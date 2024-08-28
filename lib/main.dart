@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/routers/app_router.dart';
 import 'package:notify/core/style/app_theme.dart';
 import 'package:notify/features/auth/presentation/screens/login/login_page.dart';
-
-Future<void> main() async {
-  // Inject all dependencies
-// await initInjections();
-
-  runApp(DevicePreview(
-    enabled: true,
-    builder: (context) {
-      return const MyApp();
-    },
-  ));
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(
+      // DevicePreview(
+      // enabled: true,
+      // builder: (context) {
+      //   return const
+      // },
+      const MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -33,20 +36,20 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppRouter.generateRoute,
-            builder: DevicePreview.appBuilder,
-            locale: DevicePreview.locale(context),
+            // builder: DevicePreview.appBuilder,
+            // locale: DevicePreview.locale(context),
             title: 'Notify',
             theme: appTheme,
             darkTheme: darkAppTheme,
             home:
-            // MultiBlocProvider(
-              // providers: const [
+                // MultiBlocProvider(
+                // providers: const [
                 // BlocProvider<PasswordVisibilityBloc>(
                 //   create: (context) => PasswordVisibilityBloc(),
                 // ),
-              // ],
-              // child:
-               const LoginPage(),
+                // ],
+                // child:
+                const LoginPage(),
             // ),
           );
         });
