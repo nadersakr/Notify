@@ -22,7 +22,6 @@ Notify is a Flutter-based mobile application designed for managing group-based n
   - **Search Functionality:** Users can search for and discover groups based on name or criteria.
 
 - **User Profile Management:**
-  - **Profile Customization:** Users can update their display name and profile picture.
   - **Group Membership Tracking:** View and manage group memberships easily.
 
 ## Technical Stack
@@ -32,7 +31,7 @@ Notify is a Flutter-based mobile application designed for managing group-based n
 - **Firebase Authentication:** Manages user sign-in and sign-up via email/password and Google accounts.
 - **Cloud Firestore:** NoSQL database for storing user and group data in real-time.
 - **Firebase Cloud Messaging (FCM):** Handles the delivery of push notifications.
-- **Provider/GetX:** State management solutions used for managing application state effectively.
+- **Bloc:** State management solutions used for managing application state effectively.
 
 ## Getting Started
 
@@ -40,4 +39,4 @@ To get started with Notify, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/notify.git
+   git clone https://github.com/nadersakr/notify.git
