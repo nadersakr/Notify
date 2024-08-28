@@ -22,6 +22,11 @@ class _SignupBodyState extends State<SignupBody> {
     super.initState();
     controller.emailController = TextEditingController();
     controller.passwordController = TextEditingController();
+    controller.usernameController = TextEditingController();
+    controller.firstNameController = TextEditingController();
+    controller.lastNameController = TextEditingController();
+    controller.confirmPasswordController = TextEditingController();
+
   }
 
   @override
@@ -29,6 +34,10 @@ class _SignupBodyState extends State<SignupBody> {
     super.dispose();
     controller.emailController.dispose();
     controller.passwordController.dispose();
+    controller.usernameController.dispose();
+    controller.firstNameController.dispose();
+    controller.lastNameController.dispose();
+    controller.confirmPasswordController.dispose();
   }
 
   @override
@@ -73,6 +82,7 @@ class _SignupBodyState extends State<SignupBody> {
                   width: (controller.widgetsWidth / 2) -
                       controller.paddingSpace / 2,
                   child: CustomTextFormField(
+                    textController: controller.firstNameController,
                     validator: (String? value) =>
                         controller.nameValidator(value, context),
                     labelText: controller.firstNameLabel,
@@ -87,6 +97,7 @@ class _SignupBodyState extends State<SignupBody> {
                   width: (controller.widgetsWidth / 2) -
                       controller.paddingSpace / 2,
                   child: CustomTextFormField(
+                    textController: controller.lastNameController,
                     validator: (String? value) =>
                         controller.nameValidator(value, context),
                     labelText: controller.lastNameLabel,
@@ -102,6 +113,10 @@ class _SignupBodyState extends State<SignupBody> {
             SizedBox(
               width: controller.widgetsWidth,
               child: CustomTextFormField(
+                textController: controller.usernameController,
+                validator: (String? value) =>
+                    controller.usernameValidator(value, context),
+            
                 hintText: controller.usernameString,
                 labelText: controller.usernameLabel,
                 suffixIcon: controller.usernameIcon,
@@ -141,6 +156,9 @@ class _SignupBodyState extends State<SignupBody> {
             SizedBox(
               width: controller.widgetsWidth,
               child: PasswordWidget(
+                textController: controller.confirmPasswordController,
+                validator: (String? value) =>
+                    controller.confirmPasswordValidator(value, context,controller.passwordController.text),
                 controller: controller,
                 isConfirmPassword: true,
               ),

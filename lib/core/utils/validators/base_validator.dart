@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notify/core/helper/snackbar.dart';
 
 abstract class BaseValidator {
   bool validate(String value);

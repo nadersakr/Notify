@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
+import 'package:notify/core/utils/validators/equal_to_validator.dart';
 import 'package:notify/core/utils/validators/longer_than_2_chars.dart';
 import 'package:notify/core/utils/validators/no_space_validator.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
@@ -23,12 +24,22 @@ class SignupViewModle extends AuthViewModel with Icons, Strings, Sizes, Validato
   String get donothaveAccountString => "Already have an account?";
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late TextEditingController firstNameController;
+  late TextEditingController lastNameController;
+  late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  late TextEditingController confirmPasswordController;
   void signUpWithEmail() {
     if (formKey.currentState!.validate()) {
       print("email : ${emailController.text.toLowerCase().trim()}");
       print("password : ${passwordController.text}");
+      print("first name : ${firstNameController.text}");
+      print("last name : ${lastNameController.text}");
+      print("username : ${usernameController.text}");
+      print("confirm password : ${confirmPasswordController.text}");
+      
+
     }
   }
 }
@@ -61,7 +72,16 @@ mixin Validators {
       BaseValidator.validateValue(
         context,
         value ?? "",
-        [RequiredValidator(), LognerThan2Chars()],
+        [RequiredValidator(), LognerThan2Chars(),NoSpaceValidator()],
         true,
       );
+  String? confirmPasswordValidator(String? value, BuildContext context,String password) =>
+      BaseValidator.validateValue(
+        context,
+        value ?? "",
+        [EqualToPasswordValidator(password)],
+        true,
+      );
+
+
 }
