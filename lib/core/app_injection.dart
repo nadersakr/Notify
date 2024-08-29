@@ -31,7 +31,7 @@ authBlocinjections() async {
         login: sl<Login>(),
         signup: sl<Signup>(),
       ));
-
+}
 authUseCasesInjections() async {
   sl.registerFactory<Signup>(() => Signup(sl<AuthRepository>()));
   sl.registerFactory<Login>(() => Login(sl<AuthRepository>()));
