@@ -35,3 +35,9 @@ class CacheException implements Exception {
 
   CacheException(this.message);
 }
+
+class FirebaseFirestoreException implements Exception {
+  final String message;
+
+  FirebaseFirestoreException(this.message);
+}
