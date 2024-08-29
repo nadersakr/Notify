@@ -4,13 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/auth/domin/entities/user_model.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
+import 'package:notify/features/auth/domin/usecases/signup.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Login login;
-  AuthBloc({required this.login}) : super(AuthInitial()) {
+  AuthBloc({required this.login, required Signup signup}) : super(AuthInitial()) {
     on<AuthLoginEvent>((event, emit) async {
       emit(LoginLoading());
       Either<Failure, UserModel> response =
