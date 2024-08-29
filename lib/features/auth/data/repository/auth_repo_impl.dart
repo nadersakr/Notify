@@ -1,24 +1,45 @@
 import 'package:dartz/dartz.dart';
+import 'package:notify/core/network/error/exceptions.dart';
 import 'package:notify/core/network/error/failures.dart';
+import 'package:notify/core/network/network_info.dart';
+import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
+import 'package:notify/features/auth/data/data_source/remote_data_source.dart';
 import 'package:notify/features/auth/domin/entities/user_model.dart';
 import 'package:notify/features/auth/domin/repository/auth_repository.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
+import 'package:notify/features/auth/domin/usecases/signup.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  // final AuthRemoteDataSource remoteDataSource;
-  // final AuthLocalDataSource localDataSource;
-  // final NetworkInfo networkInfo;
+  final AuthRemoteDataSource remoteDataSource;
+  final AuthLocalDataSource localDataSource;
+  final NetworkInfo networkInfo;
 
-  AuthRepositoryImpl(
-    // required this.remoteDataSource,
-    // required this.localDataSource,
-    // required this.networkInfo,
-  );
+  AuthRepositoryImpl({
+    required this.remoteDataSource,
+    required this.localDataSource,
+    required this.networkInfo,
+ } );
 
   @override
   Future<Either<Failure, UserModel>> login(LoginParams login) {
     // TODO: implement login
     throw UnimplementedError();
+  }
+
+  
+  @override
+  Future<Either<Failure, UserModel>> signup(SignUpParams params) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final user = await remoteDataSource.signup(params);
+        localDataSource.cacheUser(user);
+        return Right(user);
+      } on ServerException {
+        return const Left(ServerFailure("Server Failure",402));
+      }
+    } else {
+      return const Left(NetworkFailure());
+    }
   }
 
   // @override
