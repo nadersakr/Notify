@@ -22,3 +22,7 @@ class CancelTokenFailure extends Failure {
 
   const CancelTokenFailure(super.errorMessage, this.statusCode);
 }
+
+class NetworkFailure extends Failure {
+  const NetworkFailure() : super("No internet connection");
+}
