@@ -11,7 +11,8 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Login login;
-  AuthBloc({required this.login, required Signup signup}) : super(AuthInitial()) {
+  final Signup signup;
+  AuthBloc({required this.login, required this.signup}) : super(AuthInitial()) {
     on<AuthLoginEvent>((event, emit) async {
       emit(LoginLoading());
       Either<Failure, UserModel> response =
@@ -20,6 +21,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(LoginFailure(l.errorMessage));
       }, (r) {
         emit(LoginSuccess(user: r));
+      });
+    });
+    on<AuthSignUpEvent>((event, emit) async {
+      emit(SignUpLoading());
+      Either<Failure, UserModel> response =
+          await signup.call(event.params);
+      response.fold((l) {
+        emit(SignUpFailure(l.errorMessage));
+      }, (r) {
+        emit(SignUpSuccess(user: r));
       });
     });
   }

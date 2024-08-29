@@ -24,3 +24,19 @@ final class LoginFailure extends AuthState {
   @override
   List<Object> get props => [message];
 }
+
+final class SignUpLoading extends AuthState {}
+
+final class SignUpSuccess extends AuthState {
+  final UserModel user;
+  const SignUpSuccess({required this.user});
+}
+
+final class SignUpFailure extends AuthState {
+  final String message;
+
+  const SignUpFailure(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
