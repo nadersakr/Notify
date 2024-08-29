@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notify/core/network/error/exceptions.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
@@ -18,7 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required this.remoteDataSource,
     required this.localDataSource,
     required this.networkInfo,
- } );
+  });
 
   @override
   Future<Either<Failure, UserModel>> login(LoginParams login) {
@@ -26,7 +27,6 @@ class AuthRepositoryImpl implements AuthRepository {
     throw UnimplementedError();
   }
 
-  
   @override
   Future<Either<Failure, UserModel>> signup(SignUpParams params) async {
     if (await networkInfo.isConnected) {
@@ -34,8 +34,12 @@ class AuthRepositoryImpl implements AuthRepository {
         final user = await remoteDataSource.signup(params);
         localDataSource.cacheUser(user);
         return Right(user);
-      } on ServerException {
-        return const Left(ServerFailure("Server Failure",402));
+      } on FirebaseAUthFailure catch (e) {
+        return Left(FirebaseAUthFailure(e.errorMessage));
+      } on CacheFailure catch (e) {
+        return Left(CacheFailure(e.errorMessage));
+      } catch (e) {
+        return const Left(UnknowFailure("Error Occured"));
       }
     } else {
       return const Left(NetworkFailure());
@@ -62,6 +66,3 @@ class AuthRepositoryImpl implements AuthRepository {
   //   }
   // }
 }
-
-
-

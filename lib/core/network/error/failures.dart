@@ -16,11 +16,21 @@ class ServerFailure extends Failure {
   const ServerFailure(super.errorMessage, this.statusCode);
 }
 
-/// Cancel token failure
-class CancelTokenFailure extends Failure {
-  final int? statusCode;
+class FirebaseAUthFailure extends Failure {
+  const FirebaseAUthFailure(
+    super.errorMessage,
+  );
+}
 
-  const CancelTokenFailure(super.errorMessage, this.statusCode);
+
+/// Cancel token failure
+class CacheFailure extends Failure {
+
+  const CacheFailure(super.errorMessage);
+}
+class UnknowFailure extends Failure {
+
+  const UnknowFailure(super.errorMessage);
 }
 
 class NetworkFailure extends Failure {
