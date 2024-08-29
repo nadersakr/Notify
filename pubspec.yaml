@@ -54,6 +54,13 @@ dependencies:
   # for icons
   iconsax: ^0.0.8
   firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  internet_connection_checker: ^2.0.0
+  
+  firebase_storage: ^11.6.0
+  cloud_firestore: ^4.14.0
+  mockito: ^5.4.4
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +68,6 @@ dev_dependencies:
   build_runner: ^2.4.7
   json_serializable: ^6.7.1
   flutter_lints: ^3.0.0
-  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
