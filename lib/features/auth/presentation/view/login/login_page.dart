@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notify/features/auth/presentation/screens/login/login_body.dart';
+import 'package:notify/features/auth/presentation/view/login/login_body.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

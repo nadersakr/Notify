@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/style/app_text_style.dart';
-import 'package:notify/features/auth/presentation/screens/view%20model/login%20view%20model/login_view_modle.dart';
-import 'package:notify/features/auth/presentation/widgets/signin_with_google_widget.dart';
-import 'package:notify/features/auth/presentation/widgets/string_line_for_navigator_auth.dart';
+import 'package:notify/features/auth/presentation/controllers/login%20view%20model/login_view_modle.dart';
+import 'package:notify/features/auth/presentation/view/widgets/signin_with_google_widget.dart';
+import 'package:notify/features/auth/presentation/view/widgets/string_line_for_navigator_auth.dart';
 import 'package:notify/shared/presentaion/widget/custom_button.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
-import 'package:notify/features/auth/presentation/widgets/password_widget.dart';
+import 'package:notify/features/auth/presentation/view/widgets/password_widget.dart';
 
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});

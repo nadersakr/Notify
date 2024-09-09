@@ -5,13 +5,13 @@ import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/style/app_text_style.dart';
-import 'package:notify/features/auth/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:notify/features/auth/presentation/screens/view%20model/signup%20view%20model/signup_view_model.dart';
-import 'package:notify/features/auth/presentation/widgets/signin_with_google_widget.dart';
-import 'package:notify/features/auth/presentation/widgets/string_line_for_navigator_auth.dart';
+import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:notify/features/auth/presentation/controllers/signup%20view%20model/signup_view_model.dart';
+import 'package:notify/features/auth/presentation/view/widgets/signin_with_google_widget.dart';
+import 'package:notify/features/auth/presentation/view/widgets/string_line_for_navigator_auth.dart';
 import 'package:notify/shared/presentaion/widget/custom_button.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
-import 'package:notify/features/auth/presentation/widgets/password_widget.dart';
+import 'package:notify/features/auth/presentation/view/widgets/password_widget.dart';
 
 class SignupBody extends StatefulWidget {
   const SignupBody({super.key});
@@ -54,10 +54,10 @@ class _SignupBodyState extends State<SignupBody> {
             ShowSnackBar.errorSnackBar(context, state.message);
           }
           if (state is SignUpSuccess) {
-            // Navigator.pushReplacementNamed(
-            //   context,
-            //   AppRouteEnum.homePage.name,
-            // );
+            Navigator.pushReplacementNamed(
+              context,
+              AppRouteEnum.homePage.name,
+            );
             ShowSnackBar.errorSnackBar(context, state.user.email);
           }
           if (state is SignUpLoading) {

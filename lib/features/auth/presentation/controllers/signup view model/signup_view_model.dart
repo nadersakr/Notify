@@ -8,8 +8,8 @@ import 'package:notify/core/utils/validators/longer_than_2_chars.dart';
 import 'package:notify/core/utils/validators/no_space_validator.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
-import 'package:notify/features/auth/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:notify/features/auth/presentation/screens/view model/auth_view_model.dart';
+import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:notify/features/auth/presentation/controllers/auth_view_model.dart';
 
 class SignupViewModle extends AuthViewModel
     with Icons, Strings, Sizes, Validators {

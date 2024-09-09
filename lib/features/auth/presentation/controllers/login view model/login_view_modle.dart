@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
-import 'package:notify/features/auth/presentation/screens/view model/auth_view_model.dart';
+import 'package:notify/features/auth/presentation/controllers/auth_view_model.dart';
 
 class LoginViewModle extends AuthViewModel
     with AssetsStrings, Strings, Sizes {
