@@ -4,10 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/routers/app_router.dart';
 import 'package:notify/core/style/app_theme.dart';
-import 'package:notify/features/auth/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:notify/features/auth/presentation/screens/login/login_page.dart';
+import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:notify/features/auth/presentation/screens/signup/signup_page.dart';
+import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
