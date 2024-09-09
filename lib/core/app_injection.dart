@@ -3,13 +3,14 @@ import 'package:notify/core/network/network_info.dart';
 import 'package:notify/core/utils/shared%20preferances/shared_preferences.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_source_impl.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
-import 'package:notify/features/auth/data/data_source/remote_data_source.dart';
-import 'package:notify/features/auth/data/data_source/remote_data_source_impl.dart';
+import 'package:notify/features/auth/data/data_source/remote/remote_data_source.dart';
+import 'package:notify/features/auth/data/data_source/remote/remote_data_source_impl.dart';
 import 'package:notify/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:notify/features/auth/domin/repository/auth_repository.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
+import 'package:notify/features/auth/domin/usecases/signin_with_google.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
-import 'package:notify/features/auth/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -28,6 +29,7 @@ Future<void> initInjections() async {
 }
 authBlocinjections() async {
   sl.registerFactory<AuthBloc>(() => AuthBloc(
+      signinWithGooogle: sl<SigninWithGoogle>(),
         login: sl<Login>(),
         signup: sl<Signup>(),
       ));
@@ -35,6 +37,7 @@ authBlocinjections() async {
 authUseCasesInjections() async {
   sl.registerFactory<Signup>(() => Signup(sl<AuthRepository>()));
   sl.registerFactory<Login>(() => Login(sl<AuthRepository>()));
+  sl.registerFactory<SigninWithGoogle>(() => SigninWithGoogle(sl<AuthRepository>()));
 }
 networkInjections() async {
   sl.registerSingletonAsync<NetworkInfo>(() async {
