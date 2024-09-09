@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:notify/features/auth/presentation/screens/login/login_page.dart';
-import 'package:notify/features/auth/presentation/screens/signup/signup_page.dart';
+import 'package:notify/features/auth/presentation/view/login/login_page.dart';
+import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
+import 'package:notify/features/home%20screen/presentation/view/home_screen.dart';
 
 class AppRouter {
   static String currentRoute = "/";
@@ -24,6 +25,15 @@ class AppRouter {
             // assert(
                 // settings.arguments != null, "signup is required");
             return const SignupPage();
+          },
+        );
+      case '/home':
+        return CupertinoPageRoute(
+          settings: RouteSettings(name: settings.name),
+          builder: (_) {
+            // assert(
+                // settings.arguments != null, "signup is required");
+            return const HomeScreen();
           },
         );
 
