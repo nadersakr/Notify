@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:notify/core/network/error/exceptions.dart';
 import 'package:notify/core/utils/shared%20preferances/shared_preferences.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
-import 'package:notify/features/auth/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/entities/user_model.dart';
 
 class AuthLocalDataSourceImp implements AuthLocalDataSource {
   final SaveDataLocal saveDataLocal;
