@@ -23,8 +23,8 @@ class LoginViewModle extends AuthViewModel
   late TextEditingController passwordController;
   void login() {
     if (formKey.currentState!.validate()) {
-      print("email : ${emailController.text.toLowerCase().trim()}");
-      print("password : ${passwordController.text}");
+      // print("email : ${emailController.text.toLowerCase().trim()}");
+      // print("password : ${passwordController.text}");
     }
   }
 }

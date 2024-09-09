@@ -14,7 +14,7 @@ abstract class AuthViewModel with Icons, Strings, Sizes ,Validators {
   void showPassword(bool isConfirmePassword) {
     if (isConfirmePassword) {
       isConfirmedPasswordVisible = !isConfirmedPasswordVisible;
-      print("showing Password is $isConfirmedPasswordVisible");
+      // print("showing Password is $isConfirmedPasswordVisible");
       if (isConfirmedPasswordVisible) {
         passwordIcon = Iconsax.lock;
       } else {
@@ -22,7 +22,7 @@ abstract class AuthViewModel with Icons, Strings, Sizes ,Validators {
       }
     } else {
       isPasswordVisible = !isPasswordVisible;
-      print("showing Password is $isPasswordVisible");
+      // print("showing Password is $isPasswordVisible");
       if (isPasswordVisible) {
         passwordIcon = Iconsax.lock;
       } else {

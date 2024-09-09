@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    print("width : $width");
-    print("height : $height");
+    // print("width : $width");
+    // print("height : $height");
     return ScreenUtilInit(
         designSize: Size(width, height),
         minTextAdapt: true,

@@ -47,12 +47,12 @@ class SignupViewModle extends AuthViewModel
   late TextEditingController confirmPasswordController;
   Future<void> signUpWithEmail(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      print("email : ${emailController.text.toLowerCase().trim()}");
-      print("password : ${passwordController.text}");
-      print("first name : ${firstNameController.text}");
-      print("last name : ${lastNameController.text}");
-      print("username : ${usernameController.text}");
-      print("confirm password : ${confirmPasswordController.text}");
+      // print("email : ${emailController.text.toLowerCase().trim()}");
+      // print("password : ${passwordController.text}");
+      // print("first name : ${firstNameController.text}");
+      // print("last name : ${lastNameController.text}");
+      // print("username : ${usernameController.text}");
+      // print("confirm password : ${confirmPasswordController.text}");
       // SharedPreferences sharedPreferncesServices =
       //     await SharedPreferences.getInstance();
 
