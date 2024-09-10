@@ -17,15 +17,21 @@ class SignInWithGoogleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-       BlocProvider.of<AuthBloc>(context).add(SignInWithGoogleEvent());
+        final authBloc = BlocProvider.of<AuthBloc>(context);
+        if (authBloc.isClosed) {
+          debugPrint("authBloc is closed");
+        } else {
+       
+          authBloc.add(SignInWithGoogleEvent());
+        }
       },
       child: Container(
         height: controller.signinWithGoogleHeight,
         width: controller.widgetsWidth,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(controller.borderRadius),
-          border:
-              Border.all(color: AppColors.black, width: controller.borderWidth),
+          border: Border.all(
+              color: AppColors.black, width: controller.borderWidth),
         ),
         child: Center(
           child: Row(
@@ -51,3 +57,4 @@ class SignInWithGoogleWidget extends StatelessWidget {
     );
   }
 }
+

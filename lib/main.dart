@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/routers/app_router.dart';
 import 'package:notify/core/style/app_theme.dart';
-import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'firebase_options.dart';
@@ -30,8 +28,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    // print("width : $width");
-    // print("height : $height");
     return ScreenUtilInit(
         designSize: Size(width, height),
         minTextAdapt: true,
@@ -40,20 +36,12 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             onGenerateRoute: AppRouter.generateRoute,
-            // builder: DevicePreview.appBuilder,
-            // locale: DevicePreview.locale(context),
             title: 'Notify',
             theme: appTheme,
             darkTheme: darkAppTheme,
-            home: MultiBlocProvider(
-              providers: [
-                BlocProvider<AuthBloc>(
-                  create: (_) => sl<AuthBloc>(),
-                ),
-              ],
-              child: const LoginPage(),
-            ),
+            home: const LoginPage(),
           );
         });
   }
 }
+

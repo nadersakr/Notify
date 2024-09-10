@@ -30,7 +30,7 @@ Future<void> initInjections() async {
 authBlocinjections() async {
   // I need to make one inssatnce of the bloc
 
-  sl.registerSingleton<AuthBloc>( AuthBloc(
+  sl.registerFactory<AuthBloc>(()=> AuthBloc(
         login: sl<Login>(),
         signup: sl<Signup>(),
         signinWithGooogle: sl<SigninWithGoogle>(),

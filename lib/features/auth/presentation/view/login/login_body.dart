@@ -41,7 +41,7 @@ class _LoginBodyState extends State<LoginBody> {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           // show snack bar for all responses
-          if (state is LoginFailure) {
+          if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
@@ -49,7 +49,7 @@ class _LoginBodyState extends State<LoginBody> {
               ),
             );
           }
-          if (state is LoginSuccess) {
+          if (state is AuthSuccess) {
             Navigator.pushReplacementNamed(
               context,
               AppRouteEnum.homePage.name,
@@ -62,7 +62,7 @@ class _LoginBodyState extends State<LoginBody> {
               ),
             );
           }
-          if (state is LoginLoading) {
+          if (state is AuthLoading) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text("Loading"),

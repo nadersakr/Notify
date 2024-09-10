@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';

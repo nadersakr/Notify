@@ -47,17 +47,17 @@ class _SignupBodyState extends State<SignupBody> {
       create: (_) => sl<AuthBloc>(),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is SignUpFailure) {
+          if (state is AuthFailure) {
             ShowSnackBar.errorSnackBar(context, state.message);
           }
-          if (state is SignUpSuccess) {
+          if (state is AuthSuccess) {
             Navigator.pushReplacementNamed(
               context,
               AppRouteEnum.homePage.name,
             );
             ShowSnackBar.errorSnackBar(context, state.user.fullName);
           }
-          if (state is SignUpLoading) {
+          if (state is AuthFailure) {
             // Navigator.pushReplacementNamed(
             //   context,
             //   AppRouteEnum.homePage.name,

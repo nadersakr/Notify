@@ -9,35 +9,23 @@ sealed class AuthState extends Equatable {
 
 final class AuthInitial extends AuthState {}
 
-final class LoginLoading extends AuthState {}
+final class AuthLoading extends AuthState {}
 
-final class LoginSuccess extends AuthState {
-  final UserModel user;
-  const LoginSuccess({required this.user});
-}
 
-final class LoginFailure extends AuthState {
+final class AuthFailure extends AuthState {
   final String message;
 
-  const LoginFailure(this.message);
+  const AuthFailure(this.message);
 
   @override
   List<Object> get props => [message];
 }
 
-final class SignUpLoading extends AuthState {}
 
-final class SignUpSuccess extends AuthState {
+final class AuthSuccess extends AuthState {
   final UserModel user;
-  const SignUpSuccess({required this.user});
+  const AuthSuccess({required this.user});
 }
 
 
-final class SignUpFailure extends AuthState {
-  final String message;
 
-  const SignUpFailure(this.message);
-
-  @override
-  List<Object> get props => [message];
-}

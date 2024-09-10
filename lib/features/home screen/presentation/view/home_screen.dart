@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notify/core/app_injection.dart';
-import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,7 +7,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserModel user = sl<AuthBloc>().user!;
+    UserModel user =LoadedUserData().loadedUser! ;
     debugPrint(user.fullName);
     return const Scaffold(
       body: Center(
