@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
@@ -27,7 +26,7 @@ class _SignupBodyState extends State<SignupBody> {
     super.initState();
     controller.emailController = TextEditingController();
     controller.passwordController = TextEditingController();
-    controller.usernameController = TextEditingController();
+    // controller.usernameController = TextEditingController();
     controller.fullNameController = TextEditingController();
     controller.confirmPasswordController = TextEditingController();
   }
@@ -37,7 +36,7 @@ class _SignupBodyState extends State<SignupBody> {
     super.dispose();
     controller.emailController.dispose();
     controller.passwordController.dispose();
-    controller.usernameController.dispose();
+    // controller.usernameController.dispose();
     controller.fullNameController.dispose();
     controller.confirmPasswordController.dispose();
   }
@@ -56,7 +55,7 @@ class _SignupBodyState extends State<SignupBody> {
               context,
               AppRouteEnum.homePage.name,
             );
-            ShowSnackBar.errorSnackBar(context, state.user.username);
+            ShowSnackBar.errorSnackBar(context, state.user.fullName);
           }
           if (state is SignUpLoading) {
             // Navigator.pushReplacementNamed(
@@ -116,20 +115,20 @@ class _SignupBodyState extends State<SignupBody> {
                     height: controller.paddingSpace,
                   ),
                   // username textFormField
-                  SizedBox(
-                    width: controller.widgetsWidth,
-                    child: CustomTextFormField(
-                      textController: controller.usernameController,
-                      validator: (String? value) =>
-                          controller.usernameValidator(value, context),
-                      hintText: controller.usernameString,
-                      labelText: controller.usernameLabel,
-                      suffixIcon: controller.usernameIcon,
-                    ),
-                  ),
-                  SizedBox(
-                    height: controller.paddingSpace,
-                  ),
+                  // SizedBox(
+                  //   width: controller.widgetsWidth,
+                  //   child: CustomTextFormField(
+                  //     textController: controller.usernameController,
+                  //     validator: (String? value) =>
+                  //         controller.usernameValidator(value, context),
+                  //     hintText: controller.usernameString,
+                  //     labelText: controller.usernameLabel,
+                  //     suffixIcon: controller.usernameIcon,
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: controller.paddingSpace,
+                  // ),
                   // email textFormField
                   SizedBox(
                     width: controller.widgetsWidth,

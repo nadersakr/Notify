@@ -21,8 +21,8 @@ class SignupViewModle extends AuthViewModel
   static String userNotFound = "User not found";
   static String userNotCreated = "User not created";
   static String userDataNotFound = "User data not found";
-  static String usernameAlreadyIn = "Username is already in use";
-  static String usernameDidnotSaved = "Username did not saved";
+  // static String usernameAlreadyIn = "Username is already in use";
+  // static String usernameDidnotSaved = "Username did not saved";
   static String userDatadidnotSaved = "User's data did not saved";
   @override
   String get stringGoTo => "Login";
@@ -40,7 +40,7 @@ class SignupViewModle extends AuthViewModel
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late TextEditingController fullNameController;
-  late TextEditingController usernameController;
+  // late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
@@ -70,7 +70,7 @@ class SignupViewModle extends AuthViewModel
 
       final params = SignUpParams(
         fullName: fullNameController.text,
-        userName: usernameController.text,
+        // userName: usernameController.text,
         email: emailController.text.toLowerCase().trim(),
         password: passwordController.text,
       );
@@ -86,7 +86,7 @@ class SignupViewModle extends AuthViewModel
 }
 
 mixin Icons {
-  IconData usernameIcon = Iconsax.user_search;
+  // IconData usernameIcon = Iconsax.user_search;
   IconData fullNameIcon = Iconsax.user;
   IconData lastNameIcon = Iconsax.user;
 }
@@ -94,8 +94,8 @@ mixin Icons {
 mixin Strings {
   String signupString = "Signup";
   String fullNameString = "Enter your full name";
-  String usernameString = "Enter your username";
-  String usernameLabel = "username";
+  // String usernameString = "Enter your username";
+  // String usernameLabel = "username";
   String fullNameLabel = "Full name";
 }
 
@@ -108,13 +108,13 @@ mixin Validators {
         true,
       );
 
-  String? usernameValidator(String? value, BuildContext context) =>
-      BaseValidator.validateValue(
-        context,
-        value ?? "",
-        [RequiredValidator(), LognerThan2Chars(), NoSpaceValidator()],
-        true,
-      );
+  // String? usernameValidator(String? value, BuildContext context) =>
+  //     BaseValidator.validateValue(
+  //       context,
+  //       value ?? "",
+  //       [RequiredValidator(), LognerThan2Chars(), NoSpaceValidator()],
+  //       true,
+  //     );
   String? confirmPasswordValidator(
           String? value, BuildContext context, String password) =>
       BaseValidator.validateValue(

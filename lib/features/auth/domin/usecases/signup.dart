@@ -25,6 +25,8 @@ class SignUpParams {
  final String password;
  final String fullName;
 
-  final String userName;
-  const SignUpParams({required this.fullName,required this.userName, required this.email,required this.password});
+  // final String userName;
+  const SignUpParams({required this.fullName
+  // ,required this.userName
+  , required this.email,required this.password});
 }

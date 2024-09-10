@@ -1,12 +1,13 @@
 class UserModel {
   final String id;
   final String fullName;
-  final String username;
+  // final String username;
   final String email;
   final String? imageUrl;
   final List<String>? chanalsId;
   UserModel(
-      {required this.username,
+      {
+        // required this.username,
       required this.fullName,
       this.chanalsId,
       this.imageUrl,
@@ -20,14 +21,14 @@ class UserModel {
       email: json['email'],
       imageUrl: json['imageUrl'],
       chanalsId: json['chanalsId'],
-      username: json['username'],
+      // username: json['username'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'username': username,
+      // 'username': username,
       'fullName': fullName,
       'email': email,
       'imageUrl': imageUrl,
@@ -38,7 +39,7 @@ class UserModel {
   UserModel.fromJson(Map<String, dynamic> map)
       : id = map['id'],
         fullName = map['fullName'],
-        username = map['username'],
+        // username = map['username'],
         email = map['email'],
         imageUrl = map['imageUrl'],
         chanalsId = map['chanalsId'];

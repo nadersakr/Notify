@@ -30,7 +30,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         id: response.user!.uid,
         fullName: user.fullName,
         chanalsId: [],
-        username: user.username,
+        // username: user.username,
       );
     } on FirebaseAuthException catch (e) {
       // print(e.code);
@@ -52,7 +52,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel> signup(SignUpParams params) async {
     try {
-      await FirebaseServices.searchUsername(params.userName);
+      // await FirebaseServices.searchUsername(params.userName);
       var response = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: params.email,
         password: params.password,
@@ -61,13 +61,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw FirebaseAuthFailure(SignupViewModle.userNotCreated);
       }
       await FirebaseServices.saveUserData(
-          params.userName, params.fullName, response.user!.uid);
+          // params.userName,
+           params.fullName, response.user!.uid);
       return UserModel(
         email: params.email,
         id: response.user!.uid,
         fullName: params.fullName,
         chanalsId: [],
-        username: params.userName,
+        // username: params.userName,
       );
     } on FirebaseAuthException catch (e) {
       //  weak-password
