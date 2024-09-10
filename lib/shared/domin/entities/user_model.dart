@@ -4,7 +4,7 @@ class UserModel {
   // final String username;
   final String email;
   final String? imageUrl;
-  final List<String>? chanalsId;
+  final List<dynamic>? chanalsId;
   UserModel(
       {
         // required this.username,
@@ -42,5 +42,5 @@ class UserModel {
         // username = map['username'],
         email = map['email'],
         imageUrl = map['imageUrl'],
-        chanalsId = map['chanalsId'];
+        chanalsId = map['chanalsId'] ;
 }

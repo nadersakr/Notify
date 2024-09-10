@@ -62,7 +62,7 @@ class AuthRepositoryImpl implements AuthRepository {
     if (await networkInfo.isConnected) {
       try {
         final user = await remoteDataSource.signinWithGoogle();
-        // localDataSource.cacheUser(user);
+        localDataSource.cacheUser(user);
         return Right(user);
       } on FirebaseAuthFailure catch (e) {
         return Left(FirebaseAuthFailure(e.errorMessage));
