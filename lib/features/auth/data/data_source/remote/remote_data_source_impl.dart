@@ -90,7 +90,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User> signinWithGoogle() async {
+  Future<UserModel> signinWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -109,7 +109,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       // Perform additional operations with the user data
 
-      return user;
+      return UserModel(
+        email: user.email!,
+        id: user.uid,
+        fullName: user.displayName!,
+        chanalsId: [],
+      );
     } on FirebaseAuthException catch (e) {
       // Handle specific Firebase Auth exceptions
       switch (e.code) {

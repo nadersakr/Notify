@@ -8,5 +8,5 @@ abstract class AuthRepository {
 
   Future<Either<Failure,UserModel>> login(LoginParams params);
   Future<Either<Failure,UserModel>> signup(SignUpParams params);
-  Future<Either<Failure,User>> signinWithGoogle();
+  Future<Either<Failure,UserModel>> signinWithGoogle();
 }

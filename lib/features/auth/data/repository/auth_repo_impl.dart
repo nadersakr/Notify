@@ -59,7 +59,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User>> signinWithGoogle() async {
+  Future<Either<Failure, UserModel>> signinWithGoogle() async {
     if (await networkInfo.isConnected) {
       try {
         final user = await remoteDataSource.signinWithGoogle();

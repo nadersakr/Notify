@@ -7,5 +7,5 @@ abstract class AuthRemoteDataSource {
   // login user
   Future<UserModel> login(LoginParams params);
   Future<UserModel> signup(SignUpParams params);
-  Future<User> signinWithGoogle();
+  Future<UserModel> signinWithGoogle();
 }

@@ -8,7 +8,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // UserModel user = sl<AuthBloc>().user!;
+    UserModel user = sl<AuthBloc>().user!;
+    debugPrint(user.fullName);
     return const Scaffold(
       body: Center(
         child: Text("Home Screen"),

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
@@ -41,14 +40,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
     on<SignInWithGoogleEvent>((event, emit) async {
       emit(SignUpLoading());
-      Either<Failure, User> response =
+      Either<Failure, UserModel> response =
           await signinWithGooogle.call(NoParams());
       response.fold((l) {
         emit(SignUpFailure(l.errorMessage));
       }, (r) {
-        // _user = r;
-        print(r.displayName);
-        // emit(SignUpSuccess(user: r));
+        _user = r;
+        emit(SignUpSuccess(user: r));
       });
     });
   }
