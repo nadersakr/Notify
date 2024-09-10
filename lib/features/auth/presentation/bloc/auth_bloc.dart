@@ -15,7 +15,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Login login;
   final Signup signup;
   final SigninWithGoogle signinWithGooogle;
-  AuthBloc({required this.login, required this.signup,required this.signinWithGooogle}) : super(AuthInitial()) {
+ late final UserModel? _user ;
+ AuthBloc({required this.login, required this.signup,required this.signinWithGooogle}) : super(AuthInitial()) {
     on<AuthLoginEvent>((event, emit) async {
       emit(LoginLoading());
       Either<Failure, UserModel> response =
@@ -23,6 +24,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       response.fold((l) {
         emit(LoginFailure(l.errorMessage));
       }, (r) {
+      _user = r;
         emit(LoginSuccess(user: r));
       });
     });
@@ -33,6 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       response.fold((l) {
         emit(SignUpFailure(l.errorMessage));
       }, (r) {
+        _user = r;
         emit(SignUpSuccess(user: r));
       });
     });
@@ -43,8 +46,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       response.fold((l) {
         emit(SignUpFailure(l.errorMessage));
       }, (r) {
+        _user = r;
         emit(SignUpSuccess(user: r));
       });
     });
   }
+
+  get user => _user;
+
 }

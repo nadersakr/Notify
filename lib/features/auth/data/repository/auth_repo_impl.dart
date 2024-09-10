@@ -20,9 +20,22 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<Either<Failure, UserModel>> login(LoginParams login) {
-    // TODO: implement login
-    throw UnimplementedError();
+  Future<Either<Failure, UserModel>> login(LoginParams params) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final user = await remoteDataSource.login(params);
+        localDataSource.cacheUser(user);
+        return Right(user);
+      } on FirebaseAuthFailure catch (e) {
+        return Left(FirebaseAuthFailure(e.errorMessage));
+      } on CacheFailure catch (e) {
+        return Left(CacheFailure(e.errorMessage));
+      } catch (e) {
+        return const Left(UnknowFailure("Error Occured"));
+      }
+    } else {
+      return const Left(NetworkFailure());
+    }
   }
 
   @override

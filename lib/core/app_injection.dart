@@ -28,10 +28,12 @@ Future<void> initInjections() async {
   await authBlocinjections();
 }
 authBlocinjections() async {
-  sl.registerFactory<AuthBloc>(() => AuthBloc(
-      signinWithGooogle: sl<SigninWithGoogle>(),
+  // I need to make one inssatnce of the bloc
+
+  sl.registerSingleton<AuthBloc>( AuthBloc(
         login: sl<Login>(),
         signup: sl<Signup>(),
+        signinWithGooogle: sl<SigninWithGoogle>(),
       ));
 }
 authUseCasesInjections() async {

@@ -3,6 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:notify/core/network/error/exceptions.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/auth/data/data_source/remote/remote_data_source.dart';
+import 'package:notify/features/auth/presentation/controllers/login%20view%20model/login_view_modle.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
@@ -13,8 +14,41 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl();
   @override
   Future<UserModel> login(LoginParams params) async {
-    // return await authServices.login(params);
-    throw UnimplementedError();
+    try {
+      var response = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: params.email,
+        password: params.password,
+      );
+      if (response.user == null) {
+        throw FirebaseAuthFailure(SignupViewModle.userNotFound);
+      }
+
+      var user = await FirebaseServices.getUserData(response.user!.uid);
+      
+      return UserModel(
+        email: params.email,
+        id: response.user!.uid,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        chanalsId: [],
+        username: user.username,
+      );
+
+    } on FirebaseAuthException catch (e) {
+      // print(e.code);
+      // user-not-found
+      // wrong-password
+      switch (e.code) {
+        case "weak-password":
+          throw FirebaseAuthFailure(LoginViewModle.weakPassword);
+        case "invalid-credential":
+          throw FirebaseAuthFailure(LoginViewModle.wrongCredential);
+        default:
+          throw FirebaseAuthFailure(LoginViewModle.defaultError);
+      }
+    } on CacheException catch (e) {
+      throw CacheFailure(e.message);
+    }
   }
 
   @override

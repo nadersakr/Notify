@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:notify/core/app_injection.dart';
+import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
 import 'package:notify/features/home%20screen/presentation/view/home_screen.dart';
@@ -22,8 +24,7 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
-            // assert(
-                // settings.arguments != null, "signup is required");
+            assert(sl<AuthBloc>().user != null,"user is required");
             return const SignupPage();
           },
         );

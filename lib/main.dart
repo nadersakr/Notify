@@ -6,7 +6,7 @@ import 'package:notify/core/routers/app_router.dart';
 import 'package:notify/core/style/app_theme.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
+import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                   create: (_) => sl<AuthBloc>(),
                 ),
               ],
-              child: const SignupPage(),
+              child: const LoginPage(),
             ),
           );
         });
