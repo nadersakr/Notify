@@ -23,8 +23,8 @@ class Signup extends UseCase<UserModel, SignUpParams> {
 class SignUpParams {
  final  String email;
  final String password;
- final String firstName;
-  final String lastName;
+ final String fullName;
+
   final String userName;
-  const SignUpParams({required this.firstName,required this.lastName,required this.userName, required this.email,required this.password});
+  const SignUpParams({required this.fullName,required this.userName, required this.email,required this.password});
 }

@@ -6,12 +6,11 @@ import 'package:notify/features/auth/presentation/controllers/signup%20view%20mo
 
 class FirebaseServices {
   static Future<void> saveUserData(
-      String username, String firstName, String lastName, String id) async {
+      String username, String fullName, String id) async {
     try {
       // Save User data using UID
       await FirebaseFirestore.instance.collection('users').doc(id).set({
-        'firstName': firstName,
-        'lastName': lastName,
+        'fullName': fullName,
         'username': username,
       });
     } catch (e) {
@@ -45,15 +44,15 @@ class FirebaseServices {
     }
   }
 
-  static Future<({String firstName, String lastName, String username})>
+  static Future<({String fullName, String username})>
       getUserData(String uid) async {
     try {
       final response =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      print(response.data()!['firstName']);
+      // print(response.data()!['firstName']);
 
 
-      return (firstName: "${response.data()!['firstName']}",lastName: "${response.data()!['lastName']}", username: "${response.data()!['username']}");
+      return (fullName: "${response.data()!['fullName']}", username: "${response.data()!['username']}");
     } catch (e) {
       throw FirebaseAuthFailure(LoginViewModle.errorInLoadingUserData);
     }

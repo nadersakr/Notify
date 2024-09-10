@@ -32,6 +32,7 @@ final class SignUpSuccess extends AuthState {
   const SignUpSuccess({required this.user});
 }
 
+
 final class SignUpFailure extends AuthState {
   final String message;
 

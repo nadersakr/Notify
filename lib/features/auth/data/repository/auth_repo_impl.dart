@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
@@ -58,11 +59,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserModel>> signinWithGoogle() async {
+  Future<Either<Failure, User>> signinWithGoogle() async {
     if (await networkInfo.isConnected) {
       try {
         final user = await remoteDataSource.signinWithGoogle();
-        localDataSource.cacheUser(user);
+        // localDataSource.cacheUser(user);
         return Right(user);
       } on FirebaseAuthFailure catch (e) {
         return Left(FirebaseAuthFailure(e.errorMessage));

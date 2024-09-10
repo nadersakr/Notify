@@ -13,7 +13,7 @@ import 'package:notify/features/auth/presentation/controllers/auth_view_model.da
 
 class SignupViewModle extends AuthViewModel
     with Icons, Strings, Sizes, Validators {
-      // error messages
+  // error messages
   static String weakPassword = "Password is too weak";
   static String defaultError = "There is an error on Authentication";
   static String emailAlreadyInUse = "This email is already in use";
@@ -39,8 +39,7 @@ class SignupViewModle extends AuthViewModel
   String get donothaveAccountString => "Already have an account?";
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  late TextEditingController firstNameController;
-  late TextEditingController lastNameController;
+  late TextEditingController fullNameController;
   late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -70,8 +69,7 @@ class SignupViewModle extends AuthViewModel
       //     networkInfo: networkInfo);
 
       final params = SignUpParams(
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
+        fullName: fullNameController.text,
         userName: usernameController.text,
         email: emailController.text.toLowerCase().trim(),
         password: passwordController.text,
@@ -89,17 +87,16 @@ class SignupViewModle extends AuthViewModel
 
 mixin Icons {
   IconData usernameIcon = Iconsax.user_search;
-  IconData firstNameIcon = Iconsax.user;
+  IconData fullNameIcon = Iconsax.user;
   IconData lastNameIcon = Iconsax.user;
 }
 
 mixin Strings {
   String signupString = "Signup";
-  String firstNameLabel = "First Name";
-
-  String lastNameLabel = "Last Name";
+  String fullNameString = "Enter your full name";
   String usernameString = "Enter your username";
   String usernameLabel = "username";
+  String fullNameLabel = "Full name";
 }
 
 mixin Validators {

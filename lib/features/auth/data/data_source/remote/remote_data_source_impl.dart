@@ -24,16 +24,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       var user = await FirebaseServices.getUserData(response.user!.uid);
-      
+
       return UserModel(
         email: params.email,
         id: response.user!.uid,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        fullName: user.fullName,
         chanalsId: [],
         username: user.username,
       );
-
     } on FirebaseAuthException catch (e) {
       // print(e.code);
       // user-not-found
@@ -62,13 +60,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (response.user == null) {
         throw FirebaseAuthFailure(SignupViewModle.userNotCreated);
       }
-      await FirebaseServices.saveUserData(params.userName, params.firstName,
-          params.lastName, response.user!.uid);
+      await FirebaseServices.saveUserData(
+          params.userName, params.fullName, response.user!.uid);
       return UserModel(
         email: params.email,
         id: response.user!.uid,
-        firstName: params.firstName,
-        lastName: params.lastName,
+        fullName: params.fullName,
         chanalsId: [],
         username: params.userName,
       );
@@ -92,7 +89,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> signinWithGoogle() async {
+  Future<User> signinWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -111,14 +108,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       // Perform additional operations with the user data
 
-      return UserModel(
-        email: user.email ?? "user@example.com",
-        id: user.uid,
-        firstName: user.displayName?.split(' ')[0] ?? '',
-        lastName: user.displayName?.split(' ')[1] ?? '',
-        chanalsId: [],
-        username: '',
-      );
+      return user;
     } on FirebaseAuthException catch (e) {
       // Handle specific Firebase Auth exceptions
       switch (e.code) {

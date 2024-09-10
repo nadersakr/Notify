@@ -28,8 +28,7 @@ class _SignupBodyState extends State<SignupBody> {
     controller.emailController = TextEditingController();
     controller.passwordController = TextEditingController();
     controller.usernameController = TextEditingController();
-    controller.firstNameController = TextEditingController();
-    controller.lastNameController = TextEditingController();
+    controller.fullNameController = TextEditingController();
     controller.confirmPasswordController = TextEditingController();
   }
 
@@ -39,8 +38,7 @@ class _SignupBodyState extends State<SignupBody> {
     controller.emailController.dispose();
     controller.passwordController.dispose();
     controller.usernameController.dispose();
-    controller.firstNameController.dispose();
-    controller.lastNameController.dispose();
+    controller.fullNameController.dispose();
     controller.confirmPasswordController.dispose();
   }
 
@@ -58,7 +56,7 @@ class _SignupBodyState extends State<SignupBody> {
               context,
               AppRouteEnum.homePage.name,
             );
-            ShowSnackBar.errorSnackBar(context, state.user.email);
+            ShowSnackBar.errorSnackBar(context, state.user.username);
           }
           if (state is SignUpLoading) {
             // Navigator.pushReplacementNamed(
@@ -103,39 +101,16 @@ class _SignupBodyState extends State<SignupBody> {
               key: controller.formKey,
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: (1.sw - controller.widgetsWidth) / 2,
-                      ),
-                      // First name textFormField
-                      SizedBox(
-                        width: (controller.widgetsWidth / 2) -
-                            controller.paddingSpace / 2,
-                        child: CustomTextFormField(
-                          textController: controller.firstNameController,
-                          validator: (String? value) =>
-                              controller.nameValidator(value, context),
-                          labelText: controller.firstNameLabel,
-                          suffixIcon: controller.firstNameIcon,
-                        ),
-                      ),
-                      SizedBox(
-                        width: controller.paddingSpace,
-                      ),
-                      // Last name textFormField
-                      SizedBox(
-                        width: (controller.widgetsWidth / 2) -
-                            controller.paddingSpace / 2,
-                        child: CustomTextFormField(
-                          textController: controller.lastNameController,
-                          validator: (String? value) =>
-                              controller.nameValidator(value, context),
-                          labelText: controller.lastNameLabel,
-                          suffixIcon: controller.lastNameIcon,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    width: controller.widgetsWidth,
+                    child: CustomTextFormField(
+                      textController: controller.fullNameController,
+                      validator: (String? value) =>
+                          controller.nameValidator(value, context),
+                      labelText: controller.fullNameLabel,
+                      suffixIcon: controller.fullNameIcon,
+                      hintText: controller.fullNameString,
+                    ),
                   ),
                   SizedBox(
                     height: controller.paddingSpace,

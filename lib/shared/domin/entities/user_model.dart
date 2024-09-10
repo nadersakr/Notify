@@ -1,21 +1,26 @@
 class UserModel {
   final String id;
-  final String firstName;
-  final String lastName;
+  final String fullName;
   final String username;
   final String email;
   final String? imageUrl;
   final List<String>? chanalsId;
-  UserModel({required this.username, required this.firstName,required this.lastName,  this.chanalsId,this.imageUrl,required this.id, required this.email});
+  UserModel(
+      {required this.username,
+      required this.fullName,
+      this.chanalsId,
+      this.imageUrl,
+      required this.id,
+      required this.email});
 
- factory UserModel.toJson(Map<String, dynamic> json) {
+  factory UserModel.toJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
+      fullName: json['fullName'],
       email: json['email'],
       imageUrl: json['imageUrl'],
-      chanalsId: json['chanalsId'], username: json['username'],
+      chanalsId: json['chanalsId'],
+      username: json['username'],
     );
   }
 
@@ -23,8 +28,7 @@ class UserModel {
     return {
       'id': id,
       'username': username,
-      'firstName': firstName,
-      'lastName': lastName,
+      'fullName': fullName,
       'email': email,
       'imageUrl': imageUrl,
       'chanalsId': chanalsId,
@@ -33,8 +37,7 @@ class UserModel {
 
   UserModel.fromJson(Map<String, dynamic> map)
       : id = map['id'],
-        firstName = map['firstName'],
-        lastName = map['lastName'],
+        fullName = map['fullName'],
         username = map['username'],
         email = map['email'],
         imageUrl = map['imageUrl'],

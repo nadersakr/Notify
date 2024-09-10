@@ -24,7 +24,6 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
-            assert(sl<AuthBloc>().user != null,"user is required");
             return const SignupPage();
           },
         );
@@ -32,6 +31,7 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
+            assert(sl<AuthBloc>().user != null,"user is required");
             // assert(
                 // settings.arguments != null, "signup is required");
             return const HomeScreen();
