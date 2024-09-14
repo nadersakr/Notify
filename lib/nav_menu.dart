@@ -22,10 +22,7 @@ class NavMenuState extends State<NavMenu> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    BlocProvider(
-      create: (context) => sl<SearchBloc>(),
-      child: const SearchScreen(),
-    ),
+    const SearchScreen(),
     const CreateChannalScreen(),
     const NoificationScreen(),
     const MyProfileScreen(),
