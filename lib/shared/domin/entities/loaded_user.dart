@@ -2,10 +2,10 @@
 import 'package:notify/shared/domin/entities/user_model.dart';
 
 class LoadedUserData {
-  late final UserModel? loadedUser;
+  UserModel? loadedUser;
 
   // Private constructor
-  LoadedUserData._privateConstructor();
+  LoadedUserData._privateConstructor({this.loadedUser});
 
   // Static field to hold the single instance
   static final LoadedUserData _instance = LoadedUserData._privateConstructor();

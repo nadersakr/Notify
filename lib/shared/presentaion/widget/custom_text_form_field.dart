@@ -11,9 +11,12 @@ class CustomTextFormField extends StatelessWidget {
   final Color? errorBorderColor;
   final double? borderwidth;
   final IconData? suffixIcon;
+  final Widget? suffixWidget;
   final bool? obscureText;
   final String? Function(String?)? validator;
   final void Function()? onIconPressed;
+  final void Function(String)? onchanged;
+  final void Function(String)? onSubmitted;
   const CustomTextFormField(
       {super.key,
       this.hintText,
@@ -25,7 +28,7 @@ class CustomTextFormField extends StatelessWidget {
       this.suffixIcon,
       this.obscureText,
       this.onIconPressed,
-      this.validator, this.textController});
+      this.validator, this.textController, this.suffixWidget, this.onchanged, this.onSubmitted});
   InputBorder border({Color? color}) => OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 15.sp)),
         borderSide: BorderSide(
@@ -35,12 +38,14 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onchanged,
+      onFieldSubmitted : onSubmitted ,
       controller: textController,
       key: key,
       validator: validator,
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
+        suffixIcon: suffixWidget?? IconButton(
           onPressed: onIconPressed,
           icon: Icon(suffixIcon),
           disabledColor: Colors.black,

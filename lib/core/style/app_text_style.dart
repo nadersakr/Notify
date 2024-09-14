@@ -14,14 +14,23 @@ class AppTextStyle {
     fontSize: AppFontSize.small,
     color: AppColors.black,
   );
+  static final smallBoldBlack = TextStyle(
+    fontSize: AppFontSize.small,
+    fontWeight: FontWeight.bold,
+    color: AppColors.black,
+  );
 
   static final mediumBlack = TextStyle(
       fontSize: AppFontSize.medium,
       color: AppColors.black,
       fontWeight: FontWeight.normal);
+  static final primaryButton = TextStyle(
+      fontSize: AppFontSize.medium,
+      color: AppColors.primaryColor,
+      fontWeight: FontWeight.normal);
   static final mediumOrangeBold = TextStyle(
       fontSize: AppFontSize.medium,
-      color: AppColors.primaryColorDarker,
+      color: AppColors.primaryColor,
       fontWeight: FontWeight.bold);
 
   static final largeBlack = TextStyle(

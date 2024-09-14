@@ -7,10 +7,12 @@ import 'package:notify/features/auth/data/data_source/remote/remote_data_source.
 import 'package:notify/features/auth/data/data_source/remote/remote_data_source_impl.dart';
 import 'package:notify/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:notify/features/auth/domin/repository/auth_repository.dart';
+import 'package:notify/features/auth/domin/usecases/log_out.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
 import 'package:notify/features/auth/domin/usecases/signin_with_google.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -26,21 +28,34 @@ Future<void> initInjections() async {
   await authUseCasesInjections();
   // await initArticlesInjections();
   await authBlocinjections();
+  await searchBlocInjections();
 }
+
 authBlocinjections() async {
   // I need to make one inssatnce of the bloc
 
-  sl.registerFactory<AuthBloc>(()=> AuthBloc(
+  sl.registerFactory<AuthBloc>(() => AuthBloc(
         login: sl<Login>(),
         signup: sl<Signup>(),
         signinWithGooogle: sl<SigninWithGoogle>(),
+        logOut: sl<LogOut>(),
       ));
 }
+
+searchBlocInjections() async {
+  // I need to make one inssatnce of the bloc
+
+  sl.registerFactory<SearchBloc>(() => SearchBloc());
+}
+
 authUseCasesInjections() async {
   sl.registerFactory<Signup>(() => Signup(sl<AuthRepository>()));
   sl.registerFactory<Login>(() => Login(sl<AuthRepository>()));
-  sl.registerFactory<SigninWithGoogle>(() => SigninWithGoogle(sl<AuthRepository>()));
+  sl.registerFactory<SigninWithGoogle>(
+      () => SigninWithGoogle(sl<AuthRepository>()));
+  sl.registerFactory<LogOut>(() => LogOut(sl<AuthRepository>()));
 }
+
 networkInjections() async {
   sl.registerSingletonAsync<NetworkInfo>(() async {
     return NetworkInfoImpl();
@@ -59,6 +74,7 @@ saveLocalDataInjection() {
   sl.registerFactory<SaveDataLocal>(() =>
       SharedPreferencesServices(sharedPreferences: sl<SharedPreferences>()));
 }
+
 authLocalDataSourceImplInjections() async {
   sl.registerSingletonAsync<AuthLocalDataSource>(() async {
     return AuthLocalDataSourceImp(

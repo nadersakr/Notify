@@ -11,14 +11,14 @@ import 'app_colors.dart';
 final ThemeData appTheme = ThemeData(
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: AppColors.primaryColor,
-     // Change this to your desired color
+    // Change this to your desired color
   ),
   dialogBackgroundColor: AppColors.lightGray,
   cardColor: AppColors.primaryColor,
   appBarTheme: AppBarTheme(
     // shadowColor: AppColors.lightGray,
-    color: AppColors.white,
-    elevation: 2,
+    color: AppColors.transparent,
+    elevation: 0,
     toolbarTextStyle: TextTheme(
       titleLarge: AppTextStyle.xxxLargeBlack,
     ).bodyLarge,
@@ -74,11 +74,16 @@ final ThemeData darkAppTheme = ThemeData(
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: AppColors.primaryColor,
   ),
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(
+      textStyle: AppTextStyle.mediumBlack,
+    ),
+  ),
   dialogBackgroundColor: AppColors.primaryColor,
   cardColor: AppColors.primaryColor.withOpacity(0.5),
   appBarTheme: AppBarTheme(
-    shadowColor: AppColors.white,
-    color: AppColors.darkGray,
+    shadowColor: AppColors.transparent,
+    color: AppColors.transparent,
     elevation: 0,
     toolbarTextStyle: TextTheme(
       titleLarge: AppTextStyle.xxxLargeWhite,

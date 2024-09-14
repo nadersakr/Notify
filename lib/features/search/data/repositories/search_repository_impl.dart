@@ -12,11 +12,11 @@ class SearchRepositoryImpl implements SearchForGroupRepository {
   const SearchRepositoryImpl(this.remoteDataSource, this.networkInfo);
 
   @override
-  Future<Either<Failure, List<Group>>> searchForGroup(
+  Future<Either<Failure, List<Channal>>> searchForGroup(
       SearchForGroupParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        List<Group> groups = await remoteDataSource.searchForGroup(params);
+        List<Channal> groups = await remoteDataSource.searchForGroup(params);
         return Right(groups);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));

@@ -4,12 +4,12 @@ class UserModel {
   // final String username;
   final String email;
   final String? imageUrl;
-  final List<dynamic>? chanalsId;
+  final List<dynamic>? channalsId;
   UserModel(
       {
-        // required this.username,
+      // required this.username,
       required this.fullName,
-      this.chanalsId,
+      this.channalsId,
       this.imageUrl,
       required this.id,
       required this.email});
@@ -20,7 +20,7 @@ class UserModel {
       fullName: json['fullName'],
       email: json['email'],
       imageUrl: json['imageUrl'],
-      chanalsId: json['chanalsId'],
+      channalsId: json['channalsId'],
       // username: json['username'],
     );
   }
@@ -32,7 +32,7 @@ class UserModel {
       'fullName': fullName,
       'email': email,
       'imageUrl': imageUrl,
-      'chanalsId': chanalsId,
+      'channalsId': channalsId,
     };
   }
 
@@ -42,5 +42,5 @@ class UserModel {
         // username = map['username'],
         email = map['email'],
         imageUrl = map['imageUrl'],
-        chanalsId = map['chanalsId'] ;
+        channalsId = map['channalsId'];
 }

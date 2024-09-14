@@ -22,10 +22,10 @@ class LeaveGroup extends UseCase<void, LeaveGroupParams> {
 }
 
 class LeaveGroupParams {
-  final Group group;
+  final Channal channal;
   final int leaverId;
   const LeaveGroupParams({
-    required this.group,
+    required this.channal,
     required this.leaverId,
   });
 }

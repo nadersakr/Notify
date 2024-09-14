@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CreateChannalScreen extends StatelessWidget {
-  const CreateChannalScreen({super.key});
+class NoificationScreen extends StatelessWidget {
+  const NoificationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text("CreateChannalScreen"),
+        child: Text("NoificationScreen"),
       ),
     );
   }
