@@ -29,7 +29,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         email: params.email,
         id: response.user!.uid,
         fullName: user.fullName,
-        chanalsId: [],
+        channalsId: [],
         // username: user.username,
       );
     } on FirebaseAuthException catch (e) {
@@ -62,12 +62,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       await FirebaseServices.saveUserData(
           // params.userName,
-           params.fullName, response.user!.uid);
+          params.fullName,
+          response.user!.uid);
       return UserModel(
         email: params.email,
         id: response.user!.uid,
         fullName: params.fullName,
-        chanalsId: [],
+        channalsId: [],
         // username: params.userName,
       );
     } on FirebaseAuthException catch (e) {
@@ -113,7 +114,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         email: user.email!,
         id: user.uid,
         fullName: user.displayName!,
-        chanalsId: [],
+        channalsId: [],
       );
     } on FirebaseAuthException catch (e) {
       // Handle specific Firebase Auth exceptions

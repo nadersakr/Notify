@@ -5,8 +5,9 @@ import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/email_validator.dart';
 import 'package:notify/core/utils/validators/longer_than_7_chars.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
+import 'package:notify/shared/presentation/controller.dart';
 
-abstract class AuthViewModel with Icons, Strings, Sizes ,Validators {
+abstract class AuthViewModel extends AppUIController with Icons, Strings, Sizes ,Validators {
   String get stringGoTo;
   String get donothaveAccountString;
   Function(BuildContext context) get navigatotGoTO;
@@ -40,9 +41,7 @@ mixin Icons {
 mixin Sizes {
   double imageSize = 160.h;
   double googleIconSize = 30.h;
-  double widgetsWidth = 0.9.sw;
   double smallpaddingSpace = 10.h;
-  double paddingSpace = 20.h;
   double largepaddingSpace = 90.h;
   double signinWithGoogleHeight = 50.h;
   double borderWidth = 1.5.w;

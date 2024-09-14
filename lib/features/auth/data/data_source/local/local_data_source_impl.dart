@@ -11,16 +11,33 @@ class AuthLocalDataSourceImp implements AuthLocalDataSource {
 
   @override
   Future<void> cacheUser(UserModel user) async {
-    await saveDataLocal.saveData("user", jsonEncode(user.toJson()));
+    try {
+      await saveDataLocal.saveData("user", jsonEncode(user.toJson()));
+    } catch (e) {
+      throw CacheException("Error caching user");
+    }
   }
 
   @override
-  UserModel getUser() {
-    final user = saveDataLocal.getData("user");
-    if (user != null) {
-      return UserModel.fromJson(jsonDecode(user));
-    } else {
-      throw CacheException("No user found");
+  UserModel? getUser() {
+    try {
+      final user = saveDataLocal.getData("user");
+      if (user != null) {
+        return UserModel.fromJson(jsonDecode(user));
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<void> clearUser() async {
+    try {
+      await saveDataLocal.removeData("user");
+    } catch (e) {
+      throw CacheException("Error clearing user");
     }
   }
 }

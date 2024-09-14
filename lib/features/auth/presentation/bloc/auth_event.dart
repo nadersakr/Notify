@@ -29,4 +29,5 @@ class AuthSignUpEvent extends AuthEvent {
   List<Object> get props => [params.email,params.password];
 }
 class SignInWithGoogleEvent extends AuthEvent {}
+class LogoutEvent extends AuthEvent {}
 

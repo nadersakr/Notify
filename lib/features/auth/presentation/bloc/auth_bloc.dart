@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
+import 'package:notify/features/auth/domin/usecases/log_out.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
@@ -15,8 +16,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Login login;
   final Signup signup;
   final SigninWithGoogle signinWithGooogle;
+  final LogOut logOut;
   AuthBloc(
       {required this.login,
+    required this.logOut, 
       required this.signup,
       required this.signinWithGooogle})
       : super(AuthInitial()) {
@@ -49,6 +52,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }, (r) {
         LoadedUserData().loadedUser = r;
         emit(AuthSuccess(user: r));
+      });
+    });
+    on<LogoutEvent>((event, emit) async {
+      emit(AuthLoading());
+      Either<Failure, void> response = await logOut.call(NoParams());
+      response.fold((l) {
+        emit(AuthFailure(l.errorMessage));
+      }, (r) {
+        LoadedUserData().loadedUser = null;
+        emit(AuthInitial());
       });
     });
   }

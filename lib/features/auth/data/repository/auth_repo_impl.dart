@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
@@ -73,6 +74,21 @@ class AuthRepositoryImpl implements AuthRepository {
       }
     } else {
       return const Left(NetworkFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> logOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      localDataSource.clearUser();
+      return const Right(null);
+    } on CacheFailure catch (e) {
+      return Left(CacheFailure(e.errorMessage));
+    } on FirebaseAuthException catch (e) {
+      return Left(FirebaseAuthFailure(e.message.toString()));
+    } catch (e) {
+      return const Left(UnknowFailure("Error Occured"));
     }
   }
 
