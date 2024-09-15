@@ -29,7 +29,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         email: params.email,
         id: response.user!.uid,
         fullName: user.fullName,
-        channalsId: [],
+        channelsId: [],
         // username: user.username,
       );
     } on FirebaseAuthException catch (e) {
@@ -68,7 +68,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         email: params.email,
         id: response.user!.uid,
         fullName: params.fullName,
-        channalsId: [],
+        channelsId: [],
         // username: params.userName,
       );
     } on FirebaseAuthException catch (e) {
@@ -114,7 +114,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         email: user.email!,
         id: user.uid,
         fullName: user.displayName!,
-        channalsId: [],
+        channelsId: [],
       );
     } on FirebaseAuthException catch (e) {
       // Handle specific Firebase Auth exceptions

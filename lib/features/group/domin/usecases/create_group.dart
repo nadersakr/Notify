@@ -22,8 +22,8 @@ class CreateGroup extends UseCase<void, CreateGroupParams> {
 }
 
 class CreateGroupParams {
-  final Channal channal;
+  final Channel channel;
   const CreateGroupParams({
-    required this.channal,
+    required this.channel,
   });
 }

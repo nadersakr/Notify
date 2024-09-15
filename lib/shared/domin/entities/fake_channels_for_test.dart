@@ -1,7 +1,7 @@
 import 'package:notify/shared/domin/entities/group_model.dart';
 
-final List<Channal> channalList = [
-  const Channal(
+final List<Channel> channelList = [
+  const Channel(
     id: 1,
     creatorId: 101,
     membersCount: 50,
@@ -13,7 +13,7 @@ final List<Channal> channalList = [
     imageUrl: 'https://example.com/images/tech_enthusiasts.png',
     hexColor: 'FF5733',
   ),
-  const Channal(
+  const Channel(
     id: 2,
     creatorId: 107,
     // membersCount: 1405,
@@ -24,7 +24,7 @@ final List<Channal> channalList = [
     imageUrl: 'https://example.com/images/fitness_freaks.png',
     hexColor: '33FF57',
   ),
-  const Channal(
+  const Channel(
     id: 3,
     membersCount: 464,
     creatorId: 113,
@@ -35,7 +35,7 @@ final List<Channal> channalList = [
     imageUrl: 'https://example.com/images/movie_buffs.png',
     hexColor: '5733FF',
   ),
-  const Channal(
+  const Channel(
     id: 4,
     creatorId: 118,
     membersCount: 752,
@@ -46,7 +46,7 @@ final List<Channal> channalList = [
     imageUrl: 'https://example.com/images/bookworms.png',
     hexColor: 'FFD700',
   ),
-  const Channal(
+  const Channel(
     id: 5,
     membersCount: 122,
     creatorId: 123,

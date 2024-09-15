@@ -4,15 +4,15 @@ import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/shared/domin/entities/group_model.dart';
 
-class ChannalOverviewContainer extends StatelessWidget {
-  const ChannalOverviewContainer({
+class ChannelOverviewContainer extends StatelessWidget {
+  const ChannelOverviewContainer({
     super.key,
     this.height,
-    required this.channal,
+    required this.channel,
     this.letterSpace,
   });
 
-  final Channal channal;
+  final Channel channel;
   final double? height;
   final double? letterSpace;
 
@@ -23,7 +23,7 @@ class ChannalOverviewContainer extends StatelessWidget {
       margin: const EdgeInsets.all(5),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(color: Color(int.parse('0xFF${channal.hexColor}'))),
+        border: Border.all(color: Color(int.parse('0xFF${channel.hexColor}'))),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -32,7 +32,7 @@ class ChannalOverviewContainer extends StatelessWidget {
           Row(
             children: [
               Text(
-                channal.title,
+                channel.title,
                 textAlign: TextAlign.left,
                 style: AppTextStyle.smallBoldBlack.copyWith(
                   letterSpacing: letterSpace ?? 1.5.sp,
@@ -40,7 +40,7 @@ class ChannalOverviewContainer extends StatelessWidget {
               ),
               const Spacer(),
               // member count
-              Text("${channal.membersCount}"),
+              Text("${channel.membersCount}"),
 
               const Icon(
                 Iconsax.user,
@@ -49,10 +49,10 @@ class ChannalOverviewContainer extends StatelessWidget {
             ],
           ),
           Text(
-            channal.describtion.length > 50
-                ? '${channal.describtion.substring(0, 50)}'
+            channel.describtion.length > 50
+                ? '${channel.describtion.substring(0, 50)}'
                     '..'
-                : channal.describtion,
+                : channel.describtion,
             style: AppTextStyle.smallBlack,
           )
         ],

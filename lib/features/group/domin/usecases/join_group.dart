@@ -22,10 +22,10 @@ class JoinGroup extends UseCase<void, JoinGroupParams> {
 }
 
 class JoinGroupParams {
-  final Channal channal;
+  final Channel channel;
   final int joinerId;
   const JoinGroupParams({
-    required this.channal,
+    required this.channel,
     required this.joinerId,
   });
 }

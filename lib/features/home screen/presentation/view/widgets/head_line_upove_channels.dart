@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/style/app_text_style.dart';
 
-class TextLineUpoveChannals extends StatelessWidget {
-  const TextLineUpoveChannals({
+class TextLineUpoveChannels extends StatelessWidget {
+  const TextLineUpoveChannels({
     super.key,
     required this.headLineText,
     required this.actionWidget,

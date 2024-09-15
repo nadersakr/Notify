@@ -22,10 +22,10 @@ class AddSupervisorGroup extends UseCase<void, AddSupervisorParams> {
 }
 
 class AddSupervisorParams {
-  final Channal channal;
+  final Channel channel;
   final int supervisorId;
   const AddSupervisorParams({
-    required this.channal,
+    required this.channel,
     required this.supervisorId,
   });
 }

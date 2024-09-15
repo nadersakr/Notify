@@ -20,7 +20,7 @@ class NavMenuState extends State<NavMenu> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const CreateChannalScreen(),
+    const CreateChannelScreen(),
     const NoificationScreen(),
     const MyProfileScreen(),
   ];

@@ -13,8 +13,8 @@ class HomeScreenController extends AppUIController with Sizes, Strings {
 
 mixin Sizes {
   double get letterSpace => 1.0;
-  double get yourChannalContainerHeight => 60.h;
-  // double get bigestchannalContainerHeight => 360.h;
+  double get yourChannelContainerHeight => 60.h;
+  // double get bigestchannelContainerHeight => 360.h;
 }
 
 mixin Strings {

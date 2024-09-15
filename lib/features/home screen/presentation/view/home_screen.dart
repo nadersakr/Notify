@@ -5,12 +5,12 @@ import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/core/utils/constant/app_strings.dart';
 import 'package:notify/features/home%20screen/presentation/controllers/home_screen_controller.dart';
-import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channals.dart';
-import 'package:notify/shared/domin/entities/fake_channals_for_test.dart';
+import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
+import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/group_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
-import 'package:notify/shared/presentaion/widget/channal_container.dart';
+import 'package:notify/shared/presentaion/widget/channel_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -61,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: controller.paddingSpace,
                   ),
-                  TextLineUpoveChannals(
+                  TextLineUpoveChannels(
                     headLineText: controller.yourGroupHeadLine,
                     actionWidget: TextButton(
                         onPressed: () {},
@@ -69,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                             style: AppTextStyle.mediumBlack)),
                   ),
                   Container(
-                    height: controller.yourChannalContainerHeight,
+                    height: controller.yourChannelContainerHeight,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: AppColors.primaryColor,
@@ -78,12 +78,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: channalList.length,
+                      itemCount: channelList.length,
                       itemBuilder: (context, index) {
-                        Channal channal = channalList[index];
+                        Channel channel = channelList[index];
 
                         final Color color =
-                            Color(int.parse('0xFF${channal.hexColor}'));
+                            Color(int.parse('0xFF${channel.hexColor}'));
 
                         return Container(
                           width: 100.w,
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Center(
                               child: Text(
-                                channal.title,
+                                channel.title,
                                 textAlign: TextAlign.center,
                                 style: AppTextStyle.smallBoldBlack.copyWith(
                                   letterSpacing: controller.letterSpace,
@@ -121,7 +121,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(
                     height: controller.paddingSpace,
                   ),
-                  TextLineUpoveChannals(
+                  TextLineUpoveChannels(
                     headLineText: "Bigest Channels",
                     actionWidget: IconButton(
                       icon: const Icon(Iconsax.search_normal_1),
@@ -139,11 +139,11 @@ class HomeScreen extends StatelessWidget {
                     ),
                     child: Column(
                       children: List.generate(4, (index) {
-                        final Channal channal = channalList[index];
-                        return ChannalOverviewContainer(
-                            height: controller.yourChannalContainerHeight,
+                        final Channel channel = channelList[index];
+                        return ChannelOverviewContainer(
+                            height: controller.yourChannelContainerHeight,
                             letterSpace: controller.letterSpace,
-                            channal: channal);
+                            channel: channel);
                       }),
                     ),
                   ),

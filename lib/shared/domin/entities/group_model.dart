@@ -1,4 +1,4 @@
-class Channal {
+class Channel {
   final int id;
   final int creatorId;
   final String title;
@@ -9,7 +9,7 @@ class Channal {
   final String hexColor;
   final int membersCount;
 
-  const Channal(
+  const Channel(
       {required this.id,
       this.membersCount = 0,
       required this.title,
