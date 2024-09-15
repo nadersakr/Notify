@@ -10,10 +10,10 @@ import 'package:notify/shared/domin/entities/group_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SearchChannalController with SearchStrings, SearchIcons {
+class SearchChannelController with SearchStrings, SearchIcons {
   final TextEditingController searchController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  List<Channal> searchResults = [];
+  List<Channel> searchResults = [];
   List<String> searchHistory = [];
   bool isLoading = false;
 

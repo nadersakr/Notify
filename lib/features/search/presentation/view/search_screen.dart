@@ -5,7 +5,7 @@ import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/features/search/presentation/controller/search_controller.dart';
-import 'package:notify/shared/presentaion/widget/channal_container.dart';
+import 'package:notify/shared/presentaion/widget/channel_container.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
@@ -17,7 +17,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class SearchScreenState extends State<SearchScreen> {
-  final SearchChannalController _controller = SearchChannalController();
+  final SearchChannelController _controller = SearchChannelController();
 
   @override
   void initState() {
@@ -87,8 +87,8 @@ class SearchScreenState extends State<SearchScreen> {
                             child: ListView.builder(
                               itemCount: _controller.searchResults.length,
                               itemBuilder: (context, index) {
-                                return ChannalOverviewContainer(
-                                  channal: _controller.searchResults[index],
+                                return ChannelOverviewContainer(
+                                  channel: _controller.searchResults[index],
                                 );
                               },
                             ),

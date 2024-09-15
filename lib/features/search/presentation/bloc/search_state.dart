@@ -12,7 +12,7 @@ final class SearchInitial extends SearchState {}
 final class SearchLoading extends SearchState {}
 
 final class SearchLoaded extends SearchState {
-  final List<Channal> searchResults;
+  final List<Channel> searchResults;
 
   const SearchLoaded(this.searchResults);
 
@@ -21,7 +21,9 @@ final class SearchLoaded extends SearchState {
 }
 
 final class SearchFailure extends SearchState {}
+
 final class ClearSearchHistory extends SearchState {}
+
 final class SearchHistoryLoaded extends SearchState {
   final List<String> searchHistory;
 

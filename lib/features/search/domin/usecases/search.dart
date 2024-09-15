@@ -4,13 +4,13 @@ import 'package:notify/core/utils/usecases/usecase.dart';
 import 'package:notify/features/search/domin/repositories/search_repository.dart';
 import 'package:notify/shared/domin/entities/group_model.dart';
 
-class SearchForGroup extends UseCase<List<Channal>, SearchForGroupParams> {
+class SearchForGroup extends UseCase<List<Channel>, SearchForGroupParams> {
   final SearchForGroupRepository repository;
 
   SearchForGroup(this.repository);
 
   @override
-  Future<Either<Failure, List<Channal>>> call(
+  Future<Either<Failure, List<Channel>>> call(
       SearchForGroupParams params) async {
     final result = await repository.searchForGroup(params);
     return result.fold((l) {
