@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/style/app_colors.dart';
-import 'package:notify/features/group/presentation/view/screens/group_screen.dart';
+import 'package:notify/features/group/presentation/view/screens/create_channal_screen.dart';
 import 'package:notify/features/home%20screen/presentation/view/home_screen.dart';
 import 'package:notify/features/notification/persentaion/view/notification_screen.dart';
 import 'package:notify/features/profile/presentation/view/my%20profile/my_profile_screen.dart';
