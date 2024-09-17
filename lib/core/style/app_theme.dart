@@ -107,6 +107,7 @@ final ThemeData darkAppTheme = ThemeData(
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColors.primaryColor,
+      textStyle: AppTextStyle.mediumBlack,
       padding: EdgeInsets.symmetric(
         horizontal: 50.w,
         vertical: 12.h,
