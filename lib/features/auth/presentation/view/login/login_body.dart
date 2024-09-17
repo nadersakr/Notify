@@ -76,7 +76,7 @@ class _LoginBodyState extends State<LoginBody> {
               child: SingleChildScrollView(
                   child: Column(children: [
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             Text(
               controller.notifyString,
@@ -85,7 +85,7 @@ class _LoginBodyState extends State<LoginBody> {
               ),
             ),
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             SizedBox(
               width: controller.imageSize,
@@ -105,7 +105,7 @@ class _LoginBodyState extends State<LoginBody> {
               ),
             ),
             SizedBox(
-              height: 2 * controller.paddingSpace,
+              height: 2 * controller.smallPaddingSpace,
             ),
             Form(
               key: controller.formKey,
@@ -124,7 +124,7 @@ class _LoginBodyState extends State<LoginBody> {
                     ),
                   ),
                   SizedBox(
-                    height: controller.paddingSpace,
+                    height: controller.smallPaddingSpace,
                   ),
                   // password textFormField
                   SizedBox(
@@ -149,12 +149,12 @@ class _LoginBodyState extends State<LoginBody> {
                     text: controller.loginString,
                     onPressed: () => controller.login(context))),
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             // Sign in with google
             SignInWithGoogleWidget(controller: controller),
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             // don't have account
             StringLineForSwituchAuth(controller: controller),

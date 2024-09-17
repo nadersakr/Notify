@@ -74,7 +74,7 @@ class _SignupBodyState extends State<SignupBody> {
               child: SingleChildScrollView(
                   child: Column(children: [
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             Text(
               controller.notifyString,
@@ -83,7 +83,7 @@ class _SignupBodyState extends State<SignupBody> {
               ),
             ),
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             SizedBox(
               width: controller.widgetsWidth,
@@ -94,7 +94,7 @@ class _SignupBodyState extends State<SignupBody> {
               ),
             ),
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             Form(
               key: controller.formKey,
@@ -112,7 +112,7 @@ class _SignupBodyState extends State<SignupBody> {
                     ),
                   ),
                   SizedBox(
-                    height: controller.paddingSpace,
+                    height: controller.smallPaddingSpace,
                   ),
                   // username textFormField
                   // SizedBox(
@@ -127,7 +127,7 @@ class _SignupBodyState extends State<SignupBody> {
                   //   ),
                   // ),
                   // SizedBox(
-                  //   height: controller.paddingSpace,
+                  //   height: controller.smallPaddingSpace,
                   // ),
                   // email textFormField
                   SizedBox(
@@ -142,7 +142,7 @@ class _SignupBodyState extends State<SignupBody> {
                     ),
                   ),
                   SizedBox(
-                    height: controller.paddingSpace,
+                    height: controller.smallPaddingSpace,
                   ),
                   // password textFormField
                   SizedBox(
@@ -154,7 +154,7 @@ class _SignupBodyState extends State<SignupBody> {
                         controller: controller),
                   ),
                   SizedBox(
-                    height: controller.paddingSpace,
+                    height: controller.smallPaddingSpace,
                   ),
                   // confirm Password textFormField
                   SizedBox(
@@ -181,13 +181,13 @@ class _SignupBodyState extends State<SignupBody> {
                     text: controller.signupString,
                     onPressed: () => controller.signUpWithEmail(context))),
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
 
             // Sign in with google
             SignInWithGoogleWidget(controller: controller),
             SizedBox(
-              height: controller.paddingSpace,
+              height: controller.smallPaddingSpace,
             ),
             // Already have an account
             StringLineForSwituchAuth(controller: controller),

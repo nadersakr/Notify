@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: controller.paddingSpace,
+                    height: controller.smallPaddingSpace,
                   ),
                   TextLineUpoveChannels(
                     headLineText: controller.yourGroupHeadLine,
@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: controller.paddingSpace,
+                    height: controller.smallPaddingSpace,
                   ),
                   TextLineUpoveChannels(
                     headLineText: "Bigest Channels",

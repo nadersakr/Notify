@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/equal_to_validator.dart';
-import 'package:notify/core/utils/validators/longer_than_2_chars.dart';
+import 'package:notify/core/utils/validators/longer_than_chars.dart';
 import 'package:notify/core/utils/validators/no_space_validator.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
@@ -104,7 +104,7 @@ mixin Validators {
       BaseValidator.validateValue(
         context,
         value ?? "",
-        [RequiredValidator(), LognerThan2Chars(), NoSpaceValidator()],
+        [RequiredValidator(), LognerThanChars(2), NoSpaceValidator()],
         true,
       );
 

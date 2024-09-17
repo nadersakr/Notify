@@ -60,7 +60,7 @@ class SearchScreenState extends State<SearchScreen> {
                     key: _controller.formKey,
                     child: Column(
                       children: [
-                        SizedBox(height: AppUIController().paddingSpace),
+                        SizedBox(height: AppUIController().smallPaddingSpace),
                         CustomTextFormField(
                           validator: (String? value) =>
                               _controller.searchValidator(value, context),
