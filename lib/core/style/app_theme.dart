@@ -72,6 +72,7 @@ final ThemeData appTheme = ThemeData(
 /// Dark theme
 final ThemeData darkAppTheme = ThemeData(
   textSelectionTheme: const TextSelectionThemeData(
+    
     cursorColor: AppColors.primaryColor,
   ),
   textButtonTheme: TextButtonThemeData(
