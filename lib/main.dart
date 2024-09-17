@@ -8,7 +8,9 @@ import 'package:notify/features/auth/data/data_source/local/local_data_sourece.d
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'package:notify/nav_menu.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
+
 import 'firebase_options.dart';
+// import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
             theme: appTheme,
             darkTheme: darkAppTheme,
             home: LoadedUserData().loadedUser == null
-                ? const LoginPage()
+                ? const NavMenu()
                 : const NavMenu(),
           );
         });
