@@ -54,7 +54,7 @@ dependencies:
   # for icons
   iconsax: ^0.0.8
   firebase_core: ^2.24.2
-  firebase_auth: ^4.16.0
+  
   internet_connection_checker: ^2.0.0
   
   firebase_storage: ^11.6.0
@@ -63,7 +63,8 @@ dependencies:
   shared_preferences: ^2.3.2
   google_sign_in: ^6.2.1
   flutter_native_splash: ^2.4.1
-
+  firebase_auth: ^4.16.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

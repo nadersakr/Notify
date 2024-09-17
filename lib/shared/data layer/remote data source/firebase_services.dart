@@ -7,7 +7,8 @@ import 'package:notify/features/auth/presentation/controllers/signup%20view%20mo
 class FirebaseServices {
   static Future<void> saveUserData(
       // String username,
-       String fullName, String id) async {
+      String fullName,
+      String id) async {
     try {
       // Save User data using UID
       await FirebaseFirestore.instance.collection('users').doc(id).set({
@@ -15,6 +16,8 @@ class FirebaseServices {
         // 'username': username,
       });
     } catch (e) {
+      print('User data saved');
+      print(e);
       throw CacheException(SignupViewModle.userDatadidnotSaved);
     }
 
@@ -45,15 +48,17 @@ class FirebaseServices {
   //   }
   // }
 
-  static Future<({String fullName, String username})>
-      getUserData(String uid) async {
+  static Future<({String fullName, String username})> getUserData(
+      String uid) async {
     try {
       final response =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
       // print(response.data()!['firstName']);
 
-
-      return (fullName: "${response.data()!['fullName']}", username: "${response.data()!['username']}");
+      return (
+        fullName: "${response.data()!['fullName']}",
+        username: "${response.data()!['username']}"
+      );
     } catch (e) {
       throw FirebaseAuthFailure(LoginViewModle.errorInLoadingUserData);
     }
