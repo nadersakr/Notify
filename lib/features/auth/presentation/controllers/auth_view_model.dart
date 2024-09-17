@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/email_validator.dart';
-import 'package:notify/core/utils/validators/longer_than_7_chars.dart';
+import 'package:notify/core/utils/validators/longer_than_chars.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
-abstract class AuthViewModel extends AppUIController with Icons, Strings, Sizes ,Validators {
+abstract class AuthViewModel extends AppUIController
+    with Icons, Strings, Sizes, Validators {
   String get stringGoTo;
   String get donothaveAccountString;
   Function(BuildContext context) get navigatotGoTO;
@@ -77,7 +78,7 @@ mixin Validators {
       BaseValidator.validateValue(
         context,
         value ?? "",
-        [RequiredValidator(), LognerThan7Chars()],
+        [RequiredValidator(), LognerThanChars(7)],
         true,
       );
 }

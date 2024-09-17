@@ -6,7 +6,7 @@ class LessThanChars extends BaseValidator {
   LessThanChars(this.length);
   @override
   String getMessage(BuildContext? context) {
-    return "Password must be less than $length characters";
+    return "Field must be less than $length characters";
   }
 
   @override
