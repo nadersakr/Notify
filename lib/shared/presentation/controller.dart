@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppUIController with Sizes {}
 
 mixin Sizes {
-  double paddingSpace = 0.05.sw;
+  final double smallPaddingSpace = 0.05.sw;
 
-  double widgetsWidth = 0.9.sw;
-  double get letterSpace => 1.0;
+  final double widgetsWidth = 0.9.sw;
+  double get letterSpace => 1.5.sp;
 }
