@@ -6,14 +6,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/features/group/presentation/controllers/channal_controller.dart';
 
-class BuildProductImageUpload extends StatefulWidget {
-  const BuildProductImageUpload({super.key});
+class BuildChannalImageUpload extends StatefulWidget {
+  const BuildChannalImageUpload({super.key});
 
   @override
-  BuildProductImageUploadState createState() => BuildProductImageUploadState();
+  BuildChannalImageUploadState createState() => BuildChannalImageUploadState();
 }
 
-class BuildProductImageUploadState extends State<BuildProductImageUpload> {
+class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
   Future<void> _pickImage(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
     try {

@@ -15,8 +15,8 @@ import 'package:notify/shared/domin/entities/loaded_user.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
-  );
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   await initInjections();
   runApp(
       // DevicePreview(
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             darkTheme: darkAppTheme,
             home: LoadedUserData().loadedUser == null
                 ? const LoginPage()
-                : const LoginPage(),
+                : const NavMenu(),
           );
         });
   }
