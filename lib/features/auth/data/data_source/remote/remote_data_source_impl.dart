@@ -117,6 +117,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         channelsId: [],
       );
     } on FirebaseAuthException catch (e) {
+      print("Error: ${e.code}");
       // Handle specific Firebase Auth exceptions
       switch (e.code) {
         case 'user-not-found':
@@ -127,7 +128,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
     } on Exception catch (e) {
       // Handle generic exceptions
-      // print(e.toString());
+      print("Error: $e");
+      print(e.toString());
       throw FirebaseAuthFailure(e.toString());
     }
   }

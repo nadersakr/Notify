@@ -6,14 +6,14 @@ class PasswordWidget extends StatefulWidget {
   const PasswordWidget({
     super.key,
     required this.controller,
-    
-    
-    this.isConfirmPassword = false, this.validator, this.textController,
+    this.isConfirmPassword = false,
+    this.validator,
+    this.textController,
   });
   final bool isConfirmPassword;
   final AuthViewModel controller;
   final TextEditingController? textController;
-final String? Function(String?)? validator;
+  final String? Function(String?)? validator;
   @override
   State<PasswordWidget> createState() => _PasswordWidgetState();
 }
@@ -22,12 +22,13 @@ class _PasswordWidgetState extends State<PasswordWidget> {
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      maxLines: null,
       // key: widget.key,
       textController: widget.textController,
       validator: widget.validator,
-      obscureText: widget.isConfirmPassword
-          ? widget.controller.isConfirmedPasswordVisible
-          : widget.controller.isPasswordVisible,
+      // obscureText: widget.isConfirmPassword
+      //     ? widget.controller.isConfirmedPasswordVisible
+      //     : widget.controller.isPasswordVisible,
       onIconPressed: () {
         setState(() {
           widget.controller.showPassword(widget.isConfirmPassword);

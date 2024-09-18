@@ -9,13 +9,13 @@ import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'package:notify/nav_menu.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 
-import 'firebase_options.dart';
+// import 'firebase_options.dart';
 // import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    // options: DefaultFirebaseOptions.currentPlatform,
   );
   await initInjections();
   runApp(
@@ -46,8 +46,8 @@ class MyApp extends StatelessWidget {
             theme: appTheme,
             darkTheme: darkAppTheme,
             home: LoadedUserData().loadedUser == null
-                ? const NavMenu()
-                : const NavMenu(),
+                ? const LoginPage()
+                : const LoginPage(),
           );
         });
   }
