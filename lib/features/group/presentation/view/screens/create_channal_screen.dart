@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -44,16 +47,36 @@ class CreateChannelScreenState extends State<CreateChannelScreen> {
     }
     final compressedImage = await FlutterImageCompress.compressWithFile(
       ChannalController.pickedImagePath!.absolute.path,
-      minWidth: 2300,
-      minHeight: 1500,
-      quality: 94,
-      rotate: 90,
+      minWidth: 500,
+      minHeight: 500,
+      quality: 88,
+      // rotate: 90,
     );
     if (compressedImage == null) {
       ShowSnackBar.errorSnackBar(context, "Image compression failed.");
       return;
     }
+
+    print('Image Compressed successfully.');
+    // Save the compressed image to a temporary file
+    final compressedImageFile = File(
+        '${ChannalController.pickedImagePath!.parent.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg');
+    await compressedImageFile.writeAsBytes(compressedImage);
+    print("1");
+    try {
+    print("2");
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('uploads/${compressedImageFile.uri.pathSegments.last}');
+    print("3");
+      await storageRef.putFile(compressedImageFile);
+    print("4");
+    } catch (e) {
+      print(e);
+    }
+    // Upload to Firebase Storage
     print(compressedImage);
+    print('Image uploaded successfully.');
     if (_formKey.currentState?.validate() ?? false) {
       final Channel newChannel = Channel(
         id: DateTime.now().millisecondsSinceEpoch,
