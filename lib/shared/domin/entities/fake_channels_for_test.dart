@@ -3,7 +3,7 @@ import 'package:notify/shared/domin/entities/group_model.dart';
 final List<Channel> channelList = [
   const Channel(
     id: 1,
-    creatorId: 101,
+    creatorId: "101",
     membersCount: 50,
     title: 'Tech Enthusiasts',
     describtion:
@@ -15,7 +15,7 @@ final List<Channel> channelList = [
   ),
   const Channel(
     id: 2,
-    creatorId: 107,
+    creatorId: "107",
     // membersCount: 1405,
     title: 'Fitness Freaks',
     describtion: 'Join us to discuss workouts, diet tips, and staying healthy.',
@@ -27,7 +27,7 @@ final List<Channel> channelList = [
   const Channel(
     id: 3,
     membersCount: 464,
-    creatorId: 113,
+    creatorId: "113",
     title: 'Movie Buffs',
     describtion: 'All about movies: discussions, recommendations, and more!',
     superVisorsId: [114, 115],
@@ -37,7 +37,7 @@ final List<Channel> channelList = [
   ),
   const Channel(
     id: 4,
-    creatorId: 118,
+    creatorId: "118",
     membersCount: 752,
     title: 'Bookworms',
     describtion: 'For those who love reading and discussing books.',
@@ -49,7 +49,7 @@ final List<Channel> channelList = [
   const Channel(
     id: 5,
     membersCount: 122,
-    creatorId: 123,
+    creatorId: "123",
     title: 'Travel Junkies',
     describtion:
         'A space to share travel experiences, tips, and destination ideas.',

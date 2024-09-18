@@ -1,6 +1,6 @@
 class Channel {
   final int id;
-  final int creatorId;
+  final String creatorId;
   final String title;
   final String describtion;
   final List<int> superVisorsId;
