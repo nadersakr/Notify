@@ -49,7 +49,7 @@ class CreateChannelScreenState extends State<CreateChannelScreen> {
       ChannalController.pickedImagePath!.absolute.path,
       minWidth: 500,
       minHeight: 500,
-      quality: 88,
+      quality: 75,
       // rotate: 90,
     );
     if (compressedImage == null) {
@@ -64,13 +64,13 @@ class CreateChannelScreenState extends State<CreateChannelScreen> {
     await compressedImageFile.writeAsBytes(compressedImage);
     print("1");
     try {
-    print("2");
+      print("2");
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('uploads/${compressedImageFile.uri.pathSegments.last}');
-    print("3");
+      print("3");
       await storageRef.putFile(compressedImageFile);
-    print("4");
+      print("4");
     } catch (e) {
       print(e);
     }
