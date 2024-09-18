@@ -1,7 +1,8 @@
 enum AppRouteEnum {
   loginPage,
   signUpPage,
-  homePage
+  homePage,
+  navMenu
 }
 
 extension AppRouteExtension on AppRouteEnum {
@@ -14,6 +15,8 @@ extension AppRouteExtension on AppRouteEnum {
         return "/signup";
       case AppRouteEnum.homePage:
         return "/home";
+      case AppRouteEnum.navMenu:
+        return "/nav_menu";
 
       // case AppRouteEnum.weViewPage:
       //   return "/web_view_page";

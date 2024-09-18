@@ -53,7 +53,7 @@ class _SignupBodyState extends State<SignupBody> {
           if (state is AuthSuccess) {
             Navigator.pushReplacementNamed(
               context,
-              AppRouteEnum.homePage.name,
+              AppRouteEnum.navMenu.name,
             );
             ShowSnackBar.errorSnackBar(context, state.user.fullName);
           }

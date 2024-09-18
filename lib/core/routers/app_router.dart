@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
 import 'package:notify/features/home%20screen/presentation/view/home_screen.dart';
+import 'package:notify/nav_menu.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 
 class AppRouter {
@@ -34,6 +35,16 @@ class AppRouter {
             // assert(
                 // settings.arguments != null, "signup is required");
             return const HomeScreen();
+          },
+        );
+      case '/nav_menu':
+        return CupertinoPageRoute(
+          settings: RouteSettings(name: settings.name),
+          builder: (_) {
+            assert(LoadedUserData().loadedUser != null,"user is required");
+            // assert(
+                // settings.arguments != null, "signup is required");
+            return const NavMenu();
           },
         );
 

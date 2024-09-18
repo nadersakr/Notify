@@ -52,7 +52,7 @@ class _LoginBodyState extends State<LoginBody> {
           if (state is AuthSuccess) {
             Navigator.pushReplacementNamed(
               context,
-              AppRouteEnum.homePage.name,
+              AppRouteEnum.navMenu.name,
               // arguments: state.user,
             );
             ScaffoldMessenger.of(context).showSnackBar(
