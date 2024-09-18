@@ -1,4 +1,4 @@
-import 'package:notify/shared/domin/entities/group_model.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 
 final List<Channel> channelList = [
   const Channel(

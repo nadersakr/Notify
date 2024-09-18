@@ -6,8 +6,8 @@ sealed class HomeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-sealed class GetAllGroupsEvent extends Equatable {
-  const GetAllGroupsEvent();
+sealed class GetAllChannelsEvent extends Equatable {
+  const GetAllChannelsEvent();
 
   @override
   List<Object> get props => [];

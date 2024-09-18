@@ -7,7 +7,7 @@ import 'package:notify/core/utils/constant/app_strings.dart';
 import 'package:notify/features/home%20screen/presentation/controllers/home_screen_controller.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
-import 'package:notify/shared/domin/entities/group_model.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/shared/presentaion/widget/channel_container.dart';
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     height: controller.smallPaddingSpace,
                   ),
                   TextLineUpoveChannels(
-                    headLineText: controller.yourGroupHeadLine,
+                    headLineText: controller.yourChannelHeadLine,
                     actionWidget: TextButton(
                         onPressed: () {},
                         child: Text(controller.seeAllString,

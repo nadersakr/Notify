@@ -13,7 +13,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 
-class ChannalController {
+class ChannelController {
   static Color? pickedColor;
   static File? pickedImagePath;
   static final TextEditingController titleController = TextEditingController();
@@ -24,7 +24,7 @@ class ChannalController {
   static String imageUri = "";
   UserModel? user;
 
-  ChannalController() {
+  ChannelController() {
     user = LoadedUserData().loadedUser;
     if (user == null) {
       // Handle the case where the user is null

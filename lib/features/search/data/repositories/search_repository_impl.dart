@@ -4,20 +4,20 @@ import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/search/data/data%20source/remote/remote_data_source.dart';
 import 'package:notify/features/search/domin/repositories/search_repository.dart';
 import 'package:notify/features/search/domin/usecases/search.dart';
-import 'package:notify/shared/domin/entities/group_model.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 
-class SearchRepositoryImpl implements SearchForGroupRepository {
+class SearchRepositoryImpl implements SearchForChannelRepository {
   final SearchRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
   const SearchRepositoryImpl(this.remoteDataSource, this.networkInfo);
 
   @override
-  Future<Either<Failure, List<Channel>>> searchForGroup(
-      SearchForGroupParams params) async {
+  Future<Either<Failure, List<Channel>>> searchForChannel(
+      SearchForChannelParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        List<Channel> groups = await remoteDataSource.searchForGroup(params);
-        return Right(groups);
+        List<Channel> channels = await remoteDataSource.searchForChannel(params);
+        return Right(channels);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));
       }

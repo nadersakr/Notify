@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:notify/features/group/presentation/controllers/channal_controller.dart';
-import 'package:notify/features/group/presentation/view/widgets/channal_description_field.dart';
-import 'package:notify/features/group/presentation/view/widgets/channal_picker_color.dart';
-import 'package:notify/features/group/presentation/view/widgets/channal_privacy_switch.dart';
-import 'package:notify/features/group/presentation/view/widgets/channal_title_field.dart';
-import 'package:notify/features/group/presentation/view/widgets/create_channal_title.dart';
-import 'package:notify/features/group/presentation/view/widgets/pick_image_box.dart';
-import 'package:notify/features/group/presentation/view/widgets/create_channal_button.dart';
+import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
+import 'package:notify/features/channel/presentation/view/widgets/create_channal_title.dart';
+import 'package:notify/features/channel/presentation/view/widgets/channel_description_field.dart';
+import 'package:notify/features/channel/presentation/view/widgets/channel_picker_color.dart';
+import 'package:notify/features/channel/presentation/view/widgets/channel_privacy_switch.dart';
+import 'package:notify/features/channel/presentation/view/widgets/channel_title_field.dart';
+import 'package:notify/features/channel/presentation/view/widgets/pick_image_box.dart';
+import 'package:notify/features/channel/presentation/view/widgets/create_channel_button.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
 class CreateChannelScreen extends StatelessWidget {
@@ -30,7 +30,7 @@ class CreateChannelScreen extends StatelessWidget {
                   const BuildChannalImageUpload(),
                   SizedBox(height: AppUIController().smallPaddingSpace),
                   Form(
-                    key: ChannalController.formKey,
+                    key: ChannelController.formKey,
                     child: Column(
                       children: [
                         const ChannelTitleField(),

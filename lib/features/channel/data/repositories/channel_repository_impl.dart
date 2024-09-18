@@ -3,25 +3,25 @@ import 'dart:ffi';
 import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
-import 'package:notify/features/group/data/data%20source/remote/remote_data_source.dart';
-import 'package:notify/features/group/domin/repositories/group_repository.dart';
-import 'package:notify/features/group/domin/usecases/add_supervisor.dart';
-import 'package:notify/features/group/domin/usecases/create_group.dart';
-import 'package:notify/features/group/domin/usecases/join_group.dart';
-import 'package:notify/features/group/domin/usecases/leave_group.dart';
+import 'package:notify/features/channel/data/data%20source/remote/remote_data_source.dart';
+import 'package:notify/features/channel/domin/repositories/channel_repository.dart';
+import 'package:notify/features/channel/domin/usecases/add_supervisor.dart';
+import 'package:notify/features/channel/domin/usecases/create_channel.dart';
+import 'package:notify/features/channel/domin/usecases/join_channel.dart';
+import 'package:notify/features/channel/domin/usecases/leave_channel.dart';
 
-class GroupRepositoryImpl implements GroupRepository {
-  final GroupRemoteDataSource remoteDataSource;
+class ChannelRepositoryImpl implements ChannelRepository {
+  final ChannelRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  const GroupRepositoryImpl(
+  const ChannelRepositoryImpl(
       {required this.remoteDataSource, required this.networkInfo});
   @override
   Future<Either<Failure, void>> addSupervisor(
       AddSupervisorParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        await remoteDataSource.addSupervisorGroup(params);
+        await remoteDataSource.addSupervisorChannel(params);
         return const Right(Void);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));
@@ -32,10 +32,10 @@ class GroupRepositoryImpl implements GroupRepository {
   }
 
   @override
-  Future<Either<Failure, void>> createGroup(CreateGroupParams params) async {
+  Future<Either<Failure, void>> createChannel(CreateChannelParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        await remoteDataSource.createGroup(params);
+        await remoteDataSource.createChannel(params);
         return const Right(Void);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));
@@ -46,10 +46,10 @@ class GroupRepositoryImpl implements GroupRepository {
   }
 
   @override
-  Future<Either<Failure, void>> joinGroup(JoinGroupParams params) async {
+  Future<Either<Failure, void>> joinChannel(JoinChannelParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        await remoteDataSource.joinGroup(params);
+        await remoteDataSource.joinChannel(params);
         return const Right(Void);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));
@@ -60,10 +60,10 @@ class GroupRepositoryImpl implements GroupRepository {
   }
 
   @override
-  Future<Either<Failure, void>> leaveGroup(LeaveGroupParams params) async {
+  Future<Either<Failure, void>> leaveChannel(LeaveChannelParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        await remoteDataSource.leaveGroup(params);
+        await remoteDataSource.leaveChannel(params);
         return const Right(Void);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));

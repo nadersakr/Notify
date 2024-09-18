@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/style/app_colors.dart';
-import 'package:notify/features/group/presentation/controllers/channal_controller.dart';
+import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
 class ChannelColorPicker extends StatefulWidget {
@@ -21,7 +21,7 @@ class ChannelColorPickerState extends State<ChannelColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    ChannalController.pickedColor ??= Colors.black;  // Ensure pickedColor is initialized
+    ChannelController.pickedColor ??= Colors.black;  // Ensure pickedColor is initialized
     return Row(
       children: [
         GestureDetector(
@@ -41,7 +41,7 @@ class ChannelColorPickerState extends State<ChannelColorPicker> {
                     child: const Text('Got it'),
                     onPressed: () {
                       setState(() {
-                        ChannalController.pickedColor = pickerColor;
+                        ChannelController.pickedColor = pickerColor;
                       });
                       Navigator.of(context).pop();
                     },
@@ -69,7 +69,7 @@ class ChannelColorPickerState extends State<ChannelColorPicker> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: ChannalController.pickedColor!,  // Safe usage after initialization
+              color: ChannelController.pickedColor!,  // Safe usage after initialization
               width: 8.sp,
             ),
           ),

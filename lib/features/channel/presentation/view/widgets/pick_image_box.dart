@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notify/core/style/app_colors.dart';
-import 'package:notify/features/group/presentation/controllers/channal_controller.dart';
+import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
 
 class BuildChannalImageUpload extends StatefulWidget {
   const BuildChannalImageUpload({super.key});
@@ -28,7 +28,7 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
         // Check if the aspect ratio is approximately 1:2
         if (image.width / image.height > 1.2) {
           setState(() {
-            ChannalController.pickedImagePath = File(pickedFile.path);
+            ChannelController.pickedImagePath = File(pickedFile.path);
           });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -59,7 +59,7 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
               border: Border.all(width: 1.5.sp, color: AppColors.primaryColor),
               borderRadius: const BorderRadius.all(Radius.circular(32)),
             ),
-            child: ChannalController.pickedImagePath == null
+            child: ChannelController.pickedImagePath == null
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -79,7 +79,7 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
                     child: Stack(
                       children: [
                         Image.file(
-                          ChannalController.pickedImagePath!,
+                          ChannelController.pickedImagePath!,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
@@ -91,7 +91,7 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
                             icon: const Icon(Iconsax.close_square),
                             onPressed: () {
                               setState(() {
-                                ChannalController.pickedImagePath = null;
+                                ChannelController.pickedImagePath = null;
                               });
                             },
                           ),

@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
-import 'package:notify/features/group/domin/repositories/group_repository.dart';
-import 'package:notify/shared/domin/entities/group_model.dart';
+import 'package:notify/features/channel/domin/repositories/channel_repository.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 
-class AddSupervisorGroup extends UseCase<void, AddSupervisorParams> {
-  final GroupRepository repository;
+class AddSupervisorChannel extends UseCase<void, AddSupervisorParams> {
+  final ChannelRepository repository;
 
-  AddSupervisorGroup(this.repository);
+  AddSupervisorChannel(this.repository);
 
   @override
   Future<Either<Failure, void>> call(AddSupervisorParams params) async {

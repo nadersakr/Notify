@@ -18,6 +18,6 @@ mixin Sizes {
 }
 
 mixin Strings {
-  String get yourGroupHeadLine => "Your Channels";
+  String get yourChannelHeadLine => "Your Channels";
   String get seeAllString => "See All";
 }

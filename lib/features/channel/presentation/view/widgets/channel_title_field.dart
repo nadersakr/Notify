@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notify/features/group/presentation/controllers/channal_controller.dart';
+import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
 
 class ChannelTitleField extends StatelessWidget {
@@ -7,11 +7,11 @@ class ChannelTitleField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = ChannalController();
+    final controller = ChannelController();
     return CustomTextFormField(
       maxLenght: 19,
       labelText: "Title",
-      textController: ChannalController.titleController,
+      textController: ChannelController.titleController,
       validator: (String? value) => controller.titleValidator(value, context),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/style/app_colors.dart';
-import 'package:notify/features/group/presentation/controllers/channal_controller.dart';
+import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
 
 class ChannelPrivacySwitch extends StatefulWidget {
   const ChannelPrivacySwitch({super.key});
@@ -15,12 +15,12 @@ class _ChannelPrivacySwitchState extends State<ChannelPrivacySwitch> {
   @override
   void initState() {
     super.initState();
-    isPrivate = ChannalController.isPrivate; // Initialize with the controller value
+    isPrivate = ChannelController.isPrivate; // Initialize with the controller value
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = ChannalController();
+    final controller = ChannelController();
     return SwitchListTile(
       contentPadding: const EdgeInsets.all(0),
       activeColor: AppColors.primaryColor,

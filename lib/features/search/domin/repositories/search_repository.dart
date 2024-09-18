@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/search/domin/usecases/search.dart';
-import 'package:notify/shared/domin/entities/group_model.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 
-abstract class SearchForGroupRepository {
-  Future<Either<Failure, List<Channel>>> searchForGroup(
-      SearchForGroupParams params);
+abstract class SearchForChannelRepository {
+  Future<Either<Failure, List<Channel>>> searchForChannel(
+      SearchForChannelParams params);
 }
