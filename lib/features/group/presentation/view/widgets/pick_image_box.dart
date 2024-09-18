@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notify/core/style/app_colors.dart';
+import 'package:notify/features/group/presentation/controllers/channal_controller.dart';
 
 class BuildProductImageUpload extends StatefulWidget {
   const BuildProductImageUpload({super.key});
@@ -13,8 +14,6 @@ class BuildProductImageUpload extends StatefulWidget {
 }
 
 class BuildProductImageUploadState extends State<BuildProductImageUpload> {
-  String? selectedImagePath;
-
   Future<void> _pickImage(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
     try {
@@ -29,7 +28,7 @@ class BuildProductImageUploadState extends State<BuildProductImageUpload> {
         // Check if the aspect ratio is approximately 1:2
         if (image.width / image.height > 1.2) {
           setState(() {
-            selectedImagePath = pickedFile.path;
+            ChannalController.pickedImagePath = File(pickedFile.path);
           });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -60,7 +59,7 @@ class BuildProductImageUploadState extends State<BuildProductImageUpload> {
               border: Border.all(width: 1.5.sp, color: AppColors.primaryColor),
               borderRadius: const BorderRadius.all(Radius.circular(32)),
             ),
-            child: selectedImagePath == null
+            child: ChannalController.pickedImagePath == null
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -80,7 +79,7 @@ class BuildProductImageUploadState extends State<BuildProductImageUpload> {
                     child: Stack(
                       children: [
                         Image.file(
-                          File(selectedImagePath!),
+                          ChannalController.pickedImagePath!,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
@@ -92,7 +91,7 @@ class BuildProductImageUploadState extends State<BuildProductImageUpload> {
                             icon: const Icon(Iconsax.close_square),
                             onPressed: () {
                               setState(() {
-                                selectedImagePath = null;
+                                ChannalController.pickedImagePath = null;
                               });
                             },
                           ),

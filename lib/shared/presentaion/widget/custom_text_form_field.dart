@@ -5,11 +5,13 @@ import 'package:notify/core/style/app_colors.dart';
 class CustomTextFormField extends StatelessWidget {
   final String? hintText;
   final String? labelText;
+  final int? maxLines;
   final double? borderRadius;
   final TextEditingController? textController;
   final Color? borderColor;
   final Color? errorBorderColor;
   final double? borderwidth;
+  final int? maxLenght;
   final IconData? suffixIcon;
   final Widget? suffixWidget;
   final bool? obscureText;
@@ -19,7 +21,9 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String)? onSubmitted;
   const CustomTextFormField(
       {super.key,
+      this.maxLines,
       this.hintText,
+      this.maxLenght,
       this.labelText,
       this.borderRadius,
       this.borderColor,
@@ -28,7 +32,11 @@ class CustomTextFormField extends StatelessWidget {
       this.suffixIcon,
       this.obscureText,
       this.onIconPressed,
-      this.validator, this.textController, this.suffixWidget, this.onchanged, this.onSubmitted});
+      this.validator,
+      this.textController,
+      this.suffixWidget,
+      this.onchanged,
+      this.onSubmitted});
   InputBorder border({Color? color}) => OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 15.sp)),
         borderSide: BorderSide(
@@ -38,18 +46,24 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines,
+      minLines: 1,
+      maxLength: maxLenght,
       onChanged: onchanged,
-      onFieldSubmitted : onSubmitted ,
+      onFieldSubmitted: onSubmitted,
       controller: textController,
       key: key,
       validator: validator,
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
-        suffixIcon: suffixWidget?? IconButton(
-          onPressed: onIconPressed,
-          icon: Icon(suffixIcon),
-          disabledColor: Colors.black,
-        ),
+        counterText: "",
+        contentPadding: const EdgeInsets.all(10),
+        suffixIcon: suffixWidget ??
+            IconButton(
+              onPressed: onIconPressed,
+              icon: Icon(suffixIcon),
+              disabledColor: Colors.black,
+            ),
         hintText: hintText,
         labelText: labelText,
         focusedBorder: border(color: borderColor),

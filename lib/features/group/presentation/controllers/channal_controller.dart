@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/less_than.dart';
@@ -5,7 +7,7 @@ import 'package:notify/core/utils/validators/longer_than_chars.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
 
 class ChannalController {
- static List<String> pickedImagePaths = [];
+  static File? pickedImagePath;
   String? titleValidator(String? value, BuildContext context) =>
       BaseValidator.validateValue(
         context,

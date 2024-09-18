@@ -8,6 +8,7 @@ class Channel {
   final String? imageUrl;
   final String hexColor;
   final int membersCount;
+  final bool? isPrivate;
 
   const Channel(
       {required this.id,
@@ -17,6 +18,7 @@ class Channel {
       required this.creatorId,
       required this.describtion,
       required this.superVisorsId,
+      this.isPrivate = false,
       this.imageUrl,
       this.membersId = const []});
 }
