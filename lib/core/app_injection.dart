@@ -13,6 +13,11 @@ import 'package:notify/features/auth/domin/usecases/signin_with_google.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
+import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source.dart';
+import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source_impl.dart';
+import 'package:notify/shared/data%20layer/repositories/image_util_repository_impl.dart';
+import 'package:notify/shared/domin/repositories/Image_util_repository.dart';
+import 'package:notify/shared/domin/usecases/upload_image_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -29,6 +34,7 @@ Future<void> initInjections() async {
   // await initArticlesInjections();
   await authBlocinjections();
   await searchBlocInjections();
+  await imageUtilInjections();
 }
 
 authBlocinjections() async {
@@ -54,6 +60,19 @@ authUseCasesInjections() async {
   sl.registerFactory<SigninWithGoogle>(
       () => SigninWithGoogle(sl<AuthRepository>()));
   sl.registerFactory<LogOut>(() => LogOut(sl<AuthRepository>()));
+}
+
+imageUtilInjections() async {
+  sl.registerFactory<ImageUtilRemoteDataSource>(
+      () => ImageUtilRemoteDataSourceImpl());
+
+  sl.registerSingletonAsync<ImageUtilRepository>(() async {
+    return ImageUtilRepositoryImpl(
+        networkInfo: sl<NetworkInfo>(),
+        remoteDataSource: sl<ImageUtilRemoteDataSource>());
+  });
+
+  sl.registerFactory<UploadImage>(() => UploadImage(sl<ImageUtilRepository>()));
 }
 
 networkInjections() async {

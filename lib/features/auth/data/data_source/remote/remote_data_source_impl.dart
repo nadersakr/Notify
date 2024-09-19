@@ -8,7 +8,7 @@ import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
 import 'package:notify/features/auth/presentation/controllers/signup%20view%20model/signup_view_model.dart';
-import 'package:notify/shared/data%20layer/remote%20data%20source/firebase_services.dart';
+import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/firebase_services.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl();

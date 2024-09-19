@@ -2,14 +2,16 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:notify/core/network/error/failures.dart';
-import 'package:notify/shared/data%20layer/remote%20data%20source/image_util.dart/image_util_remote_data_source.dart';
+import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source.dart';
+import 'package:notify/shared/domin/usecases/compress_image_usecase.dart';
+import 'package:notify/shared/domin/usecases/upload_image_usecase.dart';
 
 class ImageUtilRemoteDataSourceImpl extends ImageUtilRemoteDataSource {
   @override
-  Future<File> compressImage(File image) async {
+  Future<File> compressImage(CompressImageParams params) async {
     try {
       final compressedImage = await FlutterImageCompress.compressWithFile(
-        image.absolute.path,
+        params.image.absolute.path,
         minWidth: 600,
         minHeight: 500,
         quality: 75,
@@ -20,7 +22,7 @@ class ImageUtilRemoteDataSourceImpl extends ImageUtilRemoteDataSource {
       }
 
       final compressedImageFile = File(
-        '${image.parent.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg',
+        '${params.image.parent.path}/compressed_${DateTime.now().millisecondsSinceEpoch}.jpg',
       );
       await compressedImageFile.writeAsBytes(compressedImage);
 
@@ -31,12 +33,12 @@ class ImageUtilRemoteDataSourceImpl extends ImageUtilRemoteDataSource {
   }
 
   @override
-  Future<String> uploadImageAndGetUrl(File image) async {
+  Future<String> uploadImageAndGetUrl(UploadImageParams params) async {
     try {
       final storageRef = FirebaseStorage.instance
           .ref()
-          .child('uploads/${image.uri.pathSegments.last}');
-      await storageRef.putFile(image);
+          .child('uploads/${params.image.uri.pathSegments.last}');
+      await storageRef.putFile(params.image);
       return await storageRef.getDownloadURL();
     } catch (e) {
       throw const ImageUtilFailure('Error uploading image');

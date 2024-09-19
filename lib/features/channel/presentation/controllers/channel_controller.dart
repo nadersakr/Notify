@@ -59,25 +59,20 @@ class ChannelController {
   // Create Channel Logic
   Future<void> createChannel(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-    } else {
-      ShowSnackBar.errorSnackBar(
-          context, "Please fill in all required fields.");
-      return;
-    }
     if (pickedColor == null) {
       ShowSnackBar.errorSnackBar(context, "Pick channel color");
       return;
     }
-
     if (pickedImagePath == null) {
       ShowSnackBar.errorSnackBar(context, "Pick channel cover");
       return;
     }
-
     if (user == null) {
       ShowSnackBar.errorSnackBar(context, "User data is not loaded.");
       return;
     }
+
+    
 
     final compressedImage = await FlutterImageCompress.compressWithFile(
       pickedImagePath!.absolute.path,
@@ -110,5 +105,10 @@ class ChannelController {
     print("Successfully uploaded image");
     print(
         'Creating channel with details: ${titleController.text}, ${descriptionController.text}, private: $isPrivate, color: ${pickedColor!.toHexString()},image: $imageUri');
+    } else {
+      ShowSnackBar.errorSnackBar(
+          context, "Please fill in all required fields.");
+      return;
+    }
   }
 }
