@@ -5,6 +5,9 @@ import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
 class HomeScreenController extends AppUIController with Sizes, Strings {
+  navigateToSearchScreen(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, "/search",(router)=>false);
+  }
   void logOut(BuildContext context) {
     sl<AuthBloc>().add(LogoutEvent());
     Navigator.pushReplacementNamed(context, "/login");

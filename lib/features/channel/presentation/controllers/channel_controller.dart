@@ -9,9 +9,7 @@ import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/less_than.dart';
 import 'package:notify/core/utils/validators/longer_than_chars.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:notify/core/helper/snackbar.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:notify/features/channel/domin/usecases/create_channel.dart';
 import 'package:notify/features/channel/presentation/bloc/channel_bloc.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
@@ -85,6 +83,17 @@ class ChannelController {
         ShowSnackBar.errorSnackBar(context, "User data is not loaded.");
         return;
       }
+      // Show CircularProgressIndicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
 
       CompressImage compressImage = sl<CompressImage>();
       CompressImageParams params = CompressImageParams(image: pickedImagePath!);
@@ -110,6 +119,7 @@ class ChannelController {
               superVisorsId: [user!.id],
               imageUrl: r);
           CreateChannelParams params = CreateChannelParams(channel: channel);
+          
           BlocProvider.of<ChannelBloc>(context)
               .add(CreateChannelEvent(params: params));
         });

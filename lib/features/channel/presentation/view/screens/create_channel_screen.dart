@@ -22,13 +22,14 @@ class CreateChannelScreen extends StatelessWidget {
       create: (context) => sl<ChannelBloc>(),
       child: BlocConsumer<ChannelBloc, ChannelState>(
         listener: (context, state) {
-          if (state is CreateChannelLoading) {
-            ShowSnackBar.warningSnackBar(context, "Loading");
-          }
+          if (state is CreateChannelLoading) {}
           if (state is CreateChannelFailed) {
             ShowSnackBar.errorSnackBar(context, state.errorMessage);
           }
           if (state is CreateChannelSuccess) {
+            ChannelController.resetParamters();
+            Navigator.pushNamedAndRemoveUntil(
+                context, "/nav_menu", (router) => false);
             ShowSnackBar.successSnackBar(
                 context, "Channel created Successfully");
           }

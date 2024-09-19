@@ -8,14 +8,23 @@ import 'package:notify/features/profile/presentation/view/my%20profile/my_profil
 import 'package:notify/features/search/presentation/view/search_screen.dart';
 
 class NavMenu extends StatefulWidget {
-  const NavMenu({super.key});
+  final int index;
+  const NavMenu({
+    super.key,
+    this.index = 0,
+  });
 
   @override
   NavMenuState createState() => NavMenuState();
 }
 
 class NavMenuState extends State<NavMenu> {
-  int _selectedIndex = 0;
+  int? _selectedIndex;
+  @override
+  void initState() {
+    _selectedIndex = widget.index > 4 ? 0 : widget.index;
+    super.initState();
+  }
 
   final List<Widget> _screens = [
     const HomeScreen(),
@@ -31,6 +40,8 @@ class NavMenuState extends State<NavMenu> {
     });
   }
 
+  set onNavigate(int index) => _selectedIndex = index;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +49,7 @@ class NavMenuState extends State<NavMenu> {
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-        selectedIndex: _selectedIndex,
+        selectedIndex: _selectedIndex!,
         indicatorColor: Colors.transparent,
         onDestinationSelected: _onItemTapped,
         destinations: const [
@@ -84,7 +95,7 @@ class NavMenuState extends State<NavMenu> {
           ),
         ],
       ),
-      body: _screens[_selectedIndex],
+      body: _screens[_selectedIndex!],
     );
   }
 }
