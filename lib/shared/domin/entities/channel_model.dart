@@ -3,8 +3,8 @@ class Channel {
   final String creatorId;
   final String title;
   final String describtion;
-  final List<int> superVisorsId;
-  final List<int> membersId;
+  final List<String> superVisorsId;
+  final List<String> membersId;
   final String? imageUrl;
   final String hexColor;
   final int membersCount;
