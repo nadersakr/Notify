@@ -7,4 +7,5 @@ mixin Sizes {
 
   final double widgetsWidth = 0.9.sw;
   double get letterSpace => 1.5.sp;
+  double get borderWidth => 1.5.sp;
 }

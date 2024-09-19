@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
+import 'package:notify/shared/presentation/controller.dart';
 
 class BuildChannalImageUpload extends StatefulWidget {
   const BuildChannalImageUpload({super.key});
@@ -56,7 +57,9 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
             height: 150.h,
             decoration: BoxDecoration(
               color: Theme.of(context).scaffoldBackgroundColor,
-              border: Border.all(width: 1.5.sp, color: AppColors.primaryColor),
+              border: Border.all(
+                  width: AppUIController().borderWidth,
+                  color: AppColors.primaryColor),
               borderRadius: const BorderRadius.all(Radius.circular(32)),
             ),
             child: ChannelController.pickedImagePath == null
@@ -66,6 +69,7 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
                       const Icon(
                         Iconsax.picture_frame,
                         size: 50,
+                        
                         color: AppColors.primaryColor,
                       ),
                       Text(

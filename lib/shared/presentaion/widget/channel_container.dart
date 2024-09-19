@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/presentation/controller.dart';
 
 class ChannelOverviewContainer extends StatelessWidget {
   const ChannelOverviewContainer({
@@ -23,7 +24,11 @@ class ChannelOverviewContainer extends StatelessWidget {
       margin: const EdgeInsets.all(5),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(color: Color(int.parse('0xFF${channel.hexColor}'))),
+        border: Border.all(
+            color: Color(
+              int.parse('0xFF${channel.hexColor}'),
+            ),
+            width: AppUIController().borderWidth),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/style/app_colors.dart';
+import 'package:notify/shared/presentation/controller.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? hintText;
@@ -41,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 15.sp)),
         borderSide: BorderSide(
             color: borderColor ?? AppColors.primaryColor,
-            width: borderwidth ?? 1.5.w),
+            width: borderwidth ?? AppUIController().borderWidth),
       );
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,7 @@ class ChannelColorPicker extends StatefulWidget {
 }
 
 class ChannelColorPickerState extends State<ChannelColorPicker> {
-  Color pickerColor = Colors.black;
+  Color pickerColor = AppColors.primaryColor;
 
   void changeColor(Color color) {
     setState(() => pickerColor = color);
@@ -21,7 +21,7 @@ class ChannelColorPickerState extends State<ChannelColorPicker> {
 
   @override
   Widget build(BuildContext context) {
-    ChannelController.pickedColor ??= Colors.black;  // Ensure pickedColor is initialized
+    ChannelController.pickedColor ??= AppColors.primaryColor;
     return Row(
       children: [
         GestureDetector(
@@ -52,8 +52,8 @@ class ChannelColorPickerState extends State<ChannelColorPicker> {
           },
           child: Container(
             height: 45.h,
-            width: AppUIController().widgetsWidth - 
-                45.h - 
+            width: AppUIController().widgetsWidth -
+                45.h -
                 AppUIController().smallPaddingSpace,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15.sp)),
@@ -69,8 +69,9 @@ class ChannelColorPickerState extends State<ChannelColorPicker> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: ChannelController.pickedColor!,  // Safe usage after initialization
-              width: 8.sp,
+              color: ChannelController
+                  .pickedColor!, // Safe usage after initialization
+              width: AppUIController().borderWidth,
             ),
           ),
         ),
