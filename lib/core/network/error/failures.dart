@@ -21,6 +21,11 @@ class FirebaseAuthFailure extends Failure {
     super.errorMessage,
   );
 }
+class ImageUtilFailure extends Failure {
+  const ImageUtilFailure(
+    super.errorMessage,
+  );
+}
 
 /// Cancel token failure
 class CacheFailure extends Failure {
@@ -34,3 +39,4 @@ class UnknowFailure extends Failure {
 class NetworkFailure extends Failure {
   const NetworkFailure() : super("No internet connection");
 }
+
