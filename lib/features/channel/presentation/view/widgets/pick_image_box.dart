@@ -16,35 +16,39 @@ class BuildChannalImageUpload extends StatefulWidget {
 
 class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
   Future<void> _pickImage(BuildContext context) async {
-    final ImagePicker picker = ImagePicker();
-    try {
-      final XFile? pickedFile =
-          await picker.pickImage(source: ImageSource.gallery);
+  final ImagePicker picker = ImagePicker();
+  try {
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-      if (pickedFile != null) {
-        File imageFile = File(pickedFile.path);
-        final image = await decodeImageFromList(imageFile.readAsBytesSync());
-        print(image.width / image.height);
-
-        // Check if the aspect ratio is approximately 1:2
-        if (image.width / image.height > 1.2) {
+    if (pickedFile != null) {
+      File imageFile = File(pickedFile.path);
+      final image = await decodeImageFromList(imageFile.readAsBytesSync());
+      
+      if (image.width / image.height > 1.2) {
+        if (mounted) { // Check if the widget is still mounted
           setState(() {
             ChannelController.pickedImagePath = File(pickedFile.path);
           });
-        } else {
+        }
+      } else {
+        if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-                content: Text(
-                    'this image is not suitable for a channel cover, please pick another image')),
+              content: Text('This image is not suitable for a channel cover, please pick another image'),
+            ),
           );
         }
       }
-    } catch (e) {
+    }
+  } catch (e) {
+    if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
     }
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

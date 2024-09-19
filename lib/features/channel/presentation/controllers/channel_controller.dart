@@ -49,7 +49,6 @@ class ChannelController {
   // Toggle Privacy
   void togglePrivacy(bool value) {
     isPrivate = value;
-    print(isPrivate);
   }
 
   // Validation
@@ -94,7 +93,6 @@ class ChannelController {
         ShowSnackBar.errorSnackBar(context, l.errorMessage);
         return;
       }, (r) async {
-        print("compressed");
         UploadImageParams params = UploadImageParams(image: r);
         UploadImage uploadImage = sl<UploadImage>();
         final result = await uploadImage(params);

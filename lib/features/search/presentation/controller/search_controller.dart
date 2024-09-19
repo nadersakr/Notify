@@ -54,7 +54,6 @@ class SearchChannelController with SearchStrings, SearchIcons {
 
   clearSearchHistory(BuildContext context) {
     BlocProvider.of<SearchBloc>(context).add(const ClearSearchHistoryEvent());
-    print("cleaaaaaaaaaaaaaaaaaaaaaaaaaar history");
     searchHistory = [];
   }
 

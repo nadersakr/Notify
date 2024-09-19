@@ -120,7 +120,6 @@ await FirebaseServices.saveUserData(
         channelsId: [],
       );
     } on FirebaseAuthException catch (e) {
-      print("Error: ${e.code}");
       // Handle specific Firebase Auth exceptions
       switch (e.code) {
         case 'user-not-found':
@@ -131,8 +130,6 @@ await FirebaseServices.saveUserData(
       }
     } on Exception catch (e) {
       // Handle generic exceptions
-      print("Error: $e");
-      print(e.toString());
       throw FirebaseAuthFailure(e.toString());
     }
   }

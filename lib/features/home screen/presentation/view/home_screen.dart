@@ -6,7 +6,6 @@ import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/core/utils/constant/app_strings.dart';
 import 'package:notify/features/home%20screen/presentation/controllers/home_screen_controller.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
-import 'package:notify/nav_menu.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';

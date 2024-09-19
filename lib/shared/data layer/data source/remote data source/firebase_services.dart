@@ -16,8 +16,6 @@ class FirebaseServices {
         // 'username': username,
       });
     } catch (e) {
-      print('User data saved');
-      print(e);
       throw CacheException(SignupViewModle.userDatadidnotSaved);
     }
 

@@ -20,7 +20,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     });
     on<ClearSearchHistoryEvent>((event, emit) {
       sl<SharedPreferences>().remove('searchHistory');
-      print("cleaaaaaaaaaaaaaaaaaaar");
       emit(ClearSearchHistory());
     });
   }

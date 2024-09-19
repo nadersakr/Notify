@@ -8,7 +8,7 @@ import 'package:notify/features/channel/domin/usecases/leave_channel.dart';
 class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
   Future<void> addSupervisorChannel(AddSupervisorParams params) {
-    // TODO: implement addSupervisorChannel
+    
     throw UnimplementedError();
   }
 
@@ -40,13 +40,12 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
 
   @override
   Future<void> joinChannel(JoinChannelParams params) {
-    // TODO: implement joinChannel
+    
     throw UnimplementedError();
   }
 
   @override
   Future<void> leaveChannel(LeaveChannelParams params) {
-    // TODO: implement leaveChannel
     throw UnimplementedError();
   }
 }
