@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:notify/core/app_injection.dart';
+import 'package:notify/core/utils/lottle/lottle.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/less_than.dart';
 import 'package:notify/core/utils/validators/longer_than_chars.dart';
@@ -84,16 +85,7 @@ class ChannelController {
         return;
       }
       // Show CircularProgressIndicator
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      );
+      RunLottleFile().showNotiftyLottle(context, "Creating Channel");
 
       CompressImage compressImage = sl<CompressImage>();
       CompressImageParams params = CompressImageParams(image: pickedImagePath!);
@@ -119,7 +111,7 @@ class ChannelController {
               superVisorsId: [user!.id],
               imageUrl: r);
           CreateChannelParams params = CreateChannelParams(channel: channel);
-          
+
           BlocProvider.of<ChannelBloc>(context)
               .add(CreateChannelEvent(params: params));
         });
