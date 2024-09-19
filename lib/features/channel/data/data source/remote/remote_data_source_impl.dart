@@ -27,11 +27,11 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
       'color': params.channel.hexColor,
       'isPrivate':params.channel.isPrivate,
       'createdAt': FieldValue.serverTimestamp(),
-      'ownerId': params.creator,
+      'ownerId': params.channel.creatorId,
     });
 
     // Add the channel ID to the user's list of owned channels
-    final userDoc = userCollection.doc(params.creator);
+    final userDoc = userCollection.doc(params.channel.creatorId);
     await userDoc.update({
       'ownedChannels': FieldValue.arrayUnion([channelDoc.id]),
     });

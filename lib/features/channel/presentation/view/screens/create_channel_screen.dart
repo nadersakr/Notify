@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notify/core/app_injection.dart';
+import 'package:notify/core/helper/snackbar.dart';
+import 'package:notify/features/channel/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
 import 'package:notify/features/channel/presentation/view/widgets/create_channal_title.dart';
 import 'package:notify/features/channel/presentation/view/widgets/channel_description_field.dart';
@@ -14,42 +18,62 @@ class CreateChannelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: SafeArea(
-        child: SizedBox(
-          width: AppUIController().widgetsWidth,
-          child: Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: AppUIController().smallPaddingSpace),
-                  const CreateChannelTitle(),
-                  SizedBox(height: AppUIController().smallPaddingSpace),
-                  const BuildChannalImageUpload(),
-                  SizedBox(height: AppUIController().smallPaddingSpace),
-                  Form(
-                    key: ChannelController.formKey,
+    return BlocProvider(
+      create: (context) => sl<ChannelBloc>(),
+      child: BlocConsumer<ChannelBloc, ChannelState>(
+        listener: (context, state) {
+          if (state is CreateChannelLoading) {
+            ShowSnackBar.warningSnackBar(context, "Loading");
+          }
+          if (state is CreateChannelFailed) {
+            ShowSnackBar.errorSnackBar(context, state.errorMessage);
+          }
+          if (state is CreateChannelSuccess) {
+            ShowSnackBar.successSnackBar(
+                context, "Channel created Successfully");
+          }
+        },
+        builder: (context, state) {
+          return Align(
+            alignment: Alignment.center,
+            child: SafeArea(
+              child: SizedBox(
+                width: AppUIController().widgetsWidth,
+                child: Scaffold(
+                  body: SingleChildScrollView(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const ChannelTitleField(),
                         SizedBox(height: AppUIController().smallPaddingSpace),
-                        const ChannelDescriptionField(),
+                        const CreateChannelTitle(),
+                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        const BuildChannalImageUpload(),
+                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        Form(
+                          key: ChannelController.formKey,
+                          child: Column(
+                            children: [
+                              const ChannelTitleField(),
+                              SizedBox(
+                                  height: AppUIController().smallPaddingSpace),
+                              const ChannelDescriptionField(),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        const ChannelColorPicker(),
+                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        const ChannelPrivacySwitch(),
+                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        const CreateChannelButton(),
                       ],
                     ),
                   ),
-                  SizedBox(height: AppUIController().smallPaddingSpace),
-                  const ChannelColorPicker(),
-                  SizedBox(height: AppUIController().smallPaddingSpace),
-                  const ChannelPrivacySwitch(),
-                  SizedBox(height: AppUIController().smallPaddingSpace),
-                  const CreateChannelButton(),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

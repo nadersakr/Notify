@@ -12,6 +12,8 @@ import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:notify/features/channel/domin/usecases/create_channel.dart';
+import 'package:notify/features/channel/presentation/bloc/channel_bloc.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
@@ -28,12 +30,19 @@ class ChannelController {
   static bool isPrivate = false;
   static String imageUri = "";
   UserModel? user;
+  static resetParamters() {
+    pickedColor = null;
+    pickedImagePath = null;
+    titleController.clear();
+    descriptionController.clear();
+    formKey.currentState?.reset();
+  }
 
   ChannelController() {
     user = LoadedUserData().loadedUser;
     if (user == null) {
       // Handle the case where the user is null
-      print("Error: Loaded user is null");
+      throw Exception("user is null");
       // Optionally, show an error message to the user
     }
   }
@@ -92,18 +101,17 @@ class ChannelController {
           ShowSnackBar.errorSnackBar(context, l.errorMessage);
           return;
         }, (r) {
-          print(r);
-          print("Successfully uploaded image");
           final Channel channel = Channel(
               id: DateTime.now().microsecondsSinceEpoch,
               title: titleController.text,
               hexColor: pickedColor!.toHexString(),
               creatorId: user!.id,
               describtion: descriptionController.text,
-              superVisorsId: [user!.id]);
-          
-          print(
-              'Creating channel with details: ${titleController.text}, ${descriptionController.text}, private: $isPrivate, color: ${pickedColor!.toHexString()},image: $imageUri');
+              superVisorsId: [user!.id],
+              imageUrl: r);
+          CreateChannelParams params = CreateChannelParams(channel: channel);
+          BlocProvider.of<ChannelBloc>(context)
+              .add(CreateChannelEvent(params: params));
         });
       });
     }

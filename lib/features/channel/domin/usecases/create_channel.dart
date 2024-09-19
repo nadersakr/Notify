@@ -23,9 +23,9 @@ class CreateChannel extends UseCase<void, CreateChannelParams> {
 
 class CreateChannelParams {
   final Channel channel;
-  final String creator;
+
   const CreateChannelParams({
     required this.channel,
-    required this.creator
+   
   });
 }

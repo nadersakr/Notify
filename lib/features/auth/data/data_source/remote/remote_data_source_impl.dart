@@ -109,7 +109,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       // Perform additional operations with the user data
-
+await FirebaseServices.saveUserData(
+          // params.userName,
+          user.displayName!,
+          user.uid);
       return UserModel(
         email: user.email!,
         id: user.uid,

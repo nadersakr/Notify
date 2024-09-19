@@ -12,6 +12,12 @@ import 'package:notify/features/auth/domin/usecases/login.dart';
 import 'package:notify/features/auth/domin/usecases/signin_with_google.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:notify/features/channel/data/data%20source/remote/remote_data_source.dart';
+import 'package:notify/features/channel/data/data%20source/remote/remote_data_source_impl.dart';
+import 'package:notify/features/channel/data/repositories/channel_repository_impl.dart';
+import 'package:notify/features/channel/domin/repositories/channel_repository.dart';
+import 'package:notify/features/channel/domin/usecases/create_channel.dart';
+import 'package:notify/features/channel/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source_impl.dart';
@@ -36,6 +42,7 @@ Future<void> initInjections() async {
   await authBlocinjections();
   await searchBlocInjections();
   await imageUtilInjections();
+  await channelFeatureInjection();
 }
 
 authBlocinjections() async {
@@ -73,7 +80,23 @@ imageUtilInjections() async {
         remoteDataSource: sl<ImageUtilRemoteDataSource>());
   });
   sl.registerFactory<UploadImage>(() => UploadImage(sl<ImageUtilRepository>()));
-  sl.registerFactory<CompressImage>(() => CompressImage(sl<ImageUtilRepository>()));
+  sl.registerFactory<CompressImage>(
+      () => CompressImage(sl<ImageUtilRepository>()));
+}
+
+channelFeatureInjection() async {
+  sl.registerFactory<ChannelRemoteDataSource>(
+      () => ChannelRemoteDataSourceImpl());
+
+  sl.registerSingletonAsync<ChannelRepository>(() async {
+    return ChannelRepositoryImpl(
+        networkInfo: sl<NetworkInfo>(),
+        remoteDataSource: sl<ChannelRemoteDataSource>());
+  });
+  sl.registerFactory<CreateChannel>(
+      () => CreateChannel(sl<ChannelRepository>()));
+  sl.registerFactory<ChannelBloc>(
+      () => ChannelBloc(createChannel: sl<CreateChannel>()));
 }
 
 networkInjections() async {
@@ -126,4 +149,5 @@ initSharedPrefsInjections() async {
 //   // initRootLogger();
 //   // DioNetwork.initDio();
 // }
+
 
