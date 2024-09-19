@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/style/app_colors.dart';
-import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
+import 'package:notify/features/channel%20manipulation/presentation/controllers/channel_controller.dart';
 
 class ChannelPrivacySwitch extends StatefulWidget {
   const ChannelPrivacySwitch({super.key});

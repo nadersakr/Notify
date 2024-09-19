@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
+import 'package:notify/features/channel%20manipulation/presentation/controllers/channel_controller.dart';
 import 'package:notify/shared/presentaion/widget/custom_button.dart';
 
 class CreateChannelButton extends StatelessWidget {

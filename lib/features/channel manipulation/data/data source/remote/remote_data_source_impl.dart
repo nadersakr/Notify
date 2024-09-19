@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:notify/features/channel/data/data%20source/remote/remote_data_source.dart';
-import 'package:notify/features/channel/domin/usecases/add_supervisor.dart';
-import 'package:notify/features/channel/domin/usecases/create_channel.dart';
-import 'package:notify/features/channel/domin/usecases/join_channel.dart';
-import 'package:notify/features/channel/domin/usecases/leave_channel.dart';
+import 'package:notify/features/channel%20manipulation/data/data%20source/remote/remote_data_source.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/add_supervisor.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/leave_channel.dart';
 
 class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override

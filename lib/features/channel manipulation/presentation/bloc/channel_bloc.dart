@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notify/features/channel/domin/usecases/create_channel.dart';
-import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
+import 'package:notify/features/channel%20manipulation/presentation/controllers/channel_controller.dart';
 
 part 'channel_event.dart';
 part 'channel_state.dart';

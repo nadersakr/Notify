@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:notify/core/style/app_colors.dart';
-import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
+import 'package:notify/features/channel%20manipulation/presentation/controllers/channel_controller.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
 class BuildChannalImageUpload extends StatefulWidget {

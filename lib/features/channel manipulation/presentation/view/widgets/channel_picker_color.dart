@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/style/app_colors.dart';
-import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
+import 'package:notify/features/channel%20manipulation/presentation/controllers/channel_controller.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
 class ChannelColorPicker extends StatefulWidget {

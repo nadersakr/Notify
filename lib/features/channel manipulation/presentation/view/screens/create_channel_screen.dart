@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
-import 'package:notify/features/channel/presentation/bloc/channel_bloc.dart';
-import 'package:notify/features/channel/presentation/controllers/channel_controller.dart';
-import 'package:notify/features/channel/presentation/view/widgets/create_channal_title.dart';
-import 'package:notify/features/channel/presentation/view/widgets/channel_description_field.dart';
-import 'package:notify/features/channel/presentation/view/widgets/channel_picker_color.dart';
-import 'package:notify/features/channel/presentation/view/widgets/channel_privacy_switch.dart';
-import 'package:notify/features/channel/presentation/view/widgets/channel_title_field.dart';
-import 'package:notify/features/channel/presentation/view/widgets/pick_image_box.dart';
-import 'package:notify/features/channel/presentation/view/widgets/create_channel_button.dart';
+import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
+import 'package:notify/features/channel%20manipulation/presentation/controllers/channel_controller.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/widgets/create_channal_title.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/widgets/channel_description_field.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/widgets/channel_picker_color.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/widgets/channel_privacy_switch.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/widgets/channel_title_field.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/widgets/pick_image_box.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/widgets/create_channel_button.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
 class CreateChannelScreen extends StatelessWidget {
