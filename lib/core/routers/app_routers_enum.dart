@@ -1,4 +1,4 @@
-enum AppRouteEnum { loginPage, signUpPage, homePage, navMenu, search }
+enum AppRouteEnum { loginPage, signUpPage, homePage, navMenu, search,channelScreen }
 
 extension AppRouteExtension on AppRouteEnum {
   String get name {
@@ -14,7 +14,9 @@ extension AppRouteExtension on AppRouteEnum {
         return "/nav_menu";
       case AppRouteEnum.search:
         return "/search";
-
+      case AppRouteEnum.channelScreen:
+        return "/channel_screen";
+    
       // case AppRouteEnum.weViewPage:
       //   return "/web_view_page";
 

@@ -2,7 +2,7 @@ import 'package:notify/shared/domin/entities/channel_model.dart';
 
 final List<Channel> channelList = [
   const Channel(
-    id: 1,
+    id: '1',
     creatorId: "101",
     membersCount: 50,
     title: 'Tech Enthusiasts',
@@ -14,7 +14,7 @@ final List<Channel> channelList = [
     hexColor: 'FF5733',
   ),
   const Channel(
-    id: 2,
+    id: '2',
     creatorId: "107",
     // membersCount: 1405,
     title: 'Fitness Freaks',
@@ -25,7 +25,7 @@ final List<Channel> channelList = [
     hexColor: '33FF57',
   ),
   const Channel(
-    id: 3,
+    id: '3',
     membersCount: 464,
     creatorId: "113",
     title: 'Movie Buffs',
@@ -36,7 +36,7 @@ final List<Channel> channelList = [
     hexColor: '5733FF',
   ),
   const Channel(
-    id: 4,
+    id: '4',
     creatorId: "118",
     membersCount: 752,
     title: 'Bookworms',
@@ -47,7 +47,7 @@ final List<Channel> channelList = [
     hexColor: 'FFD700',
   ),
   const Channel(
-    id: 5,
+    id: '5',
     membersCount: 122,
     creatorId: "123",
     title: 'Travel Junkies',

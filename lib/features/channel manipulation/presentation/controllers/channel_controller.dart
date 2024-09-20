@@ -101,7 +101,7 @@ class ChannelController {
           return;
         }, (r) {
           final Channel channel = Channel(
-              id: DateTime.now().microsecondsSinceEpoch,
+              id: "${DateTime.now().microsecondsSinceEpoch}",
               title: titleController.text,
               hexColor: pickedColor!.toHexString(),
               creatorId: user!.id,

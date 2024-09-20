@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
+import 'package:notify/features/display%20channel/presentation/view/channek_screen.dart';
 import 'package:notify/features/home%20screen/presentation/view/home_screen.dart';
 import 'package:notify/nav_menu.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart'; 
+import 'package:notify/shared/domin/entities/loaded_user.dart';
 
 class AppRouter {
   static String currentRoute = "/";
@@ -31,9 +32,9 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
-            assert(LoadedUserData().loadedUser != null,"user is required");
+            assert(LoadedUserData().loadedUser != null, "user is required");
             // assert(
-                // settings.arguments != null, "signup is required");
+            // settings.arguments != null, "signup is required");
             return const HomeScreen();
           },
         );
@@ -41,9 +42,9 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
-            assert(LoadedUserData().loadedUser != null,"user is required");
+            assert(LoadedUserData().loadedUser != null, "user is required");
             // assert(
-                // settings.arguments != null, "signup is required");
+            // settings.arguments != null, "signup is required");
             return const NavMenu();
           },
         );
@@ -51,10 +52,21 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
-            assert(LoadedUserData().loadedUser != null,"user is required");
+            assert(LoadedUserData().loadedUser != null, "user is required");
             // assert(
-                // settings.arguments != null, "signup is required");
-            return const NavMenu(index: 1,);
+            // settings.arguments != null, "signup is required");
+            return const NavMenu(
+              index: 1,
+            );
+          },
+        );
+      case '/channel_screen':
+        return CupertinoPageRoute(
+          settings: RouteSettings(name: settings.name),
+          builder: (_) {
+            assert(LoadedUserData().loadedUser != null, "user is required");
+            assert(settings.arguments != null, "channel is required");
+            return  ChannelScreen();
           },
         );
 

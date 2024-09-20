@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/presentation/controller.dart';
 
 class HomeScreenController extends AppUIController with Sizes, Strings {
   navigateToSearchScreen(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, "/search",(router)=>false);
+  }
+  navigateToChannelScreen(BuildContext context,Channel channel)  {
+    Navigator.pushNamed(context, "/channel_screen",arguments: channel);
   }
   void logOut(BuildContext context) {
     sl<AuthBloc>().add(LogoutEvent());

@@ -143,10 +143,15 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       children: List.generate(4, (index) {
                         final Channel channel = channelList[index];
-                        return ChannelOverviewContainer(
-                            height: controller.yourChannelContainerHeight,
-                            letterSpace: controller.letterSpace,
-                            channel: channel);
+                        return GestureDetector(
+                          onTap: () {
+                            controller.navigateToChannelScreen(context, channel);
+                          },
+                          child: ChannelOverviewContainer(
+                              height: controller.yourChannelContainerHeight,
+                              letterSpace: controller.letterSpace,
+                              channel: channel),
+                        );
                       }),
                     ),
                   ),
