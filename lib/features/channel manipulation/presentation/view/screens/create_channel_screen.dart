@@ -35,37 +35,38 @@ class CreateChannelScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          final AppUIController appUIController = AppUIController();
           return Align(
             alignment: Alignment.center,
             child: SafeArea(
               child: SizedBox(
-                width: AppUIController().widgetsWidth,
+                width: appUIController.widgetsWidth,
                 child: Scaffold(
                   body: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        SizedBox(height: appUIController.smallPaddingSpace),
                         const CreateChannelTitle(),
-                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        SizedBox(height: appUIController.smallPaddingSpace),
                         const BuildChannalImageUpload(),
-                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        SizedBox(height: appUIController.smallPaddingSpace),
                         Form(
                           key: ChannelController.formKey,
                           child: Column(
                             children: [
                               const ChannelTitleField(),
                               SizedBox(
-                                  height: AppUIController().smallPaddingSpace),
+                                  height: appUIController.smallPaddingSpace),
                               const ChannelDescriptionField(),
                             ],
                           ),
                         ),
-                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        SizedBox(height: appUIController.smallPaddingSpace),
                         const ChannelColorPicker(),
-                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        SizedBox(height: appUIController.smallPaddingSpace),
                         const ChannelPrivacySwitch(),
-                        SizedBox(height: AppUIController().smallPaddingSpace),
+                        SizedBox(height: appUIController.smallPaddingSpace),
                         const CreateChannelButton(),
                         
                       ],

@@ -39,7 +39,9 @@ class CustomTextFormField extends StatelessWidget {
       this.onchanged,
       this.onSubmitted});
   InputBorder border({Color? color}) => OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 15.sp)),
+        borderRadius: borderRadius != null
+            ? BorderRadius.all(Radius.circular(borderRadius ?? 15.sp))
+            : AppUIController().textFormFieldborderRadius,
         borderSide: BorderSide(
             color: borderColor ?? AppColors.primaryColor,
             width: borderwidth ?? AppUIController().borderWidth),

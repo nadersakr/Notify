@@ -16,42 +16,45 @@ class BuildChannalImageUpload extends StatefulWidget {
 
 class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
   Future<void> _pickImage(BuildContext context) async {
-  final ImagePicker picker = ImagePicker();
-  try {
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    try {
+      final XFile? pickedFile =
+          await picker.pickImage(source: ImageSource.gallery);
 
-    if (pickedFile != null) {
-      File imageFile = File(pickedFile.path);
-      final image = await decodeImageFromList(imageFile.readAsBytesSync());
-      
-      if (image.width / image.height > 1.2) {
-        if (mounted) { // Check if the widget is still mounted
-          setState(() {
-            ChannelController.pickedImagePath = File(pickedFile.path);
-          });
-        }
-      } else {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('This image is not suitable for a channel cover, please pick another image'),
-            ),
-          );
+      if (pickedFile != null) {
+        File imageFile = File(pickedFile.path);
+        final image = await decodeImageFromList(imageFile.readAsBytesSync());
+
+        if (image.width / image.height > 1.2) {
+          if (mounted) {
+            // Check if the widget is still mounted
+            setState(() {
+              ChannelController.pickedImagePath = File(pickedFile.path);
+            });
+          }
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                    'This image is not suitable for a channel cover, please pick another image'),
+              ),
+            );
+          }
         }
       }
-    }
-  } catch (e) {
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
-      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
     }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
+    final AppUIController appUIController = AppUIController();
     return Column(
       children: [
         GestureDetector(
@@ -62,9 +65,9 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
             decoration: BoxDecoration(
               color: Theme.of(context).scaffoldBackgroundColor,
               border: Border.all(
-                  width: AppUIController().borderWidth,
+                  width: appUIController.borderWidth,
                   color: AppColors.primaryColor),
-              borderRadius: const BorderRadius.all(Radius.circular(32)),
+              borderRadius: appUIController.toFitborderRadius,
             ),
             child: ChannelController.pickedImagePath == null
                 ? Column(
@@ -73,7 +76,6 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
                       const Icon(
                         Iconsax.picture_frame,
                         size: 50,
-                        
                         color: AppColors.primaryColor,
                       ),
                       Text(
@@ -83,7 +85,7 @@ class BuildChannalImageUploadState extends State<BuildChannalImageUpload> {
                     ],
                   )
                 : ClipRRect(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: appUIController.borderRadius,
                     child: Stack(
                       children: [
                         Image.file(

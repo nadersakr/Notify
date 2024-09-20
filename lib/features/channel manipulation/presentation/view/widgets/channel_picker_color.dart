@@ -56,7 +56,7 @@ class ChannelColorPickerState extends State<ChannelColorPicker> {
                 45.h -
                 AppUIController().smallPaddingSpace,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15.sp)),
+              borderRadius: AppUIController().textFormFieldborderRadius,
               border: Border.all(color: AppColors.primaryColor, width: 1.5.sp),
             ),
             child: const Center(child: Text("Pick Channel Color")),

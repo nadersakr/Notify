@@ -1,6 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppUIController with Sizes {}
+class AppUIController with Sizes {
+  BorderRadius borderRadius = BorderRadius.all(Radius.circular(15.sp));
+  BorderRadius toFitborderRadius = BorderRadius.all(Radius.circular(16.sp));
+  BorderRadius textFormFieldborderRadius =
+      BorderRadius.all(Radius.circular(12.sp));
+}
 
 mixin Sizes {
   final double smallPaddingSpace = 0.05.sw;

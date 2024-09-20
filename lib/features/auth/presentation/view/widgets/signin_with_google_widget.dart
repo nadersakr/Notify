@@ -4,6 +4,7 @@ import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/controllers/auth_view_model.dart';
+import 'package:notify/shared/presentation/controller.dart';
 
 class SignInWithGoogleWidget extends StatelessWidget {
   const SignInWithGoogleWidget({
@@ -21,7 +22,6 @@ class SignInWithGoogleWidget extends StatelessWidget {
         if (authBloc.isClosed) {
           debugPrint("authBloc is closed");
         } else {
-       
           authBloc.add(SignInWithGoogleEvent());
         }
       },
@@ -29,9 +29,9 @@ class SignInWithGoogleWidget extends StatelessWidget {
         height: controller.signinWithGoogleHeight,
         width: controller.widgetsWidth,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(controller.borderRadius),
-          border: Border.all(
-              color: AppColors.black, width: controller.borderWidth),
+          borderRadius: AppUIController().textFormFieldborderRadius,
+          border:
+              Border.all(color: AppColors.black, width: controller.borderWidth),
         ),
         child: Center(
           child: Row(
@@ -57,4 +57,3 @@ class SignInWithGoogleWidget extends StatelessWidget {
     );
   }
 }
-

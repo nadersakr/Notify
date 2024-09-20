@@ -46,7 +46,6 @@ mixin Sizes {
   double largepaddingSpace = 90.h;
   double signinWithGoogleHeight = 50.h;
   double borderWidth = 1.5.w;
-  double borderRadius = 15.sp;
   double letterSpace = 1.5.w;
 }
 
