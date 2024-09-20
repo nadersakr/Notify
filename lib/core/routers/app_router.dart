@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
-import 'package:notify/features/display%20channel/presentation/view/channek_screen.dart';
+import 'package:notify/features/display%20channel/presentation/view/channel_screen.dart';
 import 'package:notify/features/home%20screen/presentation/view/home_screen.dart';
 import 'package:notify/nav_menu.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
