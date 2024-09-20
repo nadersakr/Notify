@@ -72,7 +72,7 @@ class ShowSnackBar {
     final snackBar = SnackBar(
       content: Row(
         children: [
-          const Icon(Iconsax.copy_success, color: AppColors.white),
+          const Icon(Iconsax.tick_circle, color: AppColors.white),
           const SizedBox(width: 10),
           Expanded(
             child: Text(

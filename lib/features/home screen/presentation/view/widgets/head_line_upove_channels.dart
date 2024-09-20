@@ -5,9 +5,9 @@ class TextLineUpoveChannels extends StatelessWidget {
   const TextLineUpoveChannels({
     super.key,
     required this.headLineText,
-    required this.actionWidget,
+    this.actionWidget,
   });
-  final Widget actionWidget;
+  final Widget? actionWidget;
   final String headLineText;
 
   @override
@@ -24,7 +24,7 @@ class TextLineUpoveChannels extends StatelessWidget {
         ),
 
         // see all text button
-        actionWidget,
+        actionWidget ?? const SizedBox(),
       ],
     );
   }

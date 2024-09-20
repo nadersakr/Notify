@@ -7,11 +7,13 @@ import 'package:notify/shared/presentation/controller.dart';
 
 class HomeScreenController extends AppUIController with Sizes, Strings {
   navigateToSearchScreen(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, "/search",(router)=>false);
+    Navigator.pushNamedAndRemoveUntil(context, "/search", (router) => false);
   }
-  navigateToChannelScreen(BuildContext context,Channel channel)  {
-    Navigator.pushNamed(context, "/channel_screen",arguments: channel);
+
+  navigateToChannelScreen(BuildContext context, Channel channel) {
+    Navigator.pushNamed(context, "/channel_screen", arguments: channel);
   }
+
   void logOut(BuildContext context) {
     sl<AuthBloc>().add(LogoutEvent());
     Navigator.pushReplacementNamed(context, "/login");
@@ -26,5 +28,5 @@ mixin Sizes {
 
 mixin Strings {
   String get yourChannelHeadLine => "Your Channels";
-  String get seeAllString => "See All";
+  String get seeAllString => "View All";
 }
