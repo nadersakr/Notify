@@ -20,18 +20,31 @@ class ContainerChannelVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     return BorderContainer(
       child: Column(
-        children: List.generate(4, (index) {
-          final Channel channel = channelList[index];
-          return GestureDetector(
-            onTap: () {
-              onTap(channel);
-            },
-            child: ChannelOverviewContainer(
-                height: height,
-                letterSpace: letterSpace,
-                channel: channel),
-          );
-        }),
+        children: channelList.length > 4
+            ? List.generate(4, (index) {
+                final Channel channel = channelList[index];
+                return GestureDetector(
+                  onTap: () {
+                    onTap(channel);
+                  },
+                  child: ChannelOverviewContainer(
+                      height: height,
+                      letterSpace: letterSpace,
+                      channel: channel),
+                );
+              })
+            : List.generate(channelList.length, (index) {
+                final Channel channel = channelList[index];
+                return GestureDetector(
+                  onTap: () {
+                    onTap(channel);
+                  },
+                  child: ChannelOverviewContainer(
+                      height: height,
+                      letterSpace: letterSpace,
+                      channel: channel),
+                );
+              }),
       ),
     );
   }

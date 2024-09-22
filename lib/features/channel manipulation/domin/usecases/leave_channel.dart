@@ -23,7 +23,7 @@ class LeaveChannel extends UseCase<void, LeaveChannelParams> {
 
 class LeaveChannelParams {
   final Channel channel;
-  final int leaverId;
+  final String leaverId;
   const LeaveChannelParams({
     required this.channel,
     required this.leaverId,

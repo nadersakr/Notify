@@ -108,11 +108,10 @@ class ChannelController {
               description: descriptionController.text,
               supervisorsId: [user!.id],
               imageUrl: r,
-              isPrivate: isPrivate
-              ,membersCount: 1,
+              isPrivate: isPrivate,
+              membersCount: 1,
               membersId: [user!.id],
-              notifications: []
-              );
+              notifications: []);
           CreateChannelParams params = CreateChannelParams(channel: channel);
 
           BlocProvider.of<ChannelBloc>(context)

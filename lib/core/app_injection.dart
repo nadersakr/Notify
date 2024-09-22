@@ -17,6 +17,9 @@ import 'package:notify/features/channel%20manipulation/data/data%20source/remote
 import 'package:notify/features/channel%20manipulation/data/repositories/channel_repository_impl.dart';
 import 'package:notify/features/channel%20manipulation/domin/repositories/channel_repository.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/delete_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/leave_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/send_notification.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/display%20channel/data/data%20source/display_channel_remote_data_source.dart';
@@ -108,11 +111,18 @@ channelFeatureInjection() async {
   });
   sl.registerFactory<CreateChannel>(
       () => CreateChannel(sl<ChannelRepository>()));
+  sl.registerFactory<LeaveChannel>(() => LeaveChannel(sl<ChannelRepository>()));
   sl.registerFactory<SendNotification>(
       () => SendNotification(sl<ChannelRepository>()));
+  sl.registerFactory<DeleteChannel>(
+      () => DeleteChannel(sl<ChannelRepository>()));
+  sl.registerFactory<JoinChannel>(() => JoinChannel(sl<ChannelRepository>()));
   sl.registerFactory<ChannelBloc>(() => ChannelBloc(
+      joinChannel: sl<JoinChannel>(),
       createChannel: sl<CreateChannel>(),
-      sendNotifaction: sl<SendNotification>()));
+      sendNotifaction: sl<SendNotification>(),
+      leaveChannel: sl<LeaveChannel>(),
+      deleteChannel: sl<DeleteChannel>()));
 }
 
 displaychannelFeatureInjection() async {
@@ -184,7 +194,7 @@ homeScreenBlocInjections() async {
         networkInfo: sl<NetworkInfo>(),
         remoteDataSource: sl<HomeRemoteDataSource>());
   });
-sl.registerFactory<GetBiggestChannels>(
+  sl.registerFactory<GetBiggestChannels>(
       () => GetBiggestChannels(sl<HomeRepository>()));
   sl.registerFactory<HomeBloc>(
       () => HomeBloc(getBiggestChannels: sl<GetBiggestChannels>()));

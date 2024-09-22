@@ -15,6 +15,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeLoading());
       final result = await getBiggestChannels.call(NoParams());
       result.fold((l) {
+        print(l.errorMessage);
         emit(HomeFailure(l.errorMessage));
       }, (r) {
         for (var element in r) {

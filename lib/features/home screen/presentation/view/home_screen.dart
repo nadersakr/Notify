@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                           child: ContainerChannelVertical(
                               channelList: state is GetBigetsChannelsLoaded
                                   ? state.channels
-                                  : channelList,
+                                  : [],
                               height: controller.yourChannelContainerHeight,
                               letterSpace: controller.letterSpace,
                               onTap: (channel) {

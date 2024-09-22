@@ -38,7 +38,7 @@ class Channel {
       isPrivate: data['isPrivate'] ?? false,
       imageUrl: data['imageUrl'],
       membersCount: data['membersCount'] ?? 0,
-      supervisorsId: List<String>.from(data['superVisorsId'] ?? []),
+      supervisorsId: List<String>.from(data['supervisorsId'] ?? []),
       membersId: List<String>.from(data['membersId'] ?? []),
       notifications: [], // You might want to fetch or pass notifications differently
     );

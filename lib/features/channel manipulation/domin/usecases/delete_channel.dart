@@ -4,14 +4,14 @@ import 'package:notify/core/utils/usecases/usecase.dart';
 import 'package:notify/features/channel%20manipulation/domin/repositories/channel_repository.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 
-class JoinChannel extends UseCase<void, JoinChannelParams> {
+class DeleteChannel extends UseCase<void, DeleteChannelParams> {
   final ChannelRepository repository;
 
-  JoinChannel(this.repository);
+  DeleteChannel(this.repository);
 
   @override
-  Future<Either<Failure, void>> call(JoinChannelParams params) async {
-    final result = await repository.joinChannel(params);
+  Future<Either<Failure, void>> call(DeleteChannelParams params) async {
+    final result = await repository.deleteChannel(params);
     return result.fold((l) {
       return Left(l);
     }, (r) async {
@@ -21,11 +21,11 @@ class JoinChannel extends UseCase<void, JoinChannelParams> {
   }
 }
 
-class JoinChannelParams {
+class DeleteChannelParams {
   final Channel channel;
-  final String joinerId;
-  const JoinChannelParams({
+
+  const DeleteChannelParams({
     required this.channel,
-    required this.joinerId,
+   
   });
 }

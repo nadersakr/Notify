@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/app_injection.dart';
+import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/style/app_text_style.dart';
-import 'package:notify/features/channel%20manipulation/domin/usecases/send_notification.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/delete_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/leave_channel.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/display%20channel/domin/usecases/load_channel_data.dart';
 import 'package:notify/features/display%20channel/presentation/bloc/display_channel_bloc.dart';
@@ -13,7 +16,6 @@ import 'package:notify/features/home%20screen/presentation/view/widgets/head_lin
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
-import 'package:notify/shared/domin/entities/notification_model.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/shared/presentation/controller.dart';
 import 'package:notify/shared/presentation/widgets/border_container.dart';
@@ -57,7 +59,8 @@ class ChannelScreen extends StatelessWidget {
             channel = state.channel;
             isOwner = state.channel.supervisorsId
                 .contains(LoadedUserData().loadedUser!.id);
-
+            print(state.channel.supervisorsId);
+            print(state.channel.id);
             isJoined = state.channel.membersId
                 .contains(LoadedUserData().loadedUser!.id);
             print("isOwner $isOwner");
@@ -68,247 +71,297 @@ class ChannelScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return SafeArea(
-            child: Scaffold(
-              body: Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  width: appUIController.widgetsWidth,
-                  child: Skeletonizer(
-                    enabled: loading,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: appUIController.smallPaddingSpace),
+          return BlocListener<ChannelBloc, ChannelState>(
+            listener: (context, state) {
+              if (state is ChannelManipulationFailed) {
+                ShowSnackBar.errorSnackBar(context, state.errorMessage);
+              }
+              if (state is ChannelManipulationSucess) {
+                ShowSnackBar.successSnackBar(
+                  context,
+                  state.message,
+                );
+              }
+            },
+            child: SafeArea(
+              child: Scaffold(
+                body: Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                    width: appUIController.widgetsWidth,
+                    child: Skeletonizer(
+                      enabled: loading,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: appUIController.smallPaddingSpace),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: 0.75.sw,
-                                child: Text(
-                                  channel.title,
-                                  style: AppTextStyle.xLargeBlack
-                                      .copyWith(letterSpacing: 1.0.sp),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width: 0.75.sw,
+                                  child: Text(
+                                    channel.title,
+                                    style: AppTextStyle.xLargeBlack
+                                        .copyWith(letterSpacing: 1.0.sp),
+                                  ),
                                 ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  showMenu(
-                                    context: context,
-                                    position: const RelativeRect.fromLTRB(
-                                        100, 100, 0, 0),
-                                    items: isOwner
-                                        ? ownerPopUpMenuItems
-                                        : isJoined
-                                            ? memberPopUpMenuItems
-                                            : notMemberPopUpMenuItems,
-                                  ).then((value) {
-                                    if (value != null) {
-                                      debugPrint('Selected: $value');
-                                    }
-                                  });
-                                },
-                                icon: const Icon(Iconsax.candle),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                              height: 0.5 * appUIController.smallPaddingSpace),
+                                IconButton(
+                                  onPressed: () {
+                                    showMenu(
+                                      context: context,
+                                      position: const RelativeRect.fromLTRB(
+                                          100, 100, 0, 0),
+                                      items: isOwner
+                                          ? ownerPopUpMenuItems
+                                          : isJoined
+                                              ? memberPopUpMenuItems
+                                              : notMemberPopUpMenuItems,
+                                    ).then((value) {
+                                      switch (value) {
+                                        case "6":
+                                          DeleteChannelParams params =
+                                              DeleteChannelParams(
+                                                  channel: channel);
+                                          BlocProvider.of<ChannelBloc>(context)
+                                              .add(DeleteChannelEvent(
+                                                  params: params));
+                                          break;
+                                        case "7":
+                                          JoinChannelParams params =
+                                              JoinChannelParams(
+                                                  channel: channel,
+                                                  joinerId: LoadedUserData()
+                                                      .loadedUser!
+                                                      .id);
+                                          BlocProvider.of<ChannelBloc>(context)
+                                              .add(JoinChannelEvent(
+                                                  params: params));
+                                          break;
+                                        case "5":
+                                          LeaveChannelParams params =
+                                              LeaveChannelParams(
+                                                  channel: channel,
+                                                  leaverId: LoadedUserData()
+                                                      .loadedUser!
+                                                      .id);
+                                          BlocProvider.of<ChannelBloc>(context)
+                                              .add(LeaveChannelEvent(
+                                                  params: params));
 
-                          Container(
-                            height: 150.h,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: appUIController.borderWidth,
-                                  color: Color(
-                                      int.parse('0xff${channel.hexColor}'))),
-                              borderRadius: AppUIController().toFitborderRadius,
+                                          break;
+                                        default:
+                                      }
+                                    });
+                                  },
+                                  icon: const Icon(Iconsax.candle),
+                                ),
+                              ],
                             ),
-                            child: ClipRRect(
-                                borderRadius: AppUIController().borderRadius,
-                                child: Stack(
-                                  children: [
-                                    Image.network(
-                                      channel.imageUrl!,
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ],
-                                )),
-                          ),
-                          SizedBox(height: appUIController.smallPaddingSpace),
+                            SizedBox(
+                                height:
+                                    0.5 * appUIController.smallPaddingSpace),
 
-                          Text(
-                            channel.description,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                              height: 0.5 * appUIController.smallPaddingSpace),
-
-                          TextLineUpoveChannels(
-                            headLineText: "Supervisors",
-                            actionWidget: members.length > 3
-                                ? TextButton(
-                                    onPressed: () {},
-                                    child: Text("View All",
-                                        style: AppTextStyle.mediumBlack))
-                                : SizedBox(
-                                    width: 1,
-                                    height: 2.5 *
-                                        appUIController.smallPaddingSpace),
-                          ),
-                          // Members List
-                          BorderContainer(
-                            color: Color(int.parse('0xff${channel.hexColor}')),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children:
-                                    List.generate(members.length, (index) {
-                                  final member = members[index];
-                                  return Container(
-                                    margin: const EdgeInsets.all(5),
-                                    padding: const EdgeInsets.only(
-                                        left: 10, top: 10, bottom: 10),
-                                    child: Column(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundColor: Colors.grey[200],
-                                          radius: 30,
-                                          backgroundImage:
-                                              NetworkImage(member.imageUrl!),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          member.fullName,
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }),
+                            Container(
+                              height: 150.h,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: appUIController.borderWidth,
+                                    color: Color(
+                                        int.parse('0xff${channel.hexColor}'))),
+                                borderRadius:
+                                    AppUIController().toFitborderRadius,
                               ),
+                              child: ClipRRect(
+                                  borderRadius: AppUIController().borderRadius,
+                                  child: Stack(
+                                    children: [
+                                      Image.network(
+                                        channel.imageUrl!,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ],
+                                  )),
                             ),
-                          ),
-                          SizedBox(
-                              height: 0.5 * appUIController.smallPaddingSpace),
+                            SizedBox(height: appUIController.smallPaddingSpace),
 
-                          TextLineUpoveChannels(
-                            headLineText: "Notifications",
-                            actionWidget: channel.notifications.length > 3
-                                ? TextButton(
-                                    onPressed: () {},
-                                    child: Text("View All",
-                                        style: AppTextStyle.mediumBlack))
-                                : SizedBox(
-                                    width: 1,
-                                    height: 2.5 *
-                                        appUIController.smallPaddingSpace),
-                          ),
-                          BorderContainer(
+                            Text(
+                              channel.description,
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                                height:
+                                    0.5 * appUIController.smallPaddingSpace),
+
+                            TextLineUpoveChannels(
+                              headLineText: "Supervisors",
+                              actionWidget: members.length > 3
+                                  ? TextButton(
+                                      onPressed: () {},
+                                      child: Text("View All",
+                                          style: AppTextStyle.mediumBlack))
+                                  : SizedBox(
+                                      width: 1,
+                                      height: 2.5 *
+                                          appUIController.smallPaddingSpace),
+                            ),
+                            // Members List
+                            BorderContainer(
                               color:
                                   Color(int.parse('0xff${channel.hexColor}')),
-                              child: Container(
-                                margin: const EdgeInsets.all(5),
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  children: List.generate(
-                                      channel.notifications.length > 3
-                                          ? 3
-                                          : channel.notifications.length,
-                                      (index) {
-                                    final notification =
-                                        channel.notifications[index];
-                                    return SizedBox(
-                                      // color: Colors.amber,
-                                      width: double.infinity,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children:
+                                      List.generate(members.length, (index) {
+                                    final member = members[index];
+                                    return Container(
+                                      margin: const EdgeInsets.all(5),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 10, bottom: 10),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            notification.message,
-                                            style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500),
+                                          CircleAvatar(
+                                            backgroundColor: Colors.grey[200],
+                                            radius: 30,
+                                            backgroundImage:
+                                                NetworkImage(member.imageUrl!),
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
-                                            notification.timestamp.toString(),
+                                            member.fullName,
                                             style: const TextStyle(
                                                 fontSize: 14,
-                                                fontWeight: FontWeight.w400),
+                                                fontWeight: FontWeight.w500),
                                           ),
-                                          if (index != 3 - 1)
-                                            Divider(
-                                              thickness: 1,
-                                              color: Color(int.parse(
-                                                  '0xff${channel.hexColor}')),
-                                            ),
                                         ],
                                       ),
                                     );
                                   }),
                                 ),
-                              )),
-                          TextLineUpoveChannels(
-                            headLineText: "Members",
-                            actionWidget: members.length > 3
-                                ? TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(
-                                          '/view_all_screen',
-                                          arguments: members);
-                                    },
-                                    child: Text("View All",
-                                        style: AppTextStyle.mediumBlack))
-                                : SizedBox(
-                                    width: 1,
-                                    height: 2.5 *
-                                        appUIController.smallPaddingSpace),
-                          ),
-                          BorderContainer(
-                            color: Color(int.parse('0xff${channel.hexColor}')),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children:
-                                    List.generate(members.length, (index) {
-                                  final member = members[index];
-                                  return Container(
-                                    margin: const EdgeInsets.all(5),
-                                    padding: const EdgeInsets.only(
-                                        left: 10, top: 10, bottom: 10),
-                                    child: Column(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 30,
-                                          backgroundColor: Colors.white,
-                                          backgroundImage:
-                                              NetworkImage(member.imageUrl!),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          member.fullName,
-                                          style: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }),
                               ),
                             ),
-                          ),
-                          SizedBox(height: appUIController.smallPaddingSpace),
-                        ],
+                            SizedBox(
+                                height:
+                                    0.5 * appUIController.smallPaddingSpace),
+
+                            TextLineUpoveChannels(
+                              headLineText: "Notifications",
+                              actionWidget: channel.notifications.length > 3
+                                  ? TextButton(
+                                      onPressed: () {},
+                                      child: Text("View All",
+                                          style: AppTextStyle.mediumBlack))
+                                  : SizedBox(
+                                      width: 1,
+                                      height: 2.5 *
+                                          appUIController.smallPaddingSpace),
+                            ),
+                            BorderContainer(
+                                color:
+                                    Color(int.parse('0xff${channel.hexColor}')),
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(10),
+                                  child: Column(
+                                    children: List.generate(
+                                        channel.notifications.length > 3
+                                            ? 3
+                                            : channel.notifications.length,
+                                        (index) {
+                                      final notification =
+                                          channel.notifications[index];
+                                      return SizedBox(
+                                        // color: Colors.amber,
+                                        width: double.infinity,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              notification.message,
+                                              style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              notification.timestamp.toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                            if (index != 3 - 1)
+                                              Divider(
+                                                thickness: 1,
+                                                color: Color(int.parse(
+                                                    '0xff${channel.hexColor}')),
+                                              ),
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                )),
+                            TextLineUpoveChannels(
+                              headLineText: "Members",
+                              actionWidget: members.length > 3
+                                  ? TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pushNamed(
+                                            '/view_all_screen',
+                                            arguments: members);
+                                      },
+                                      child: Text("View All",
+                                          style: AppTextStyle.mediumBlack))
+                                  : SizedBox(
+                                      width: 1,
+                                      height: 2.5 *
+                                          appUIController.smallPaddingSpace),
+                            ),
+                            BorderContainer(
+                              color:
+                                  Color(int.parse('0xff${channel.hexColor}')),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children:
+                                      List.generate(members.length, (index) {
+                                    final member = members[index];
+                                    return Container(
+                                      margin: const EdgeInsets.all(5),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 10, bottom: 10),
+                                      child: Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 30,
+                                            backgroundColor: Colors.white,
+                                            backgroundImage:
+                                                NetworkImage(member.imageUrl!),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            member.fullName,
+                                            style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: appUIController.smallPaddingSpace),
+                          ],
+                        ),
                       ),
                     ),
                   ),
