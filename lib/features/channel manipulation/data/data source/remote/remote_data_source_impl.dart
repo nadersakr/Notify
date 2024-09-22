@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:notify/features/channel%20manipulation/data/data%20source/remote/firebase_messaging.dart';
+import 'package:notify/shared/data%20layer/data%20source/firebase_messaging.dart';
 import 'package:notify/features/channel%20manipulation/data/data%20source/remote/remote_data_source.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/add_supervisor.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
@@ -31,9 +31,9 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
         'isPrivate': params.channel.isPrivate,
         'createdAt': FieldValue.serverTimestamp(),
         'ownerId': params.channel.creatorId,
-        'membersCount': 1,
-        'membersId': [params.channel.creatorId],
-        'superVisorsId': [params.channel.creatorId],
+        'membersCount':params.channel.membersCount,
+        'membersId': params.channel.membersId,
+        'supervisorsId': params.channel.supervisorsId,
         'notifications': [],
       });
 

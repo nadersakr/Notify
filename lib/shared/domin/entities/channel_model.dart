@@ -6,7 +6,7 @@ class Channel {
   final String creatorId;
   final String title;
   final String description;
-  final List<String> superVisorsId;
+  final List<String> supervisorsId;
   final List<String> membersId;
   final String? imageUrl;
   final String hexColor;
@@ -21,7 +21,7 @@ class Channel {
       required this.hexColor,
       required this.creatorId,
       required this.description,
-      required this.superVisorsId,
+      required this.supervisorsId,
       this.isPrivate = false,
       this.imageUrl,
       this.membersId = const [],
@@ -38,7 +38,7 @@ class Channel {
       isPrivate: data['isPrivate'] ?? false,
       imageUrl: data['imageUrl'],
       membersCount: data['membersCount'] ?? 0,
-      superVisorsId: List<String>.from(data['superVisorsId'] ?? []),
+      supervisorsId: List<String>.from(data['superVisorsId'] ?? []),
       membersId: List<String>.from(data['membersId'] ?? []),
       notifications: [], // You might want to fetch or pass notifications differently
     );

@@ -106,8 +106,13 @@ class ChannelController {
               hexColor: pickedColor!.toHexString(),
               creatorId: user!.id,
               description: descriptionController.text,
-              superVisorsId: [user!.id],
-              imageUrl: r);
+              supervisorsId: [user!.id],
+              imageUrl: r,
+              isPrivate: isPrivate
+              ,membersCount: 1,
+              membersId: [user!.id],
+              notifications: []
+              );
           CreateChannelParams params = CreateChannelParams(channel: channel);
 
           BlocProvider.of<ChannelBloc>(context)

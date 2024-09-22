@@ -6,7 +6,7 @@ import 'package:notify/core/style/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
-import 'package:notify/features/channel%20manipulation/data/data%20source/remote/firebase_messaging.dart';
+import 'package:notify/shared/data%20layer/data%20source/firebase_messaging.dart';
 import 'package:notify/nav_menu.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 
