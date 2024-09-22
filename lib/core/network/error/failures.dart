@@ -35,6 +35,9 @@ class CacheFailure extends Failure {
 class UnknowFailure extends Failure {
   const UnknowFailure(super.errorMessage);
 }
+class FirebaseFailure extends Failure {
+  const FirebaseFailure(super.errorMessage);
+}
 
 class NetworkFailure extends Failure {
   const NetworkFailure() : super("No internet connection");

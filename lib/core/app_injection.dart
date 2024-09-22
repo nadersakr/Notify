@@ -18,6 +18,12 @@ import 'package:notify/features/channel%20manipulation/data/repositories/channel
 import 'package:notify/features/channel%20manipulation/domin/repositories/channel_repository.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
+import 'package:notify/features/display%20channel/data/data%20source/display_channel_remote_data_source.dart';
+import 'package:notify/features/display%20channel/data/data%20source/display_channel_remote_data_source_impl.dart';
+import 'package:notify/features/display%20channel/data/repositories/display_channel_repositoriy_impl.dart';
+import 'package:notify/features/display%20channel/domin/repositories/display_channel_repository.dart';
+import 'package:notify/features/display%20channel/domin/usecases/load_channel_data.dart';
+import 'package:notify/features/display%20channel/presentation/bloc/display_channel_bloc.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source_impl.dart';
@@ -43,6 +49,7 @@ Future<void> initInjections() async {
   await searchBlocInjections();
   await imageUtilInjections();
   await channelFeatureInjection();
+  await displaychannelFeatureInjection();
 }
 
 authBlocinjections() async {
@@ -97,6 +104,21 @@ channelFeatureInjection() async {
       () => CreateChannel(sl<ChannelRepository>()));
   sl.registerFactory<ChannelBloc>(
       () => ChannelBloc(createChannel: sl<CreateChannel>()));
+}
+
+displaychannelFeatureInjection() async {
+  sl.registerFactory<DisplayChannelRemoteDataSource>(
+      () => DisplayChannelRemoteDataSourceImpl());
+
+  sl.registerSingletonAsync<DisplayChannelRepository>(() async {
+    return DisplayChannelRepositoriyImpl(
+        networkInfo: sl<NetworkInfo>(),
+        remoteDataSource: sl<DisplayChannelRemoteDataSource>());
+  });
+  sl.registerFactory<LoadChannelData>(
+      () => LoadChannelData(sl<DisplayChannelRepository>()));
+  sl.registerFactory<DisplayChannelBloc>(
+      () => DisplayChannelBloc(loadChannelData: sl<LoadChannelData>()));
 }
 
 networkInjections() async {

@@ -54,10 +54,10 @@ class ChannelOverviewContainer extends StatelessWidget {
             ],
           ),
           Text(
-            channel.describtion.length > 50
-                ? '${channel.describtion.substring(0, 50)}'
+            channel.description.length > 50
+                ? '${channel.description.substring(0, 50)}'
                     '..'
-                : channel.describtion,
+                : channel.description,
             style: AppTextStyle.smallBlack,
           )
         ],

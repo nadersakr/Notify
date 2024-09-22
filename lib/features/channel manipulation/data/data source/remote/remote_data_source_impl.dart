@@ -8,7 +8,6 @@ import 'package:notify/features/channel%20manipulation/domin/usecases/leave_chan
 class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
   Future<void> addSupervisorChannel(AddSupervisorParams params) {
-    
     throw UnimplementedError();
   }
 
@@ -18,16 +17,20 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
     final userCollection = FirebaseFirestore.instance.collection('users');
 
     // Create the channel document
-    final channelDoc = channelCollection.doc();
+    final channelDoc = channelCollection.doc( params.channel.id);
     await channelDoc.set({
       'id': params.channel.id,
       'name': params.channel.title,
-      'description': params.channel.describtion,
+      'description': params.channel.description,
       'imageUrl': params.channel.imageUrl,
       'color': params.channel.hexColor,
-      'isPrivate':params.channel.isPrivate,
+      'isPrivate': params.channel.isPrivate,
       'createdAt': FieldValue.serverTimestamp(),
       'ownerId': params.channel.creatorId,
+      'membersCount': 1,
+      'membersId': [params.channel.creatorId],
+      'superVisorsId': [params.channel.creatorId],
+      'notifications': [],
     });
 
     // Add the channel ID to the user's list of owned channels
@@ -35,12 +38,10 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
     await userDoc.update({
       'ownedChannels': FieldValue.arrayUnion([channelDoc.id]),
     });
-    
   }
 
   @override
   Future<void> joinChannel(JoinChannelParams params) {
-    
     throw UnimplementedError();
   }
 

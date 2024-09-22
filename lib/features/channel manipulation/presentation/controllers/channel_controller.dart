@@ -105,7 +105,7 @@ class ChannelController {
               title: titleController.text,
               hexColor: pickedColor!.toHexString(),
               creatorId: user!.id,
-              describtion: descriptionController.text,
+              description: descriptionController.text,
               superVisorsId: [user!.id],
               imageUrl: r);
           CreateChannelParams params = CreateChannelParams(channel: channel);

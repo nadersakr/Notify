@@ -11,7 +11,7 @@ class HomeScreenController extends AppUIController with Sizes, Strings {
   }
 
   navigateToChannelScreen(BuildContext context, Channel channel) {
-    Navigator.pushNamed(context, "/channel_screen", arguments: channel);
+    Navigator.pushNamed(context, "/channel_screen", arguments: channel.id);
   }
 
   void logOut(BuildContext context) {

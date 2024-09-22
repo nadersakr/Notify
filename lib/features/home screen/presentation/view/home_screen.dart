@@ -9,11 +9,8 @@ import 'package:notify/features/home%20screen/presentation/view/widgets/channels
 import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/your_channel_box.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
-import 'package:notify/shared/presentaion/widget/channel_container.dart';
-import 'package:notify/shared/presentation/widgets/border_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

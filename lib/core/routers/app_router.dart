@@ -65,8 +65,8 @@ class AppRouter {
           settings: RouteSettings(name: settings.name),
           builder: (_) {
             assert(LoadedUserData().loadedUser != null, "user is required");
-            assert(settings.arguments != null, "channel is required");
-            return  ChannelScreen();
+            assert(settings.arguments != null, "channel Id is required");
+            return ChannelScreen(channelId: settings.arguments as String);
           },
         );
 
