@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-List<PopupMenuItem> popUpMenuItems = [
+List<PopupMenuItem> ownerPopUpMenuItems = [
   const PopupMenuItem(
     value: '1',
     child: Row(
@@ -46,7 +46,7 @@ List<PopupMenuItem> popUpMenuItems = [
     value: '5',
     child: Row(
       children: [
-        Icon(Iconsax.arrow_down_2),
+        Icon(Iconsax.flag),
         SizedBox(width: 10),
         Text('Leave'),
       ],
@@ -59,6 +59,50 @@ List<PopupMenuItem> popUpMenuItems = [
         Icon(Iconsax.close_circle),
         SizedBox(width: 10),
         Text('Close The Channel'),
+      ],
+    ),
+  ),
+];
+List<PopupMenuItem> memberPopUpMenuItems = [
+  const PopupMenuItem(
+    value: '4',
+    child: Row(
+      children: [
+        Icon(Iconsax.share),
+        SizedBox(width: 10),
+        Text('Share'),
+      ],
+    ),
+  ),
+  const PopupMenuItem(
+    value: '5',
+    child: Row(
+      children: [
+        Icon(Iconsax.flag),
+        SizedBox(width: 10),
+        Text('Leave'),
+      ],
+    ),
+  ),
+];
+List<PopupMenuItem> notMemberPopUpMenuItems = [
+  const PopupMenuItem(
+    value: '7',
+    child: Row(
+      children: [
+        Icon(Iconsax.frame),
+        SizedBox(width: 10),
+        Text('Join'),
+      ],
+    ),
+  ),
+  const PopupMenuItem(
+    value: '4',
+    child: Row(
+      children: [
+        Icon(Iconsax.share),
+        SizedBox(width: 10),
+        Text('Share'),
       ],
     ),
   ),

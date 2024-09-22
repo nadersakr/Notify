@@ -8,11 +8,13 @@ class FirebaseServices {
   static Future<void> saveUserData(
       // String username,
       String fullName,
+      String email,
       String id) async {
     try {
       // Save User data using UID
       await FirebaseFirestore.instance.collection('users').doc(id).set({
         'fullName': fullName,
+        'email': fullName,
         // 'username': username,
       });
     } catch (e) {

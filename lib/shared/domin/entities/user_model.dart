@@ -4,12 +4,12 @@ class UserModel {
   // final String username;
   final String email;
   final String? imageUrl;
-  final List<dynamic>? channelsId;
+  final List<dynamic> channelsId;
   UserModel(
       {
       // required this.username,
       required this.fullName,
-      this.channelsId,
+      this.channelsId=const[],
       this.imageUrl,
       required this.id,
       required this.email});
