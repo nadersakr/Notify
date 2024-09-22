@@ -7,6 +7,7 @@ import 'package:notify/features/channel%20manipulation/domin/usecases/add_superv
 import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/leave_channel.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/send_notification.dart';
 
 class ChannelRepositoryImpl implements ChannelRepository {
   final ChannelRemoteDataSource remoteDataSource;
@@ -65,6 +66,20 @@ Future<Either<Failure, Unit>> addSupervisor(AddSupervisorParams params) async {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.leaveChannel(params);
+        return const Right(unit);
+      } catch (e) {
+        return Left(UnknowFailure("Error Occured:$e"));
+      }
+    } else {
+      return const Left(NetworkFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> sendNotification(SendNotificationParams params) async {
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSource.sendNotification(params);
         return const Right(unit);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));

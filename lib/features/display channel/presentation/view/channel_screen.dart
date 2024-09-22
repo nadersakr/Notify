@@ -4,12 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/style/app_text_style.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/send_notification.dart';
+import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/display%20channel/domin/usecases/load_channel_data.dart';
 import 'package:notify/features/display%20channel/presentation/bloc/display_channel_bloc.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/popup_menu_items.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
+import 'package:notify/shared/domin/entities/notification_model.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/shared/presentation/controller.dart';
 import 'package:notify/shared/presentation/widgets/border_container.dart';
@@ -26,17 +29,24 @@ class ChannelScreen extends StatelessWidget {
     bool loading = false;
 
     List<UserModel> members = fakeMembers;
-    return BlocProvider(
-      create: (context) => sl<DisplayChannelBloc>()
-        ..add(GetChannelDataEvent(LoadChannelDataParams(channelId: channelId))),
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<DisplayChannelBloc>()
+            ..add(GetChannelDataEvent(
+                LoadChannelDataParams(channelId: channelId))),
+        ),
+        BlocProvider(
+          create: (context) => sl<ChannelBloc>(),
+        ),
+      ],
       child: BlocConsumer<DisplayChannelBloc, DisplayChannelState>(
         listener: (context, state) {
           if (state is DisplayChannelFailed) {
             loading = false;
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-              ),
+              SnackBar(content: Text(state.errorMessage)),
             );
           }
           if (state is DisplayChannelLoaded) {
@@ -61,7 +71,7 @@ class ChannelScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: appUIController.smallPaddingSpace),
-
+          
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -74,26 +84,43 @@ class ChannelScreen extends StatelessWidget {
                                 ),
                               ),
                               IconButton(
-                                  onPressed: () {
-                                    showMenu(
-                                      context: context,
-                                      position: const RelativeRect.fromLTRB(
-                                          100, 100, 0, 0),
-                                      items: popUpMenuItems,
-                                    ).then((value) {
-                                      if (value != null) {
-                                        // Handle menu selection
-                                        // Use a logging framework instead of print
-                                        debugPrint('Selected: $value');
+                                onPressed: () {
+                                  showMenu(
+                                    context: context,
+                                    position: const RelativeRect.fromLTRB(
+                                        100, 100, 0, 0),
+                                    items: popUpMenuItems,
+                                  ).then((value) {
+                                    if (value != null) {
+                                      debugPrint('Selected: $value');
+                                      if (true) {
+                                        print("send notification");
+                                        context.read<ChannelBloc>().add(
+                                              SendNotificationEvent(
+                                                params:
+                                                    SendNotificationParams(
+                                                  notification:
+                                                      NotificationModel(
+                                                    id: '1',
+                                                    message: "hi there",
+                                                    timestamp: DateTime.now(),
+                                                  ),
+                                                  channel: channel,
+                                                ),
+                                              ),
+                                            );
                                       }
-                                    });
-                                  },
-                                  icon: const Icon(Iconsax.candle)),
+                                    }
+                                  });
+                                },
+                                icon: const Icon(Iconsax.candle),
+                              ),
                             ],
                           ),
                           SizedBox(
-                              height: 0.5 * appUIController.smallPaddingSpace),
-
+                              height:
+                                  0.5 * appUIController.smallPaddingSpace),
+          
                           Container(
                             height: 150.h,
                             decoration: BoxDecoration(
@@ -101,7 +128,8 @@ class ChannelScreen extends StatelessWidget {
                                   width: appUIController.borderWidth,
                                   color: Color(
                                       int.parse('0xff${channel.hexColor}'))),
-                              borderRadius: AppUIController().toFitborderRadius,
+                              borderRadius:
+                                  AppUIController().toFitborderRadius,
                             ),
                             child: ClipRRect(
                                 borderRadius: AppUIController().borderRadius,
@@ -117,15 +145,16 @@ class ChannelScreen extends StatelessWidget {
                                 )),
                           ),
                           SizedBox(height: appUIController.smallPaddingSpace),
-
+          
                           Text(
                             channel.description,
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w400),
                           ),
                           SizedBox(
-                              height: 0.5 * appUIController.smallPaddingSpace),
-
+                              height:
+                                  0.5 * appUIController.smallPaddingSpace),
+          
                           TextLineUpoveChannels(
                             headLineText: "Supervisors",
                             actionWidget: members.length > 3
@@ -140,7 +169,8 @@ class ChannelScreen extends StatelessWidget {
                           ),
                           // Members List
                           BorderContainer(
-                            color: Color(int.parse('0xff${channel.hexColor}')),
+                            color:
+                                Color(int.parse('0xff${channel.hexColor}')),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -174,8 +204,9 @@ class ChannelScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                              height: 0.5 * appUIController.smallPaddingSpace),
-
+                              height:
+                                  0.5 * appUIController.smallPaddingSpace),
+          
                           TextLineUpoveChannels(
                             headLineText: "Notifications",
                             actionWidget: channel.notifications.length > 3
@@ -251,7 +282,8 @@ class ChannelScreen extends StatelessWidget {
                                         appUIController.smallPaddingSpace),
                           ),
                           BorderContainer(
-                            color: Color(int.parse('0xff${channel.hexColor}')),
+                            color:
+                                Color(int.parse('0xff${channel.hexColor}')),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
