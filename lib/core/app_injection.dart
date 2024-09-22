@@ -25,6 +25,12 @@ import 'package:notify/features/display%20channel/data/repositories/display_chan
 import 'package:notify/features/display%20channel/domin/repositories/display_channel_repository.dart';
 import 'package:notify/features/display%20channel/domin/usecases/load_channel_data.dart';
 import 'package:notify/features/display%20channel/presentation/bloc/display_channel_bloc.dart';
+import 'package:notify/features/home%20screen/data%20layer/data%20source/remote/remote_data_source.dart';
+import 'package:notify/features/home%20screen/data%20layer/data%20source/remote/remote_data_source_impl.dart';
+import 'package:notify/features/home%20screen/data%20layer/repositories/home_repository_impl.dart';
+import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
+import 'package:notify/features/home%20screen/domin/usecase/get_biggest_channel.dart';
+import 'package:notify/features/home%20screen/presentation/bloc/home_bloc.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source_impl.dart';
@@ -43,14 +49,13 @@ Future<void> initInjections() async {
   await authLocalDataSourceImplInjections();
   await authRemoteDataSourceInjections();
   await authRepositoryAppInjections();
-  // await initHTTPInjections();
   await authUseCasesInjections();
-  // await initArticlesInjections();
   await authBlocinjections();
   await searchBlocInjections();
   await imageUtilInjections();
   await channelFeatureInjection();
   await displaychannelFeatureInjection();
+  await homeScreenBlocInjections();
 }
 
 authBlocinjections() async {
@@ -105,8 +110,9 @@ channelFeatureInjection() async {
       () => CreateChannel(sl<ChannelRepository>()));
   sl.registerFactory<SendNotification>(
       () => SendNotification(sl<ChannelRepository>()));
-  sl.registerFactory<ChannelBloc>(
-      () => ChannelBloc(createChannel: sl<CreateChannel>(),sendNotifaction: sl<SendNotification>()));
+  sl.registerFactory<ChannelBloc>(() => ChannelBloc(
+      createChannel: sl<CreateChannel>(),
+      sendNotifaction: sl<SendNotification>()));
 }
 
 displaychannelFeatureInjection() async {
@@ -170,9 +176,16 @@ initSharedPrefsInjections() async {
   await sl.isReady<SharedPreferences>();
 }
 
-// Future<void> initHTTPInjections() async {
-//   // initRootLogger();
-//   // DioNetwork.initDio();
-// }
+homeScreenBlocInjections() async {
+  sl.registerFactory<HomeRemoteDataSource>(() => HomeRemoteDataSourceImpl());
 
-
+  sl.registerSingletonAsync<HomeRepository>(() async {
+    return HomeRepositoryImpl(
+        networkInfo: sl<NetworkInfo>(),
+        remoteDataSource: sl<HomeRemoteDataSource>());
+  });
+sl.registerFactory<GetBiggestChannels>(
+      () => GetBiggestChannels(sl<HomeRepository>()));
+  sl.registerFactory<HomeBloc>(
+      () => HomeBloc(getBiggestChannels: sl<GetBiggestChannels>()));
+}
