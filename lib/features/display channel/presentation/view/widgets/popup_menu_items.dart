@@ -6,7 +6,7 @@ List<PopupMenuItem> popUpMenuItems = [
     value: '1',
     child: Row(
       children: [
-        Icon(Iconsax.add_circle),
+        Icon(Iconsax.send_2),
         SizedBox(width: 10),
         Text('send Notification'),
       ],

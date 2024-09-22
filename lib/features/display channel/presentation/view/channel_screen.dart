@@ -127,7 +127,7 @@ class ChannelScreen extends StatelessWidget {
                               height: 0.5 * appUIController.smallPaddingSpace),
 
                           TextLineUpoveChannels(
-                            headLineText: "SuperVisors",
+                            headLineText: "Supervisors",
                             actionWidget: members.length > 3
                                 ? TextButton(
                                     onPressed: () {},
