@@ -14,7 +14,7 @@ class FirebaseServices {
       // Save User data using UID
       await FirebaseFirestore.instance.collection('users').doc(id).set({
         'fullName': fullName,
-        'email': fullName,
+        'email': email,
         // 'username': username,
       });
     } catch (e) {
