@@ -37,10 +37,10 @@ class ChannelBloc extends Bloc<ChannelEvent, ChannelState> {
       emit(ChannelManipulationLoading());
       final result = await joinChannel.call(event.params);
       result.fold((l) {
-        print(l.errorMessage);
+        // print(l.errorMessage);
         emit(ChannelManipulationFailed(l.errorMessage));
       }, (r) {
-        print("joined");
+        // print("joined");
         emit(const ChannelManipulationSucess("You have joined the channel"));
       });
     });
@@ -59,12 +59,12 @@ class ChannelBloc extends Bloc<ChannelEvent, ChannelState> {
       result.fold((l) {
         emit(ChannelManipulationFailed(l.errorMessage));
       }, (r) {
-        print("Deleted");
+        // print("Deleted");
         emit(const ChannelManipulationSucess("Channel has been deleted"));
       });
     });
     on<SendNotificationEvent>((event, emit) async {
-      print("send notification event");
+      // print("send notification event");
       emit(SendNotificationLoading());
       final result = await sendNotifaction.call(event.params);
       result.fold((l) {

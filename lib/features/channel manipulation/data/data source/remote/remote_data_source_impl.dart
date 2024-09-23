@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/widgets.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/delete_channel.dart';
 import 'package:notify/shared/data%20layer/data%20source/firebase_messaging.dart';
@@ -88,6 +89,11 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
   Future<void> leaveChannel(LeaveChannelParams params) async {
     try {
+      if (params.channel.supervisorsId.length == 1) {
+        DeleteChannelParams deleteChannelParams =
+            DeleteChannelParams(channel: params.channel);
+        deleteChannel(deleteChannelParams);
+      }
       // check if the user is a member of the channel
       final bool isUserMember = await FirebaseFirestore.instance
           .collection('channels')
@@ -115,16 +121,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
         'joinedChannels': FieldValue.arrayRemove([params.channel.id]),
       });
 
-      // check if the user is a supervisor of the channel
-      final bool isUserSupervisor = await FirebaseFirestore.instance
-          .collection('channels')
-          .doc(params.channel.id)
-          .get()
-          .then((value) {
-        final supervisors = value.data()!['supervisorsId'] as List<dynamic>;
-        return supervisors.contains(params.leaverId);
-      });
-      print(isUserSupervisor);
+      // print(isUserSupervisor);
       // if (isUserSupervisor) {
       //   await FirebaseFirestore.instance
       //       .collection('channels')
@@ -176,12 +173,12 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
   Future<void> sendNotification(SendNotificationParams params) async {
     try {
-      print('Sending notification to channel: ${params.channel.id}');
+      debugPrint('Sending notification to channel: ${params.channel.id}');
       // Ensure notifications are set up
       await FirebaseMessagingService().setupNotifications();
       // Get the Firestore collection for notifications
 
-      print("Notification sending");
+      debugPrint("Notification sending");
       // Get the Firestore collection for channels
       final channelCollection =
           FirebaseFirestore.instance.collection('channels');
@@ -193,7 +190,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
       await channelDoc.update({
         'notifications': FieldValue.arrayUnion([params.notification]),
       });
-      print("Notification sent successfully");
+      debugPrint("Notification sent successfully");
     } catch (e) {
       rethrow;
     }
