@@ -21,6 +21,7 @@ class AuthLocalDataSourceImp implements AuthLocalDataSource {
   @override
   UserModel? getUser() {
     try {
+      print(saveDataLocal.getData("user"));
       final user = saveDataLocal.getData("user");
       if (user != null) {
         return UserModel.fromJson(jsonDecode(user));

@@ -24,7 +24,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       var user = await FirebaseServices.getUserData(response.user!.uid);
-
+      
       return UserModel(
         email: params.email,
         id: response.user!.uid,

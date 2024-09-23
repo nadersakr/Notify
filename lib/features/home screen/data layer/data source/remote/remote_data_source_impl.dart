@@ -16,11 +16,13 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   }
 
   @override
-  Future<UserModel> getUserData(GetUserInfoParams params) async{
+  Future<UserModel> getUserData(GetUserInfoParams params) async {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('users')
         .doc(params.userId)
         .get();
-    return UserModel.fromFirebase(querySnapshot,id:params.userId);
+
+    print(querySnapshot.data());
+    return UserModel.fromFirebase(querySnapshot, id: params.userId);
   }
 }

@@ -28,3 +28,4 @@ class GetUserDataEvent extends HomeEvent {
   @override
   List<Object> get props => [];
 }
+
