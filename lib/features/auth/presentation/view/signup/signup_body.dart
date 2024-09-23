@@ -55,7 +55,7 @@ class _SignupBodyState extends State<SignupBody> {
               context,
               AppRouteEnum.navMenu.name,
             );
-            ShowSnackBar.errorSnackBar(context, state.user.fullName);
+            ShowSnackBar.successSnackBar(context, "Login Success");
           }
           if (state is AuthFailure) {
             // Navigator.pushReplacementNamed(

@@ -6,6 +6,7 @@ sealed class HomeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 sealed class GetAllChannelsEvent extends Equatable {
   const GetAllChannelsEvent();
 
@@ -15,6 +16,14 @@ sealed class GetAllChannelsEvent extends Equatable {
 
 class GetBiggestChannelsEvent extends HomeEvent {
   const GetBiggestChannelsEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetUserDataEvent extends HomeEvent {
+  final GetUserInfoParams params;
+  const GetUserDataEvent({required this.params});
 
   @override
   List<Object> get props => [];

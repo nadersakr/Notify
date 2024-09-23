@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/app_injection.dart';
+import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
@@ -55,12 +56,7 @@ class _LoginBodyState extends State<LoginBody> {
               AppRouteEnum.navMenu.name,
               // arguments: state.user,
             );
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Login Success , ${state.user.fullName}"),
-                backgroundColor: Colors.green,
-              ),
-            );
+            ShowSnackBar.successSnackBar(context, "Login Success");
           }
           if (state is AuthLoading) {
             ScaffoldMessenger.of(context).showSnackBar(

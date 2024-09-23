@@ -23,4 +23,7 @@ final class GetBigetsChannelsLoaded extends HomeState {
   const GetBigetsChannelsLoaded(this.channels);
 }
 
-final class GetMyChannelsLoaded extends HomeState {}
+final class GetUserDataSuccess extends HomeState {
+  final UserModel user;
+  const GetUserDataSuccess(this.user);
+}

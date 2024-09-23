@@ -33,6 +33,7 @@ import 'package:notify/features/home%20screen/data%20layer/data%20source/remote/
 import 'package:notify/features/home%20screen/data%20layer/repositories/home_repository_impl.dart';
 import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
 import 'package:notify/features/home%20screen/domin/usecase/get_biggest_channel.dart';
+import 'package:notify/features/home%20screen/domin/usecase/get_user_data.dart';
 import 'package:notify/features/home%20screen/presentation/bloc/home_bloc.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/image_util.dart/image_util_remote_data_source.dart';
@@ -196,6 +197,8 @@ homeScreenBlocInjections() async {
   });
   sl.registerFactory<GetBiggestChannels>(
       () => GetBiggestChannels(sl<HomeRepository>()));
+  sl.registerFactory<GetUserData>(
+      () => GetUserData(sl<HomeRepository>()));
   sl.registerFactory<HomeBloc>(
-      () => HomeBloc(getBiggestChannels: sl<GetBiggestChannels>()));
+      () => HomeBloc(getBiggestChannels: sl<GetBiggestChannels>(),getUserData: sl<GetUserData>()));
 }
