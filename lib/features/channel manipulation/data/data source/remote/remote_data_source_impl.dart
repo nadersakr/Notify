@@ -89,7 +89,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
   Future<void> leaveChannel(LeaveChannelParams params) async {
     try {
-      if (params.channel.supervisorsId.length == 1) {
+      if (params.channel.supervisorsId.length == 1&&params.channel.supervisorsId[0]==params.leaverId) {
         DeleteChannelParams deleteChannelParams =
             DeleteChannelParams(channel: params.channel);
         deleteChannel(deleteChannelParams);
