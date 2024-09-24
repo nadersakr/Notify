@@ -19,52 +19,55 @@ class ContainerHorizentalBoxWIthBorder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height,
+      width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColors.primaryColor,
         ),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: channelList.length,
-        itemBuilder: (context, index) {
-          Channel channel = channelList[index];
+      child: channelList.isNotEmpty
+          ? ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: channelList.length,
+              itemBuilder: (context, index) {
+                Channel channel = channelList[index];
 
-          final Color color = Color(int.parse('0xFF${channel.hexColor}'));
+                final Color color = Color(int.parse('0xFF${channel.hexColor}'));
 
-          return Container(
-            width: 100.w,
-            margin: const EdgeInsets.all(5),
-            padding: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: color,
-              ),
-              // color: color.withOpacity(0.4),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Stack(children: [
-              // blur
-              Positioned.fill(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(),
-                ),
-              ),
-              Center(
-                child: Text(
-                  channel.title,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyle.smallBoldBlack.copyWith(
-                    letterSpacing: letterSpace,
+                return Container(
+                  width: 100.w,
+                  margin: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: color,
+                    ),
+                    // color: color.withOpacity(0.4),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-              ),
-            ]),
-          );
-        },
-      ),
+                  child: Stack(children: [
+                    // blur
+                    Positioned.fill(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        channel.title,
+                        textAlign: TextAlign.center,
+                        style: AppTextStyle.smallBoldBlack.copyWith(
+                          letterSpacing: letterSpace,
+                        ),
+                      ),
+                    ),
+                  ]),
+                );
+              },
+            )
+          : const Center(child: Text("You didn't join to any Channel!")),
     );
   }
 }

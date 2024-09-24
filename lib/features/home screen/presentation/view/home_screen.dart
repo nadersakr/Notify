@@ -46,9 +46,7 @@ class HomeScreen extends StatelessWidget {
             );
           }
           if (state is GetUserDataSuccess) {
-            print("GetUserDataSuccess");
             loadingYourChannel = false;
-            print(LoadedUserData().useroinedChannels.length);
             yourChannelList = LoadedUserData().useroinedChannels;
           }
           if (state is GetBigetsChannelsLoaded) {

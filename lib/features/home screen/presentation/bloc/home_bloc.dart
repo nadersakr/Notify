@@ -19,46 +19,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({required this.getBiggestChannels, required this.getUserData})
       : super(HomeInitial()) {
     on<GetBiggestChannelsEvent>((event, emit) async {
-      print("Get Biggest channels event");
       emit(HomeLoading());
       final result = await getBiggestChannels.call(NoParams());
       result.fold((l) {
         emit(HomeFailure(l.errorMessage));
       }, (r) {
-        for (var element in r) {
-          print(element.membersCount);
-        }
         emit(GetBigetsChannelsLoaded(r));
       });
     });
     on<GetUserDataEvent>((event, emit) async {
-  print("Get User Data event");
-  emit(GetUserDataLoading());
-  final result = await getUserData.call(event.params);
-  
-  await result.fold((l) async {
-    print(l.errorMessage);
-    emit(HomeFailure(l.errorMessage));
-  }, (user) async {
-    GetChannelData getChannelData = sl<GetChannelData>();
+      emit(GetUserDataLoading());
+      final result = await getUserData.call(event.params);
 
-    // Await the result of each call
-    for (var element in user.channelsId) {
-      final channelResult = await getChannelData.call(GetChannelInfoParams(channelId: element));
-
-      await channelResult.fold((l) async {
-        print(l.errorMessage);
+      await result.fold((l) async {
         emit(HomeFailure(l.errorMessage));
-      }, (channel) async {
-        print("================================");
-        print(channel.description);
-        LoadedUserData().useroinedChannels.add(channel);
+      }, (user) async {
+        LoadedUserData().useroinedChannels.clear();
+        GetChannelData getChannelData = sl<GetChannelData>();
+
+        // Await the result of each call
+        for (var element in user.channelsId) {
+          final channelResult = await getChannelData
+              .call(GetChannelInfoParams(channelId: element));
+
+          await channelResult.fold((l) async {
+            emit(HomeFailure(l.errorMessage));
+          }, (channel) async {
+            LoadedUserData().useroinedChannels.add(channel);
+          });
+        }
+
+        emit(GetUserDataSuccess(user));
       });
-    }
-
-    emit(GetUserDataSuccess(user));
-  });
-});
-
+    });
   }
 }

@@ -14,9 +14,7 @@ class DisplayChannelBloc
 
   DisplayChannelBloc({required this.loadChannelData})
       : super(DisplayChannelInitial()) {
-    print("DISPLAY CHANNEL BLOC");
     on<GetChannelDataEvent>((event, emit) async {
-      print("GET CHANNEL DATA EVENT");
       emit(DisplayChannelLoading());
       Either<Failure, Channel> response =
           await loadChannelData.call(event.params);
