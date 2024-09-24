@@ -5,7 +5,7 @@ import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/email_validator.dart';
 import 'package:notify/core/utils/validators/longer_than_chars.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
-import 'package:notify/shared/presentation/controller.dart';
+import 'package:notify/shared/presentaion/controller.dart';
 
 abstract class AuthViewModel extends AppUIController
     with Icons, Strings, Sizes, Validators {

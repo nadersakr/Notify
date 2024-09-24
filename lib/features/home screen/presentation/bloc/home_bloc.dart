@@ -1,11 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
 import 'package:notify/features/home%20screen/domin/usecase/get_biggest_channel.dart';
 import 'package:notify/features/home%20screen/domin/usecase/get_user_data.dart';
 import 'package:notify/features/profile/domin/usecases/get_user_info.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/usecases/get_channel_data_using_id.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -13,13 +16,13 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetBiggestChannels getBiggestChannels;
   final GetUserData getUserData;
-  HomeBloc({required this.getBiggestChannels, required this.getUserData}) : super(HomeInitial()) {
+  HomeBloc({required this.getBiggestChannels, required this.getUserData})
+      : super(HomeInitial()) {
     on<GetBiggestChannelsEvent>((event, emit) async {
       print("Get Biggest channels event");
       emit(HomeLoading());
       final result = await getBiggestChannels.call(NoParams());
       result.fold((l) {
-        print(l.errorMessage);
         emit(HomeFailure(l.errorMessage));
       }, (r) {
         for (var element in r) {
@@ -29,16 +32,33 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       });
     });
     on<GetUserDataEvent>((event, emit) async {
-      print("Get User Data event");
-      emit(HomeLoading());
-      final result = await getUserData.call(event.params);
-      result.fold((l) {
+  print("Get User Data event");
+  emit(GetUserDataLoading());
+  final result = await getUserData.call(event.params);
+  
+  await result.fold((l) async {
+    print(l.errorMessage);
+    emit(HomeFailure(l.errorMessage));
+  }, (user) async {
+    GetChannelData getChannelData = sl<GetChannelData>();
+
+    // Await the result of each call
+    for (var element in user.channelsId) {
+      final channelResult = await getChannelData.call(GetChannelInfoParams(channelId: element));
+
+      await channelResult.fold((l) async {
         print(l.errorMessage);
         emit(HomeFailure(l.errorMessage));
-      }, (r) {
-        
-        emit(GetUserDataSuccess(r));
+      }, (channel) async {
+        print("================================");
+        print(channel.description);
+        LoadedUserData().useroinedChannels.add(channel);
       });
-    });
+    }
+
+    emit(GetUserDataSuccess(user));
+  });
+});
+
   }
 }

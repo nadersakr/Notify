@@ -1,8 +1,10 @@
 // apply singleTon pattern for this class to be used in all the app
+import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 
 class LoadedUserData {
   UserModel? loadedUser;
+  List<Channel> useroinedChannels = [];
 
   // Private constructor
   LoadedUserData._privateConstructor({this.loadedUser});

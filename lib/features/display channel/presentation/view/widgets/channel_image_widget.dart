@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/presentation/controller.dart';
+import 'package:notify/shared/presentaion/controller.dart';
 
 Widget buildChannelImage(Channel channel) {
     return Container(

@@ -7,7 +7,7 @@ import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/features/search/presentation/controller/search_controller.dart';
 import 'package:notify/shared/presentaion/widget/channel_container.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
-import 'package:notify/shared/presentation/controller.dart';
+import 'package:notify/shared/presentaion/controller.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

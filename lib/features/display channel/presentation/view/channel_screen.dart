@@ -14,7 +14,7 @@ import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
-import 'package:notify/shared/presentation/controller.dart';
+import 'package:notify/shared/presentaion/controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ChannelScreen extends StatelessWidget {

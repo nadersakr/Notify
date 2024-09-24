@@ -12,6 +12,7 @@ import 'package:notify/features/home%20screen/presentation/view/widgets/channels
 import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/your_channel_box.dart';
 import 'package:notify/features/profile/domin/usecases/get_user_info.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
@@ -22,13 +23,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetUserInfoParams params = GetUserInfoParams(userId: LoadedUserData().loadedUser!.id);
+    List<Channel> bigestchannelList = channelList;
+    bool loadingBiggestChannel = true;
+    bool loadingYourChannel = true;
+    List<Channel> yourChannelList = channelList;
+    GetUserInfoParams params =
+        GetUserInfoParams(userId: LoadedUserData().loadedUser!.id);
     HomeScreenController controller = HomeScreenController();
     UserModel user = LoadedUserData().loadedUser!;
     debugPrint(user.fullName);
     return BlocProvider(
-      
-      create: (context) => sl<HomeBloc>()..add(const GetBiggestChannelsEvent())..add(GetUserDataEvent(params: params)),
+      create: (context) => sl<HomeBloc>()
+        ..add(GetUserDataEvent(params: params))
+        ..add(const GetBiggestChannelsEvent()),
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeFailure) {
@@ -37,6 +44,16 @@ class HomeScreen extends StatelessWidget {
                 content: Text(state.errorMessage),
               ),
             );
+          }
+          if (state is GetUserDataSuccess) {
+            print("GetUserDataSuccess");
+            loadingYourChannel = false;
+            print(LoadedUserData().useroinedChannels.length);
+            yourChannelList = LoadedUserData().useroinedChannels;
+          }
+          if (state is GetBigetsChannelsLoaded) {
+            loadingBiggestChannel = false;
+            bigestchannelList = state.channels;
           }
         },
         builder: (context, state) {
@@ -88,11 +105,13 @@ class HomeScreen extends StatelessWidget {
                               child: Text(controller.seeAllString,
                                   style: AppTextStyle.mediumBlack)),
                         ),
-                        ContainerHorizentalBoxWIthBorder(
-                            
-                            height: controller.yourChannelContainerHeight,
-                            channelList: channelList,
-                            letterSpace: controller.letterSpace),
+                        Skeletonizer(
+                          enabled: loadingYourChannel,
+                          child: ContainerHorizentalBoxWIthBorder(
+                              height: controller.yourChannelContainerHeight,
+                              channelList: yourChannelList,
+                              letterSpace: controller.letterSpace),
+                        ),
                         SizedBox(
                           height: controller.smallPaddingSpace,
                         ),
@@ -108,11 +127,9 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Skeletonizer(
-                          enabled: state is HomeLoading,
+                          enabled: loadingBiggestChannel,
                           child: ContainerChannelVertical(
-                              channelList: state is GetBigetsChannelsLoaded
-                                  ? state.channels
-                                  : [],
+                              channelList: bigestchannelList,
                               height: controller.yourChannelContainerHeight,
                               letterSpace: controller.letterSpace,
                               onTap: (channel) {

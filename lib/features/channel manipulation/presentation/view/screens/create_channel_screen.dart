@@ -11,7 +11,7 @@ import 'package:notify/features/channel%20manipulation/presentation/view/widgets
 import 'package:notify/features/channel%20manipulation/presentation/view/widgets/channel_title_field.dart';
 import 'package:notify/features/channel%20manipulation/presentation/view/widgets/pick_image_box.dart';
 import 'package:notify/features/channel%20manipulation/presentation/view/widgets/create_channel_button.dart';
-import 'package:notify/shared/presentation/controller.dart';
+import 'package:notify/shared/presentaion/controller.dart';
 
 class CreateChannelScreen extends StatelessWidget {
   const CreateChannelScreen({super.key});

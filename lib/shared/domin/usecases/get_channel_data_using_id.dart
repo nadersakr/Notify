@@ -1,22 +1,26 @@
 import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
-import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
-import 'package:notify/features/profile/domin/usecases/get_user_info.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/repositories/get_channel_data_repository.dart';
 
-class GetUserData extends UseCase<UserModel, GetUserInfoParams> {
-  final HomeRepository repository;
+class GetChannelData extends UseCase<Channel, GetChannelInfoParams> {
+  final GetChannelDataRepository repository;
 
-  GetUserData(this.repository);
+  GetChannelData(this.repository);
 
   @override
-  Future<Either<Failure, UserModel>> call(GetUserInfoParams params) async {
-    final result = await repository.getUserData(params);
+  Future<Either<Failure, Channel>> call(GetChannelInfoParams params) async {
+    final result = await repository.getChannelData(params);
     return result.fold((l) {
       return Left(l);
     }, (r) async {
       return Right(r);
     });
   }
+}
+class GetChannelInfoParams {
+  final String channelId;
+
+  GetChannelInfoParams({required this.channelId});
 }

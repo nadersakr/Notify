@@ -21,8 +21,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         .collection('users')
         .doc(params.userId)
         .get();
-
-    print(querySnapshot.data());
     return UserModel.fromFirebase(querySnapshot, id: params.userId);
   }
 }

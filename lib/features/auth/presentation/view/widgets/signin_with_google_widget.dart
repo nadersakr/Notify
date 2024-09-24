@@ -4,7 +4,7 @@ import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/controllers/auth_view_model.dart';
-import 'package:notify/shared/presentation/controller.dart';
+import 'package:notify/shared/presentaion/controller.dart';
 
 class SignInWithGoogleWidget extends StatelessWidget {
   const SignInWithGoogleWidget({

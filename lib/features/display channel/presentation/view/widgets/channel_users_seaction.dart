@@ -4,8 +4,8 @@ import 'package:notify/features/display%20channel/presentation/view/widgets/chan
 import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
-import 'package:notify/shared/presentation/controller.dart';
-import 'package:notify/shared/presentation/widgets/border_container.dart';
+import 'package:notify/shared/presentaion/controller.dart';
+import 'package:notify/shared/presentaion/widget/border_container.dart';
 
 Widget buildMembersSection(
     List<UserModel> members, BuildContext context, String title,
