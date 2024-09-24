@@ -69,6 +69,7 @@ class ChannelScreen extends StatelessWidget {
                 ShowSnackBar.errorSnackBar(context, state.errorMessage);
               }
               if (state is ChannelManipulationSucess) {
+                Navigator.of(context).pushNamedAndRemoveUntil('/nav_menu',(r)=>false);
                 ShowSnackBar.successSnackBar(
                   context,
                   state.message,
