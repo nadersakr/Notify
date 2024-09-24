@@ -10,7 +10,7 @@ Widget buildMemberItem(UserModel member) {
         CircleAvatar(
           radius: 30,
           backgroundColor: Colors.grey[200],
-          backgroundImage: NetworkImage(member.imageUrl!),
+          backgroundImage: NetworkImage(member.imageUrl!.isEmpty?"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgpPwM5mR5lNHGg9vxaoUgcnAIBOJumsoJrg&s":member.imageUrl!),
         ),
         const SizedBox(height: 4),
         Text(

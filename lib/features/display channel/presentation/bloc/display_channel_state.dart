@@ -11,7 +11,9 @@ final class DisplayChannelInitial extends DisplayChannelState {}
 final class DisplayChannelLoading extends DisplayChannelState {}
 final class DisplayChannelLoaded extends DisplayChannelState {
   final Channel channel;
-  const DisplayChannelLoaded(this.channel);
+  final List<UserModel> members;
+  final List<UserModel> supervisors;
+  const DisplayChannelLoaded({required this.channel,required this.members,required this.supervisors});
 }
 final class DisplayChannelFailed extends DisplayChannelState {
   final String errorMessage;

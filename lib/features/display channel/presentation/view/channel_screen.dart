@@ -30,6 +30,7 @@ class ChannelScreen extends StatelessWidget {
     bool loading = false;
 
     List<UserModel> members = fakeMembers;
+    List<UserModel> supervisors = fakeMembers;
 
     return MultiBlocProvider(
       providers: [
@@ -57,6 +58,9 @@ class ChannelScreen extends StatelessWidget {
                 .contains(LoadedUserData().loadedUser!.id);
             isJoined = state.channel.membersId
                 .contains(LoadedUserData().loadedUser!.id);
+            members = state.members;
+            supervisors = state.supervisors;
+          
           }
           if (state is DisplayChannelLoading) {
             loading = true;
@@ -96,7 +100,7 @@ class ChannelScreen extends StatelessWidget {
                                 color: Color(
                                     int.parse('0xff${channel.hexColor}'))),
                             buildNotificationsSection(channel),
-                            buildMembersSection(members, context, "Supervisors",
+                            buildMembersSection(supervisors, context, "Supervisors",
                                 color: Color(
                                     int.parse('0xff${channel.hexColor}'))),
                           ],

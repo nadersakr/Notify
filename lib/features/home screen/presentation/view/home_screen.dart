@@ -11,7 +11,7 @@ import 'package:notify/features/home%20screen/presentation/controllers/home_scre
 import 'package:notify/features/home%20screen/presentation/view/widgets/channels_box_vertical.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/your_channel_box.dart';
-import 'package:notify/features/profile/domin/usecases/get_user_info.dart';
+import 'package:notify/shared/domin/usecases/get_user_info.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';

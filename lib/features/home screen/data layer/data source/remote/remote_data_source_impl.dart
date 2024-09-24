@@ -1,5 +1,5 @@
 import 'package:notify/features/home%20screen/data%20layer/data%20source/remote/remote_data_source.dart';
-import 'package:notify/features/profile/domin/usecases/get_user_info.dart';
+import 'package:notify/shared/domin/usecases/get_user_info.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
