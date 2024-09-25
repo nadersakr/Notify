@@ -9,14 +9,15 @@ import 'package:notify/shared/domin/entities/channel_model.dart';
 class SearchRepositoryImpl implements SearchForChannelRepository {
   final SearchRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
-  const SearchRepositoryImpl(this.remoteDataSource, this.networkInfo);
+  const SearchRepositoryImpl({required this.remoteDataSource, required this.networkInfo});
 
   @override
   Future<Either<Failure, List<Channel>>> searchForChannel(
       SearchForChannelParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        List<Channel> channels = await remoteDataSource.searchForChannel(params);
+        List<Channel> channels =
+            await remoteDataSource.searchForChannel(params);
         return Right(channels);
       } catch (e) {
         return Left(UnknowFailure("Error Occured:$e"));

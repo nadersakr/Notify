@@ -7,8 +7,8 @@ sealed class SearchEvent extends Equatable {
   List<Object> get props => [];
 }
 class SearchByTitleEvent extends SearchEvent {
- final String title;
- const SearchByTitleEvent(this.title);
+ final SearchForChannelParams params;
+ const SearchByTitleEvent(this.params);
 
   @override
   List<Object> get props => [];

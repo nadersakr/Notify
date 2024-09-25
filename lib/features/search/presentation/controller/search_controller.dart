@@ -5,6 +5,7 @@ import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/less_than.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
+import 'package:notify/features/search/domin/usecases/search.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
@@ -44,8 +45,9 @@ class SearchChannelController with SearchStrings, SearchIcons {
   // }
 
   void onSearchSubmitted(BuildContext context) {
+    SearchForChannelParams params = SearchForChannelParams(query: searchController.text);
     BlocProvider.of<SearchBloc>(context)
-        .add(SearchByTitleEvent(searchController.text));
+        .add(SearchByTitleEvent(params));
     if (formKey.currentState!.validate()) {
       saveSearchHistory(searchController.text);
       // onSearchChanged(searchController.text);

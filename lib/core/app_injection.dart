@@ -36,6 +36,11 @@ import 'package:notify/features/home%20screen/domin/usecase/get_biggest_channel.
 import 'package:notify/features/home%20screen/domin/usecase/get_user_data.dart';
 import 'package:notify/features/home%20screen/presentation/bloc/home_bloc.dart';
 import 'package:notify/features/profile/data/data%20source/remote/remote_data_source.dart';
+import 'package:notify/features/search/data/data%20source/remote/remote_data_source.dart';
+import 'package:notify/features/search/data/data%20source/remote/remote_data_source_impl.dart';
+import 'package:notify/features/search/data/repositories/search_repository_impl.dart';
+import 'package:notify/features/search/domin/repositories/search_repository.dart';
+import 'package:notify/features/search/domin/usecases/search.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/get%20channel%20data/remote_data_source.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/get%20channel%20data/remote_data_source.impl.dart';
@@ -87,8 +92,10 @@ authBlocinjections() async {
 
 searchBlocInjections() async {
   // I need to make one inssatnce of the bloc
-
-  sl.registerFactory<SearchBloc>(() => SearchBloc());
+  sl.registerFactory<SearchRemoteDataSource>(() => SearchRemoteDataSourceImpl());
+  sl.registerFactory<SearchForChannelRepository>(() => SearchRepositoryImpl(remoteDataSource: sl<SearchRemoteDataSource>(), networkInfo: sl<NetworkInfo>()));
+  sl.registerFactory<SearchForChannel>(() => SearchForChannel(sl<SearchForChannelRepository >()));
+  sl.registerFactory<SearchBloc>(() => SearchBloc(searchForChannel: sl<SearchForChannel>()));
 }
 
 authUseCasesInjections() async {
