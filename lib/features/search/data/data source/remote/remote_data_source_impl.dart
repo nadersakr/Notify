@@ -16,7 +16,6 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   //       .map((e) => Channel.fromFirebase(e))
   //       .toList();
 
-    
   //   return channels;
   // }
 
@@ -26,15 +25,18 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
 //  and then fetch the data
 //  this function is optimizer than the above function, the above function is also correct but is more time consuming
   Future<List<Channel>> searchForChannel(SearchForChannelParams params) async {
-  final result = await FirebaseFirestore.instance
-      .collection('channels')
-      .get(); // Fetch all documents
+    final result = await FirebaseFirestore.instance
+        .collection('channels')
+        .where('isPrivate', isEqualTo: false)
+        .get(); // Fetch all documents
 
-  List<Channel> channels = result.docs
-      .map((e) => Channel.fromFirebase(e))
-      .where((channel) => channel.title.toLowerCase().contains(params.query.toLowerCase())) // Filter on client side
-      .toList();
+    List<Channel> channels = result.docs
+        .map((e) => Channel.fromFirebase(e))
+        .where((channel) => channel.title
+            .toLowerCase()
+            .contains(params.query.toLowerCase())) // Filter on client side
+        .toList();
 
-  return channels;
-}
+    return channels;
+  }
 }
