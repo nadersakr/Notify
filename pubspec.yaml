@@ -70,6 +70,7 @@ dependencies:
   skeletonizer: ^1.4.2
   firebase_messaging: ^14.7.10
   http: ^1.2.2
+  go_router: 
   
 dev_dependencies:
   flutter_test:

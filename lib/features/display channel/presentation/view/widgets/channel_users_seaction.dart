@@ -17,8 +17,8 @@ Widget buildMembersSection(
         actionWidget: members.length > 3
             ? TextButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushNamed('/view_all_screen', arguments: members);
+                  // Navigator.of(context)
+                  //     .pushNamed('/view_all_screen', arguments: members);
                 },
                 child: Text("View All", style: AppTextStyle.mediumBlack),
               )

@@ -35,7 +35,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
         'createdAt': FieldValue.serverTimestamp(),
         'ownerId': params.channel.creatorId,
         'membersCount': params.channel.membersCount,
-        'membersId': params.channel.membersId,
+        'membersId': [],
         'supervisorsId': params.channel.supervisorsId,
         'notifications': [],
       });

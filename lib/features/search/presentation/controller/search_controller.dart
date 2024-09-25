@@ -20,7 +20,7 @@ class SearchChannelController with SearchStrings, SearchIcons {
 
   void loadSearchHistory() {
     searchHistory = sl<SharedPreferences>()
-            .getStringList(LoadedUserData().loadedUser!.id) ??
+            .getStringList(LoadedUserData().loadedUser==null?"userId":LoadedUserData().loadedUser!.id) ??
         [];
   }
 

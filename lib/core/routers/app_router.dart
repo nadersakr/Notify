@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:notify/features/auth/presentation/view/login/login_page.dart';
 import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
 import 'package:notify/features/display%20channel/presentation/view/channel_screen.dart';
@@ -7,102 +7,62 @@ import 'package:notify/features/home%20screen/presentation/view/home_screen.dart
 import 'package:notify/nav_menu.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 
-class AppRouter {
-  static String currentRoute = "/";
-
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    currentRoute = settings.name ?? "/";
-    switch (settings.name) {
-      // login page
-      case '/login':
-        return CupertinoPageRoute(
-          settings: RouteSettings(name: settings.name),
-          builder: (_) => const LoginPage(),
-        );
-
-      // sign up page
-      case '/signup':
-        return CupertinoPageRoute(
-          settings: RouteSettings(name: settings.name),
-          builder: (_) {
-            return const SignupPage();
-          },
-        );
-      case '/home':
-        return CupertinoPageRoute(
-          settings: RouteSettings(name: settings.name),
-          builder: (_) {
-            assert(LoadedUserData().loadedUser != null, "user is required");
-            // assert(
-            // settings.arguments != null, "signup is required");
-            return const HomeScreen();
-          },
-        );
-      case '/nav_menu':
-        return CupertinoPageRoute(
-          settings: RouteSettings(name: settings.name),
-          builder: (_) {
-            assert(LoadedUserData().loadedUser != null, "user is required");
-            // assert(
-            // settings.arguments != null, "signup is required");
-            return const NavMenu();
-          },
-        );
-      case '/search':
-        return CupertinoPageRoute(
-          settings: RouteSettings(name: settings.name),
-          builder: (_) {
-            assert(LoadedUserData().loadedUser != null, "user is required");
-            // assert(
-            // settings.arguments != null, "signup is required");
-            return const NavMenu(
-              index: 1,
-            );
-          },
-        );
-      case '/channel_screen':
-        return CupertinoPageRoute(
-          settings: RouteSettings(name: settings.name),
-          builder: (_) {
-            assert(LoadedUserData().loadedUser != null, "user is required");
-            assert(settings.arguments != null, "channel Id is required");
-            return ChannelScreen(channelId: settings.arguments as String);
-          },
-        );
-
-      // // Web view page
-      // case '/web_view_page':
-      //   return CupertinoPageRoute(
-      //     settings: RouteSettings(name: settings.name),
-      //     builder: (_) => WebViewPage(
-      //       link: settings.arguments as String,
-      //     ),
-      //   );
-
-      // // Photo view page
-      // case '/photo_view_page':
-      //   return CupertinoPageRoute(
-      //     settings: RouteSettings(name: settings.name),
-      //     builder: (_) {
-      //       Map<String, dynamic>? args =
-      //           settings.arguments as Map<String, dynamic>?;
-      //       assert(args != null, "You should pass 'path' and 'fromNet'");
-      //       return PhotoViewPage(
-      //         path: args!['path'],
-      //         fromNet: args['fromNet'],
-      //       );
-      //     },
-      //   );
-
-      default:
-        return CupertinoPageRoute(
-          settings: RouteSettings(name: settings.name),
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          ),
-        );
-    }
-  }
-}
+// Define the router
+final GoRouter router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',  // Default route
+      builder: (context, state) {
+        // Redirect based on user authentication status
+        if (LoadedUserData().loadedUser == null) {
+          return const LoginPage();
+        } else {
+          return const NavMenu();
+        }
+      },
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) => const LoginPage(),
+    ),
+    GoRoute(
+      path: '/signup',
+      builder: (context, state) => const SignupPage(),
+    ),
+    GoRoute(
+      path: '/home',
+      builder: (context, state) {
+        assert(LoadedUserData().loadedUser != null, "user is required");
+        return const HomeScreen();
+      },
+    ),
+    GoRoute(
+      path: '/nav_menu',
+      builder: (context, state) {
+        assert(LoadedUserData().loadedUser != null, "user is required");
+        return const NavMenu();
+      },
+    ),
+    GoRoute(
+      path: '/search',
+      builder: (context, state) {
+        assert(LoadedUserData().loadedUser != null, "user is required");
+        return const NavMenu(index: 1);
+      },
+    ),
+    GoRoute(
+      path: '/channel_screen/:channelId',
+      builder: (context, state) {
+        assert(LoadedUserData().loadedUser != null, "user is required");
+        final channelId = state.pathParameters['channelId'];
+        assert(channelId != null, "channel Id is required");
+        return ChannelScreen(channelId: channelId!);
+      },
+    ),
+  ],
+  errorBuilder: (context, state) => Scaffold(
+    body: Center(
+      child: Text('No route defined for ${state.path}'),
+    ),
+  ),
+);

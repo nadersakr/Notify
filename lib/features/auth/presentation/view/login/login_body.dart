@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
+import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/controllers/login%20view%20model/login_view_modle.dart';
@@ -51,11 +52,12 @@ class _LoginBodyState extends State<LoginBody> {
             );
           }
           if (state is AuthSuccess) {
-            Navigator.pushReplacementNamed(
-              context,
-              AppRouteEnum.navMenu.name,
-              // arguments: state.user,
-            );
+            // Navigator.pushReplacementNamed(
+            //   context,
+            //   AppRouteEnum.navMenu.name,
+            //   // arguments: state.user,
+            // );
+            navigateTo(context, AppRouteEnum.navMenu.name);
             ShowSnackBar.successSnackBar(context, "Login Success");
           }
           if (state is AuthLoading) {
