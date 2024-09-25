@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
+import 'package:notify/core/routers/app_routers_enum.dart';
+import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/display%20channel/domin/usecases/load_channel_data.dart';
 import 'package:notify/features/display%20channel/presentation/bloc/display_channel_bloc.dart';
@@ -60,7 +62,6 @@ class ChannelScreen extends StatelessWidget {
                 .contains(LoadedUserData().loadedUser!.id);
             members = state.members;
             supervisors = state.supervisors;
-          
           }
           if (state is DisplayChannelLoading) {
             loading = true;
@@ -73,7 +74,8 @@ class ChannelScreen extends StatelessWidget {
                 ShowSnackBar.errorSnackBar(context, state.errorMessage);
               }
               if (state is ChannelManipulationSucess) {
-                Navigator.of(context).pushNamedAndRemoveUntil('/nav_menu',(r)=>false);
+                // Navigator.of(context).pushNamedAndRemoveUntil('/nav_menu',(r)=>false);
+                navigateTo(context, AppRouteEnum.navMenu.name);
                 ShowSnackBar.successSnackBar(
                   context,
                   state.message,
@@ -96,11 +98,12 @@ class ChannelScreen extends StatelessWidget {
                                 context, channel, isOwner, isJoined),
                             buildChannelImage(channel),
                             buildChannelDescription(channel),
-                            buildMembersSection(members, context, "Members",
+                            buildMembersSection(
+                                supervisors, context, "Supervisors",
                                 color: Color(
                                     int.parse('0xff${channel.hexColor}'))),
                             buildNotificationsSection(channel),
-                            buildMembersSection(supervisors, context, "Supervisors",
+                            buildMembersSection(members, context, "Members",
                                 color: Color(
                                     int.parse('0xff${channel.hexColor}'))),
                           ],
@@ -116,18 +119,4 @@ class ChannelScreen extends StatelessWidget {
       ),
     );
   }
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 }

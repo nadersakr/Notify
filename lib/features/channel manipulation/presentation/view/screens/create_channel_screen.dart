@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
+import 'package:notify/core/routers/app_routers_enum.dart';
+import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/channel%20manipulation/presentation/controllers/channel_controller.dart';
 import 'package:notify/features/channel%20manipulation/presentation/view/widgets/create_channal_title.dart';
@@ -28,8 +30,9 @@ class CreateChannelScreen extends StatelessWidget {
           }
           if (state is CreateChannelSuccess) {
             ChannelController.resetParamters();
-            Navigator.pushNamedAndRemoveUntil(
-                context, "/nav_menu", (router) => false);
+            // Navigator.pushNamedAndRemoveUntil(
+            //     context, "/nav_menu", (router) => false);
+                navigateTo(context, AppRouteEnum.navMenu.name);
             ShowSnackBar.successSnackBar(
                 context, "Channel created Successfully");
           }
