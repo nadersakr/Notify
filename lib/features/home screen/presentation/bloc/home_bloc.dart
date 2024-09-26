@@ -38,7 +38,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         GetChannelData getChannelData = sl<GetChannelData>();
 
         // Await the result of each call
-        for (var element in user.channelsId) {
+        for (var element in user.ownedChannels) {
           final channelResult = await getChannelData
               .call(GetChannelInfoParams(channelId: element));
 

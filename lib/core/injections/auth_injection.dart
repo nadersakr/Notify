@@ -15,15 +15,15 @@ import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 
 authinjections() async {
 // for the local data source
-  sl.registerSingletonAsync<AuthLocalDataSource>(() async {
-    return AuthLocalDataSourceImp(
+  sl.registerSingleton<AuthLocalDataSource>(
+     AuthLocalDataSourceImp(
       saveDataLocal: sl<SaveDataLocal>(),
-    );
-  });
+    )
+  );
   // for the remote data source
-  sl.registerSingletonAsync<AuthRemoteDataSource>(() async {
-    return AuthRemoteDataSourceImpl();
-  });
+  sl.registerSingleton<AuthRemoteDataSource>(
+     AuthRemoteDataSourceImpl()
+  );
 
 // for the repository
   sl.registerSingletonAsync<AuthRepository>(() async {

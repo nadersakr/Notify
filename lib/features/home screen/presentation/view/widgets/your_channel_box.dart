@@ -67,7 +67,7 @@ class ContainerHorizentalBoxWIthBorder extends StatelessWidget {
                 );
               },
             )
-          : const Center(child: Text("You didn't join to any Channel!")),
+          : const Center(child: Text("You aren't supervisor for any Channel!")),
     );
   }
 }

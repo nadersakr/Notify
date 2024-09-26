@@ -13,7 +13,6 @@ Future<void> initInjections() async {
   await initSharedPrefsInjections();
   await saveLocalDataInjection();
   await networkInjections();
-  await authinjections();
   await searchBlocInjections();
   await imageUtilInjections();
   await channelFeatureInjection();
@@ -21,4 +20,5 @@ Future<void> initInjections() async {
   await homeScreenBlocInjections();
   await getChannelDataInjection();
   await getUserDataInjection();
+  await authinjections();
 }
