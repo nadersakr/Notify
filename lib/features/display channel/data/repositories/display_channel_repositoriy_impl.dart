@@ -25,7 +25,7 @@ class DisplayChannelRepositoriyImpl implements DisplayChannelRepository {
       } on CacheFailure catch (e) {
         return Left(CacheFailure(e.errorMessage));
       } on FirebaseException {
-        return const Left(FirebaseFailure("Firebase Error Occured"));
+        return const Left(FirebaseErrorFailure("Firebase Error Occured"));
       } catch (e) {
         return const Left(UnknowFailure("Unknow Error Occured"));
       }

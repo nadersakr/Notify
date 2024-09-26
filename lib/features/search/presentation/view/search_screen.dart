@@ -12,9 +12,10 @@ import 'package:notify/shared/presentaion/widget/user_container.dart';
 
 // This SearchScreen will dynamically handle both channel and user search
 class SearchScreen extends StatefulWidget {
-  final bool isChannelSearch; // Add a flag to differentiate between channel and user search
-
-  const SearchScreen({super.key, this.isChannelSearch=false});
+  final bool
+      isChannelSearch; // Add a flag to differentiate between channel and user search
+  final void Function(dynamic object)? onPressed;
+  const SearchScreen({super.key, this.isChannelSearch = true, this.onPressed});
 
   @override
   SearchScreenState createState() => SearchScreenState();
@@ -93,12 +94,22 @@ class SearchScreenState extends State<SearchScreen> {
                               itemBuilder: (context, index) {
                                 // Dynamically handle result display
                                 if (widget.isChannelSearch) {
-                                  return ChannelOverviewContainer(
-                                    channel: _controller.searchResults[index],
+                                  return GestureDetector(
+                                    onTap: () {
+                                      widget.onPressed!(_controller.searchResults[index]);
+                                    },
+                                    child: ChannelOverviewContainer(
+                                      channel: _controller.searchResults[index],
+                                    ),
                                   );
                                 } else {
-                                  return UserOverviewContainer(
-                                    user: _controller.searchResults[index],
+                                  return GestureDetector(
+                                    onTap: () {
+                                      widget.onPressed!(_controller.searchResults[index]);
+                                    },
+                                    child: UserOverviewContainer(
+                                      user: _controller.searchResults[index],
+                                    ),
                                   );
                                 }
                               },

@@ -50,12 +50,13 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
         .get(); // Fetch all documents
 
     List<UserModel> users = result.docs
-        .map((e) => UserModel.fromFirebase(e,id: e.id))
+        .map((e) => UserModel.fromFirebase(e, id: e.id))
         .where((channel) => channel.fullName
             .toLowerCase()
             .contains(params.query.toLowerCase())) // Filter on client side
         .toList();
-
+    users.removeWhere(
+        (element) => element.id == FirebaseAuth.instance.currentUser!.uid);
     return users;
   }
 }

@@ -20,7 +20,14 @@ final class SearchLoaded extends SearchState {
   List<Object> get props => [searchResults];
 }
 
-final class SearchFailure extends SearchState {}
+final class SearchFailure extends SearchState {
+  final String errorMessage;
+
+  const SearchFailure({this.errorMessage = 'An error occurred'});
+
+  @override
+  List<Object> get props => [errorMessage];
+}
 
 final class ClearSearchHistory extends SearchState {}
 

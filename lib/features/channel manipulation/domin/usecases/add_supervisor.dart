@@ -13,6 +13,7 @@ class AddSupervisorChannel extends UseCase<void, AddSupervisorParams> {
   Future<Either<Failure, void>> call(AddSupervisorParams params) async {
     final result = await repository.addSupervisor(params);
     return result.fold((l) {
+    
       return Left(l);
     }, (r) async {
       void r;
@@ -22,10 +23,10 @@ class AddSupervisorChannel extends UseCase<void, AddSupervisorParams> {
 }
 
 class AddSupervisorParams {
-  final Channel channel;
-  final int supervisorId;
+  final String channelId;
+  final String supervisorId;
   const AddSupervisorParams({
-    required this.channel,
+    required this.channelId,
     required this.supervisorId,
   });
 }

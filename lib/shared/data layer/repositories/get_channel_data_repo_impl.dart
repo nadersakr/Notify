@@ -21,8 +21,8 @@ class GetChannelDataRepoImpl implements GetChannelDataRepository {
       try {
         Channel response = await remoteDataSource.getChannelData(params);
         return Right(response);
-      } on FirebaseFailure catch (e) {
-        return Left(FirebaseFailure(e.toString()));
+      } on FirebaseErrorFailure catch (e) {
+        return Left(FirebaseErrorFailure(e.toString()));
       } on UnknowFailure catch (e) {
         return Left(UnknowFailure("Unknow Failure $e"));
       }

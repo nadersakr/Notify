@@ -18,7 +18,7 @@ class GetChannelDataRemoteDataSourceImpl
 
       return channel;
     } on FirebaseException {
-      throw const FirebaseFailure("Error getting channel data");
+      throw const FirebaseErrorFailure("Error getting channel data");
     } catch (e) {
       rethrow;
     }

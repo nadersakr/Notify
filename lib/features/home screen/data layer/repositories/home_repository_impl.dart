@@ -24,8 +24,8 @@ class HomeRepositoryImpl implements HomeRepository {
       try {
         List<Channel> response = await remoteDataSource.getBiggestChannels();
         return Right(response);
-      } on FirebaseFailure catch (e) {
-        return Left(FirebaseFailure(e.toString()));
+      } on FirebaseErrorFailure catch (e) {
+        return Left(FirebaseErrorFailure(e.toString()));
       } on UnknowFailure catch (e) {
         return Left(UnknowFailure("Unknow Failure $e"));
       }
@@ -42,8 +42,8 @@ class HomeRepositoryImpl implements HomeRepository {
         UserModel response = await remoteDataSource.getUserData(params);
         LoadedUserData().loadedUser = response;
         return Right(response);
-      } on FirebaseFailure catch (e) {
-        return Left(FirebaseFailure(e.toString()));
+      } on FirebaseErrorFailure catch (e) {
+        return Left(FirebaseErrorFailure(e.toString()));
       } on UnknowFailure catch (e) {
         return Left(UnknowFailure("Unknow Failure $e"));
       }

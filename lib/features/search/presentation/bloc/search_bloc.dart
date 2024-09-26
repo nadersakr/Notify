@@ -26,7 +26,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       emit(SearchLoading());
       final result = await searchForUser(event.params);
       result.fold((failure) {
-      emit(SearchFailure());
+      emit(SearchFailure(errorMessage: failure.toString()));
       }, (usersList) {
       emit(SearchLoaded(usersList));
       });

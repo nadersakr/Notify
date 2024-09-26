@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notify/features/channel%20manipulation/domin/usecases/add_supervisor.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/delete_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
@@ -16,8 +17,10 @@ class ChannelBloc extends Bloc<ChannelEvent, ChannelState> {
   final JoinChannel joinChannel;
   final LeaveChannel leaveChannel;
   final DeleteChannel deleteChannel;
+  final AddSupervisorChannel addSupervisorChannel;
   ChannelBloc({
     required this.createChannel,
+    required this.addSupervisorChannel,
     required this.joinChannel,
     required this.deleteChannel,
     required this.leaveChannel,
@@ -71,6 +74,15 @@ class ChannelBloc extends Bloc<ChannelEvent, ChannelState> {
         emit(SendNotificationFailed(l.errorMessage));
       }, (r) {
         emit(SendNotificationSucess());
+      });
+    });
+    on<AddSupervisorChannelEvent>((event, emit) async {
+      emit(SendNotificationLoading());
+      final result = await addSupervisorChannel.call(event.params);
+      result.fold((l) {
+        emit(AddSupervisorFailed(l.errorMessage));
+      }, (r) {
+        emit(AddSupervisorSuccess());
       });
     });
   }

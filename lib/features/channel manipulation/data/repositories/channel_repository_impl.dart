@@ -24,6 +24,8 @@ class ChannelRepositoryImpl implements ChannelRepository {
       try {
         await remoteDataSource.addSupervisorChannel(params);
         return const Right(unit);
+      } on FirebaseErrorFailure catch (e) {
+        return Left(e);
       } catch (e) {
         return Left(UnknowFailure(e.toString()));
       }
@@ -53,8 +55,8 @@ class ChannelRepositoryImpl implements ChannelRepository {
       try {
         await remoteDataSource.joinChannel(params);
         return const Right(unit);
-      } on FirebaseFailure catch (e) {
-        return Left(FirebaseFailure(e.errorMessage));
+      } on FirebaseErrorFailure catch (e) {
+        return Left(e);
       } catch (e) {
         return Left(UnknowFailure(e.toString()));
       }
@@ -69,9 +71,9 @@ class ChannelRepositoryImpl implements ChannelRepository {
       try {
         await remoteDataSource.leaveChannel(params);
         return const Right(unit);
-      }on FirebaseFailure catch (e) {
-        return Left(FirebaseFailure(e.errorMessage));
-      }  catch (e) {
+      } on FirebaseErrorFailure catch (e) {
+        return Left(e);
+      } catch (e) {
         return Left(UnknowFailure(e.toString()));
       }
     } else {
@@ -95,7 +97,8 @@ class ChannelRepositoryImpl implements ChannelRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> deleteChannel(DeleteChannelParams params) async {
+  Future<Either<Failure, Unit>> deleteChannel(
+      DeleteChannelParams params) async {
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.deleteChannel(params);

@@ -15,6 +15,11 @@ final class SendNotificationFailed extends ChannelState {
   final String errorMessage;
   const SendNotificationFailed(this.errorMessage);
 }
+final class AddSupervisorFailed extends ChannelState {
+  final String errorMessage;
+  const AddSupervisorFailed(this.errorMessage);
+}
+final class AddSupervisorSuccess extends ChannelState {}
 
 final class SendNotificationSucess extends ChannelState {}
 
