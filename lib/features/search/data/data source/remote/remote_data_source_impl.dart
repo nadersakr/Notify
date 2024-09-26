@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:notify/features/search/data/data%20source/remote/remote_data_source.dart';
-import 'package:notify/features/search/domin/usecases/search.dart';
+import 'package:notify/features/search/domin/usecases/search_for_channel.dart';
+import 'package:notify/features/search/domin/usecases/search_for_user.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/entities/user_model.dart';
 
 class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
   @override
@@ -38,5 +41,21 @@ class SearchRemoteDataSourceImpl implements SearchRemoteDataSource {
         .toList();
 
     return channels;
+  }
+
+  @override
+  Future<List<UserModel>> searchForUser(SearchForUserParams params) async {
+    final result = await FirebaseFirestore.instance
+        .collection('users')
+        .get(); // Fetch all documents
+
+    List<UserModel> users = result.docs
+        .map((e) => UserModel.fromFirebase(e,id: e.id))
+        .where((channel) => channel.fullName
+            .toLowerCase()
+            .contains(params.query.toLowerCase())) // Filter on client side
+        .toList();
+
+    return users;
   }
 }

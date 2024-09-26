@@ -45,18 +45,19 @@ class UserModel {
         fullName = map['fullName'],
         // username = map['username'],
         email = map['email'],
-        ownedChannels = map['ownedChannels']??[],
+        ownedChannels = map['ownedChannels'] ?? [],
         imageUrl = map['imageUrl'],
         channelsId = map['channelsId'];
 
   factory UserModel.fromFirebase(DocumentSnapshot doc, {required String id}) {
     final data = doc.data() as Map<String, dynamic>;
+    // print(data['ownedChannels']);
     return UserModel(
       id: id,
       fullName: data['fullName'] ?? '',
       email: data['email'] ?? '',
       channelsId: data['joinedChannels'] ?? [],
-      imageUrl: data['imageUrl']??"",
+      imageUrl: data['imageUrl'] ?? "",
       ownedChannels: data['ownedChannels'] ?? [],
     );
   }

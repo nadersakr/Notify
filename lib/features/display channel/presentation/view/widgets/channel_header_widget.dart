@@ -10,7 +10,7 @@ import 'package:notify/features/channel%20manipulation/domin/usecases/delete_cha
 import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/leave_channel.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
-import 'package:notify/features/channel%20manipulation/presentation/view/add_supervisor_screen.dart';
+import 'package:notify/features/channel%20manipulation/presentation/view/screens/add_supervisor_screen.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/popup_menu_items.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';

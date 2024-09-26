@@ -5,22 +5,22 @@ import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
 import 'package:notify/core/utils/validators/less_than.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
-import 'package:notify/features/search/domin/usecases/search.dart';
+import 'package:notify/features/search/domin/usecases/search_for_channel.dart';
+import 'package:notify/features/search/domin/usecases/search_for_user.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class SearchChannelController with SearchStrings, SearchIcons {
+abstract class SearchBaseController with SearchStrings, SearchIcons {
   final TextEditingController searchController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  List<Channel> searchResults = [];
+  List<dynamic> searchResults = [];  // Make this dynamic to support both users and channels
   List<String> searchHistory = [];
   bool isLoading = false;
 
   void loadSearchHistory() {
-    searchHistory = sl<SharedPreferences>()
-            .getStringList(LoadedUserData().loadedUser==null?"userId":LoadedUserData().loadedUser!.id) ??
+    searchHistory = sl<SharedPreferences>().getStringList(LoadedUserData().loadedUser == null
+            ? "userId"
+            : LoadedUserData().loadedUser!.id) ??
         [];
   }
 
@@ -35,22 +35,10 @@ class SearchChannelController with SearchStrings, SearchIcons {
     }
   }
 
-  // Future<void> onSearchChanged(String query) async {
-  //   isLoading = true;
-  //   await Future.delayed(const Duration(seconds: 2));
-  //   isLoading = false;
-  //   searchResults = fakeData
-  //       .where((item) => item.toLowerCase().contains(query.toLowerCase()))
-  //       .toList();
-  // }
-
   void onSearchSubmitted(BuildContext context) {
-    SearchForChannelParams params = SearchForChannelParams(query: searchController.text);
-    BlocProvider.of<SearchBloc>(context)
-        .add(SearchByTitleEvent(params));
     if (formKey.currentState!.validate()) {
       saveSearchHistory(searchController.text);
-      // onSearchChanged(searchController.text);
+      executeSearch(context);
     }
   }
 
@@ -66,15 +54,49 @@ class SearchChannelController with SearchStrings, SearchIcons {
         [RequiredValidator(), LessThanChars(15)],
         true,
       );
+
+  // Override this method in child classes to perform specific searches (channels or users)
+  void executeSearch(BuildContext context);
 }
 
 mixin SearchStrings {
-  String get searchLabel => "Search";
-  String get searchHint => 'Search for Channels';
+  String get searchLabel;
+  String get searchHint;
   String get searchHistoryLabel => 'Search History';
   String get clearHistoryLabel => 'Clear Search History';
 }
 
 mixin SearchIcons {
+  IconData get searchIcon;
+}
+
+class SearchChannelController extends SearchBaseController {
+  @override
+  String get searchLabel => "Search Channels";
+  @override
+  String get searchHint => "Search for Channels";
+  @override
   IconData get searchIcon => Iconsax.search_normal_1;
+
+  @override
+  void executeSearch(BuildContext context) {
+    SearchForChannelParams params = SearchForChannelParams(query: searchController.text);
+    BlocProvider.of<SearchBloc>(context).add(SearchByTitleEvent(params));
+  }
+}
+
+
+class SearchUserController extends SearchBaseController {
+  @override
+  String get searchLabel => "Search Users";
+  @override
+  String get searchHint => "Search for Users";
+  @override
+  IconData get searchIcon => Iconsax.user_search;
+
+  @override
+  void executeSearch(BuildContext context) {
+    SearchForUserParams params = SearchForUserParams(query: searchController.text);
+    BlocProvider.of<SearchBloc>(context).add(SearchByUserEvent(params));  // Add user-specific event
+  }
 }

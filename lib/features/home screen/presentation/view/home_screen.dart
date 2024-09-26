@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/app_injection.dart';
+import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/core/utils/constant/app_strings.dart';
@@ -39,11 +40,7 @@ class HomeScreen extends StatelessWidget {
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-              ),
-            );
+            ShowSnackBar.errorSnackBar(context, state.errorMessage);
           }
           if (state is GetUserDataSuccess) {
             loadingYourChannel = false;

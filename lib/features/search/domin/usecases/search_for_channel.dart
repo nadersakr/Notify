@@ -5,7 +5,7 @@ import 'package:notify/features/search/domin/repositories/search_repository.dart
 import 'package:notify/shared/domin/entities/channel_model.dart';
 
 class SearchForChannel extends UseCase<List<Channel>, SearchForChannelParams> {
-  final SearchForChannelRepository repository;
+  final SearchRepository repository;
 
   SearchForChannel(this.repository);
 

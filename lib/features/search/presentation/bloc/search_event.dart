@@ -13,6 +13,13 @@ class SearchByTitleEvent extends SearchEvent {
   @override
   List<Object> get props => [];
 }
+class SearchByUserEvent extends SearchEvent {
+ final SearchForUserParams params;
+ const SearchByUserEvent(this.params);
+
+  @override
+  List<Object> get props => [];
+}
 class ClearSearchHistoryEvent extends SearchEvent {
  const ClearSearchHistoryEvent();
 

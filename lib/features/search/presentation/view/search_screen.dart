@@ -8,20 +8,28 @@ import 'package:notify/features/search/presentation/controller/search_controller
 import 'package:notify/shared/presentaion/widget/channel_container.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
 import 'package:notify/shared/presentaion/controller.dart';
+import 'package:notify/shared/presentaion/widget/user_container.dart';
 
+// This SearchScreen will dynamically handle both channel and user search
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  final bool isChannelSearch; // Add a flag to differentiate between channel and user search
+
+  const SearchScreen({super.key, this.isChannelSearch=false});
 
   @override
   SearchScreenState createState() => SearchScreenState();
 }
 
 class SearchScreenState extends State<SearchScreen> {
-  final SearchChannelController _controller = SearchChannelController();
+  late SearchBaseController _controller;
 
   @override
   void initState() {
     super.initState();
+    // Depending on the flag, instantiate the appropriate controller
+    _controller = widget.isChannelSearch
+        ? SearchChannelController()
+        : SearchUserController();
     _controller.loadSearchHistory();
   }
 
@@ -38,11 +46,7 @@ class SearchScreenState extends State<SearchScreen> {
             _controller.isLoading = false;
             _controller.searchResults = state.searchResults;
           }
-          if (state is SearchInitial) {
-            _controller.isLoading = false;
-            _controller.searchResults = [];
-          }
-          if (state is SearchFailure) {
+          if (state is SearchInitial || state is SearchFailure) {
             _controller.isLoading = false;
             _controller.searchResults = [];
           }
@@ -87,9 +91,16 @@ class SearchScreenState extends State<SearchScreen> {
                             child: ListView.builder(
                               itemCount: _controller.searchResults.length,
                               itemBuilder: (context, index) {
-                                return ChannelOverviewContainer(
-                                  channel: _controller.searchResults[index],
-                                );
+                                // Dynamically handle result display
+                                if (widget.isChannelSearch) {
+                                  return ChannelOverviewContainer(
+                                    channel: _controller.searchResults[index],
+                                  );
+                                } else {
+                                  return UserOverviewContainer(
+                                    user: _controller.searchResults[index],
+                                  );
+                                }
                               },
                             ),
                           ),
@@ -123,8 +134,7 @@ class SearchScreenState extends State<SearchScreen> {
                           ),
                           TextButton(
                             onPressed: () =>
-                                BlocProvider.of<SearchBloc>(context)
-                                    .add(const ClearSearchHistoryEvent()),
+                                _controller.clearSearchHistory(context),
                             child: Text(
                               _controller.clearHistoryLabel,
                               style: AppTextStyle.mediumOrangeBold,

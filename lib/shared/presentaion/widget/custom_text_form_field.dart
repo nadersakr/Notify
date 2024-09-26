@@ -49,8 +49,8 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: maxLines,
-      minLines: 1,
+      // maxLines: maxLines,
+      // minLines: 1,
       maxLength: maxLenght,
       onChanged: onchanged,
       onFieldSubmitted: onSubmitted,
