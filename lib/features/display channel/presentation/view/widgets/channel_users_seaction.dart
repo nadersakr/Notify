@@ -25,14 +25,22 @@ Widget buildMembersSection(
             : SizedBox(height: 2.5 * AppUIController().smallPaddingSpace),
       ),
       BorderContainer(
-        color: color ?? Color(int.parse('0xff${fakeChannel.hexColor}')),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: members.map((member) => buildMemberItem(member)).toList(),
-          ),
-        ),
-      ),
+          color: color ?? Color(int.parse('0xff${fakeChannel.hexColor}')),
+          child: members.isNotEmpty
+              ? SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: members
+                        .map((member) => buildMemberItem(member))
+                        .toList(),
+                  ),
+                )
+              : const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("No Members Yet"),
+                  ),
+                )),
     ],
   );
 }

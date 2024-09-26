@@ -23,7 +23,7 @@ Widget buildNotificationsSection(Channel channel) {
           child: Container(
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(10),
-            child: Column(
+            child:channel.notifications.isNotEmpty? Column(
               children: List.generate(
                 channel.notifications.length > 3
                     ? 3
@@ -33,7 +33,7 @@ Widget buildNotificationsSection(Channel channel) {
                   return buildNotificationItem(notification, index, channel);
                 },
               ),
-            ),
+            ):Center(child: Text("No Notifications",style: AppTextStyle.mediumBlack,))
           ),
         ),
       ],
