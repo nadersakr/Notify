@@ -28,11 +28,6 @@ class HomeScreen extends StatelessWidget {
         if (state is AppFailed) {
           ShowSnackBar.errorSnackBar(context, "Failed to load data");
         }
-        if (state is AppSuccess) {
-          print("Data loaded successfully");
-          
-          
-        }
       },
       builder: (context, state) {
         return BlocBuilder<AppBloc, AppState>(

@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseMessagingService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -15,16 +16,15 @@ class FirebaseMessagingService {
       provisional: false,
       sound: true,
     );
-    print('User granted permission: ${settings.authorizationStatus}');
+    debugPrint('User granted permission: ${settings.authorizationStatus}');
     // Get the token for the device
     try {
-      print(1);
       String? token = await _firebaseMessaging.getToken();
-      print("Firebase Messaging Token: $token");
+      debugPrint("Firebase Messaging Token: $token");
 
       // Handle foreground messages
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        print(
+        debugPrint(
             'Received a message in the foreground: ${message.notification?.title}');
         // Show a dialog or notification as needed
       });
@@ -33,7 +33,7 @@ class FirebaseMessagingService {
       FirebaseMessaging.onBackgroundMessage(
           _firebaseMessagingBackgroundHandler);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       rethrow;
     }
   }
@@ -41,6 +41,6 @@ class FirebaseMessagingService {
   static Future<void> _firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
     // Handle background messages here
-    print('Handling a background message: ${message.messageId}');
+    debugPrint('Handling a background message: ${message.messageId}');
   }
 }

@@ -23,8 +23,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         LoadedUserData.joindChannels.clear();
         LoadedUserData.userownedChannels.clear();
 
-        print("Loading user data...");
-
         // Load user profile data
         GetUserInfo getUserInfo = sl<GetUserInfo>();
         final userDataResult = await getUserInfo.call(event.usereInfoParams);
@@ -45,12 +43,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         }, (biggestChannels) {
           LoadedUserData.biggestChannels = biggestChannels;
         });
-        print("user joined channels: ${user.joinedChannelsId}");
-        print("user owned channels: ${user.ownedChannels}");
-        // Load user's joined channels
         GetChannelData getChannelData = sl<GetChannelData>();
         for (var channelId in user.joinedChannelsId) {
-          print("000000000000000000000000000000000");
           final channelResult = await getChannelData
               .call(GetChannelInfoParams(channelId: channelId));
           channelResult.fold((l) {
@@ -72,15 +66,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             LoadedUserData.userownedChannels.add(channelData);
           });
         }
-
-        // After all data is loaded, emit success
-        print("Loaded ${LoadedUserData.joindChannels.length} joined channels.");
-        print("Loaded ${LoadedUserData.userownedChannels.length} owned channels.");
-        print("Loaded ${LoadedUserData.biggestChannels.length} biggest channels.");
-
         emit(AppSuccess());
       } catch (e) {
-        print("Error loading data: $e");
         emit(AppFailed());
       }
     });
