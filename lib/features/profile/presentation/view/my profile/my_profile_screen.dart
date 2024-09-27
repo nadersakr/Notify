@@ -94,7 +94,7 @@ class MyProfileScreen extends StatelessWidget {
                                 child: ContainerChannelVertical(
                                   maximumNumberOfChannels: 6,
                                   height: 60.h,
-                                  channelList: channelList,
+                                  channelList: LoadedUserData.joindChannels,
                                   letterSpace: 1.0,
                                   onTap: (Channel channel) {
                                     navigatePushTo(context,
