@@ -17,6 +17,18 @@ final List<Channel> channelList = [
   ),
   const Channel(
     id: '1727006553242964',
+    creatorId: "101",
+    membersCount: 50,
+    title: 'Tech Enthusiasts',
+    description:
+        'A channel for tech lovers to share the latest in technology trends and news.',
+    supervisorsId: ['102', '103'],
+    membersId: ['104', '105', '106'],
+    imageUrl: 'https://example.com/images/tech_enthusiasts.png',
+    hexColor: 'FF5733',
+  ),
+  const Channel(
+    id: '1727006553242964',
     creatorId: "107",
     // membersCount: 1405,
     title: 'Fitness Freaks',

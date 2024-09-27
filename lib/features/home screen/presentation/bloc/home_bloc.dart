@@ -19,38 +19,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({required this.getBiggestChannels, required this.getUserData})
       : super(HomeInitial()) {
     on<GetBiggestChannelsEvent>((event, emit) async {
-      emit(HomeLoading());
-      final result = await getBiggestChannels.call(NoParams());
-      result.fold((l) {
-        emit(HomeFailure(l.errorMessage));
-      }, (r) {
-        emit(GetBigetsChannelsLoaded(r));
-      });
+      // emit(HomeLoading());
+      // final result = await getBiggestChannels.call(NoParams());
+      // result.fold((l) {
+      //   emit(HomeFailure(l.errorMessage));
+      // }, (r) {
+      //   emit(GetBigetsChannelsLoaded(r));
+      // });
     });
     on<GetUserDataEvent>((event, emit) async {
-      emit(GetUserDataLoading());
-      final result = await getUserData.call(event.params);
+      // emit(GetUserDataLoading());
+      // final result = await getUserData.call(event.params);
 
-      await result.fold((l) async {
-        emit(HomeFailure(l.errorMessage));
-      }, (user) async {
-        LoadedUserData().useroinedChannels.clear();
-        GetChannelData getChannelData = sl<GetChannelData>();
+      // await result.fold((l) async {
+      //   emit(HomeFailure(l.errorMessage));
+      // }, (user) async {
+      //   LoadedUserData.userownedChannels.clear();
+      //   GetChannelData getChannelData = sl<GetChannelData>();
 
-        // Await the result of each call
-        for (var element in user.ownedChannels) {
-          final channelResult = await getChannelData
-              .call(GetChannelInfoParams(channelId: element));
+      //   // Await the result of each call
+      //   for (var element in user.ownedChannels) {
+      //     final channelResult = await getChannelData
+      //         .call(GetChannelInfoParams(channelId: element));
 
-          await channelResult.fold((l) async {
-            emit(HomeFailure(l.errorMessage));
-          }, (channel) async {
-            LoadedUserData().useroinedChannels.add(channel);
-          });
-        }
+      //     await channelResult.fold((l) async {
+      //       emit(HomeFailure(l.errorMessage));
+      //     }, (channel) async {
+      //       LoadedUserData.userownedChannels.add(channel);
+      //     });
+      //   }
 
-        emit(GetUserDataSuccess(user));
-      });
+      //   emit(GetUserDataSuccess(user));
+      // });
     });
   }
 }

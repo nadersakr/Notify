@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notify/core/utils/constant/app_strings.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 
 Widget buildMemberItem(UserModel member) {
@@ -10,7 +11,9 @@ Widget buildMemberItem(UserModel member) {
         CircleAvatar(
           radius: 30,
           backgroundColor: Colors.grey[200],
-          backgroundImage: NetworkImage(member.imageUrl!.isEmpty?"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgpPwM5mR5lNHGg9vxaoUgcnAIBOJumsoJrg&s":member.imageUrl!),
+          backgroundImage: NetworkImage(member.imageUrl.isEmpty
+              ? AppStrings.personFixedImageUrl
+              : member.imageUrl),
         ),
         const SizedBox(height: 4),
         Text(

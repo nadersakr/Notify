@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/routers/app_router.dart';
 import 'package:notify/core/style/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:notify/core/utils/constant/bloc_observer.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
 import 'package:notify/shared/data%20layer/data%20source/firebase_messaging.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
@@ -13,6 +15,7 @@ void main() async {
   await Firebase.initializeApp();
   await FirebaseMessagingService().setupNotifications();
   await initInjections();
+  Bloc.observer=MyBlocObserver();
   runApp(const MyApp());
 }
 

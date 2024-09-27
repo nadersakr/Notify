@@ -1,10 +1,14 @@
 // apply singleTon pattern for this class to be used in all the app
 import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 
 class LoadedUserData {
   UserModel? loadedUser;
-  List<Channel> useroinedChannels = [];
+  // give them a fake data for loading using Skeletonizer package
+  static List<Channel> userownedChannels = [];
+  static List<Channel> biggestChannels = [];
+  static List<Channel> joindChannels = [];
 
   // Private constructor
   LoadedUserData._privateConstructor({this.loadedUser});

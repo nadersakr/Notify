@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/channel_member_item.dart';
-import 'package:notify/features/home%20screen/presentation/view/widgets/head_line_upove_channels.dart';
+import 'package:notify/shared/presentaion/widget/head_line_upove_channels.dart';
 import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';

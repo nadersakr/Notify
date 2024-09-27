@@ -13,7 +13,6 @@ import 'package:notify/features/channel%20manipulation/domin/usecases/send_notif
 class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
   Future<void> addSupervisorChannel(AddSupervisorParams params) async {
-
     try {
       // check if the user is already a supervisor of the channel
       final bool isUserSupervisor = await FirebaseFirestore.instance
@@ -33,7 +32,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
           .doc(params.channelId)
           .update({
         'supervisorsId': FieldValue.arrayUnion([params.supervisorId]),
-         'membersCount': FieldValue.increment(1),
+        'membersCount': FieldValue.increment(1),
       });
 
       await FirebaseFirestore.instance
@@ -122,7 +121,8 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
         return members.contains(params.joinerId);
       });
       if (isUserMember) {
-        throw const FirebaseErrorFailure("User is already a member of the channel");
+        throw const FirebaseErrorFailure(
+            "User is already a member of the channel");
       }
       await FirebaseFirestore.instance
           .collection('channels')
@@ -147,22 +147,36 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
 
   @override
   Future<void> leaveChannel(LeaveChannelParams params) async {
+    // check if the user is a member of the channel
     try {
-      if (params.channel.supervisorsId.length == 1 &&
-          params.channel.supervisorsId[0] == params.leaverId) {
-        DeleteChannelParams deleteChannelParams =
-            DeleteChannelParams(channel: params.channel);
-        deleteChannel(deleteChannelParams);
+      final bool isSupervisor =
+          params.channel.supervisorsId.contains(params.leaverId);
+      if (isSupervisor) {
+        if (params.channel.supervisorsId.length == 1) {
+          DeleteChannelParams deleteChannelParams =
+              DeleteChannelParams(channel: params.channel);
+          deleteChannel(deleteChannelParams);
+          return;
+        }
+        await FirebaseFirestore.instance
+            .collection('channels')
+            .doc(params.channel.id)
+            .update({
+          'supervisorsId': FieldValue.arrayRemove([params.leaverId]),
+          'membersCount': FieldValue.increment(-1),
+        });
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(params.leaverId)
+            .update({
+          'ownedChannels': FieldValue.arrayRemove([params.channel.id]),
+        });
+
+        return;
       }
-      // check if the user is a member of the channel
-      final bool isUserMember = await FirebaseFirestore.instance
-          .collection('channels')
-          .doc(params.channel.id)
-          .get()
-          .then((value) {
-        final members = value.data()!['membersId'] as List<dynamic>;
-        return members.contains(params.leaverId);
-      });
+      final bool isUserMember =
+          params.channel.membersId.contains(params.leaverId);
       if (!isUserMember) {
         throw const FirebaseErrorFailure("User is not a member of the channel");
       }
@@ -180,49 +194,6 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
           .update({
         'joinedChannels': FieldValue.arrayRemove([params.channel.id]),
       });
-
-      // print(isUserSupervisor);
-      // if (isUserSupervisor) {
-      //   await FirebaseFirestore.instance
-      //       .collection('channels')
-      //       .doc(params.channel.id)
-      //       .update({
-      //     'supervisorsId': FieldValue.arrayRemove([params.leaverId]),
-      //   });
-
-      //   await FirebaseFirestore.instance
-      //       .collection('users')
-      //       .doc(params.leaverId)
-      //       .update({
-      //     'ownedChannels': FieldValue.arrayRemove([params.channel.id]),
-      //   });
-
-      //   // check if the channel has no supervisors
-      //   final supervisorsCount = await FirebaseFirestore.instance
-      //       .collection('channels')
-      //       .doc(params.channel.id)
-      //       .get()
-      //       .then((value) {
-      //     final supervisors = value.data()!['supervisorsId'] as List<dynamic>;
-      //     return supervisors.length;
-      //   });
-      //   if (supervisorsCount == 0) {
-      //     await FirebaseFirestore.instance
-      //         .collection('channels')
-      //         .doc(params.channel.id)
-      //         .delete();
-      //     final users = await FirebaseFirestore.instance
-      //         .collection('users')
-      //         .where('joinedChannels', arrayContains: params.channel.id)
-      //         .get();
-      //     for (final user in users.docs) {
-      //       await user.reference.update({
-      //         'joinedChannels': FieldValue.arrayRemove([params.channel.id]),
-      //       });
-      //     }
-      //   }
-      //   // delete channel from all users joined channels
-      // }
     } on FirebaseErrorFailure catch (e) {
       throw FirebaseErrorFailure(e.errorMessage);
     } catch (e) {
