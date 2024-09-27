@@ -30,7 +30,7 @@ class DisplayChannelBloc extends Bloc<DisplayChannelEvent, DisplayChannelState> 
         // Load members asynchronously
         for (var element in channel.membersId) {
           final result = await getUserInfo.call(GetUserInfoParams(userId: element));
-          final userResult = await result.fold<Future<void>>((failure) async {
+          await result.fold<Future<void>>((failure) async {
             emit(DisplayChannelFailed(failure.errorMessage));
           }, (user) async {
             members.add(user);
@@ -41,7 +41,7 @@ class DisplayChannelBloc extends Bloc<DisplayChannelEvent, DisplayChannelState> 
         // Load supervisors asynchronously
         for (var element in channel.supervisorsId) {
           final result = await getUserInfo.call(GetUserInfoParams(userId: element));
-          final supervisorResult = await result.fold<Future<void>>((failure) async {
+           await result.fold<Future<void>>((failure) async {
             emit(DisplayChannelFailed(failure.errorMessage));
           }, (user) async {
             supervisors.add(user);

@@ -1,6 +1,5 @@
 // apply singleTon pattern for this class to be used in all the app
 import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
 
 class LoadedUserData {
@@ -11,7 +10,7 @@ class LoadedUserData {
   static List<Channel> joindChannels = [];
 
   // Private constructor
-  LoadedUserData._privateConstructor({this.loadedUser});
+  LoadedUserData._privateConstructor();
 
   // Static field to hold the single instance
   static final LoadedUserData _instance = LoadedUserData._privateConstructor();

@@ -37,7 +37,10 @@ class ChannelOverviewContainer extends StatelessWidget {
           Row(
             children: [
               Text(
-                channel.title,
+                channel.title.length > 20
+                    ? '${channel.title.substring(0, 20)}'
+                        '..'
+                    : channel.title,
                 textAlign: TextAlign.left,
                 style: AppTextStyle.smallBoldBlack.copyWith(
                   letterSpacing: letterSpace ?? 1.5.sp,
@@ -54,8 +57,8 @@ class ChannelOverviewContainer extends StatelessWidget {
             ],
           ),
           Text(
-            channel.description.length > 50
-                ? '${channel.description.substring(0, 50)}'
+            channel.description.length > 45
+                ? '${channel.description.substring(0, 45)}'
                     '..'
                 : channel.description,
             style: AppTextStyle.smallBlack,

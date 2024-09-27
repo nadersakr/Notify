@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/app_injection.dart';
+import 'package:notify/core/routers/app_routers_enum.dart';
+import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
@@ -92,11 +94,12 @@ class SearchScreenState extends State<SearchScreen> {
                             child: ListView.builder(
                               itemCount: _controller.searchResults.length,
                               itemBuilder: (context, index) {
-                                // Dynamically handle result display
+          
                                 if (widget.isChannelSearch) {
                                   return GestureDetector(
                                     onTap: () {
-                                      widget.onPressed!(_controller.searchResults[index]);
+                                      navigatePushTo(context,
+                                          "${AppRouteEnum.channelScreen.name}/${_controller.searchResults[index].id}");
                                     },
                                     child: ChannelOverviewContainer(
                                       channel: _controller.searchResults[index],
@@ -105,7 +108,8 @@ class SearchScreenState extends State<SearchScreen> {
                                 } else {
                                   return GestureDetector(
                                     onTap: () {
-                                      widget.onPressed!(_controller.searchResults[index]);
+                                      widget.onPressed!(
+                                          _controller.searchResults[index]);
                                     },
                                     child: UserOverviewContainer(
                                       user: _controller.searchResults[index],

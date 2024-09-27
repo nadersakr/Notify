@@ -97,6 +97,9 @@ class ChannelScreen extends StatelessWidget {
                             buildChannelHeader(
                                 context, channel, isOwner, isJoined),
                             buildChannelImage(channel),
+                            SizedBox(
+                                height:
+                                    0.5 * appUIController.smallPaddingSpace),
                             buildChannelDescription(channel),
                             buildMembersSection(
                                 supervisors, context, "Supervisors",
