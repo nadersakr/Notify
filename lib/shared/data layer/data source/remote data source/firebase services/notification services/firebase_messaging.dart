@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:notify/core/utils/constant/app_secrits.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/firebase%20services/notification%20services/notification_base_class.dart';
@@ -19,14 +19,14 @@ class FirebaseNotificationService implements NotificationService {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission for notifications');
+      debugPrint('User granted permission for notifications');
     } else {
-      print('User declined or has not accepted permission');
+      debugPrint('User declined or has not accepted permission');
     }
 
     // Handle foreground messages
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print(
+      debugPrint(
           'Received a foreground message: ${message.notification?.title}, ${message.notification?.body}');
     });
 
@@ -35,17 +35,17 @@ class FirebaseNotificationService implements NotificationService {
 
     // Handle message when the app is opened from a notification
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print(
+      debugPrint(
           'Notification clicked and app opened: ${message.notification?.title}, ${message.notification?.body}');
     });
 
     LoadedUserData.notificationToken = await getToken();
-    print("Token is ${LoadedUserData.notificationToken}");
+    debugPrint("Token is ${LoadedUserData.notificationToken}");
   }
 
   static Future<void> _firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
-    print('Handling a background message: ${message.messageId}');
+    debugPrint('Handling a background message: ${message.messageId}');
   }
 
   @override
@@ -56,13 +56,13 @@ class FirebaseNotificationService implements NotificationService {
   @override
   Future<void> subscribeToTopic(String topic) async {
     await _firebaseMessaging.subscribeToTopic(topic);
-    print('Subscribed to topic: $topic');
+    debugPrint('Subscribed to topic: $topic');
   }
 
   @override
   Future<void> unsubscribeFromTopic(String topic) async {
     await _firebaseMessaging.unsubscribeFromTopic(topic);
-    print('Unsubscribed from topic: $topic');
+    debugPrint('Unsubscribed from topic: $topic');
   }
 
   @override
@@ -93,14 +93,14 @@ class FirebaseNotificationService implements NotificationService {
       );
 
       if (response.statusCode == 200) {
-        print('Notification sent successfully.');
+        debugPrint('Notification sent successfully.');
       } else {
-        print(
+        debugPrint(
             'Failed to send notification. Status code: ${response.statusCode}');
-        print('Error: ${response.body}');
+        debugPrint('Error: ${response.body}');
       }
     } catch (e) {
-      print('Error sending notification: $e');
+      debugPrint('Error sending notification: $e');
     }
   }
 
@@ -132,14 +132,14 @@ class FirebaseNotificationService implements NotificationService {
       );
 
       if (response.statusCode == 200) {
-        print('Notification sent to topic successfully.');
+        debugPrint('Notification sent to topic successfully.');
       } else {
-        print(
+        debugPrint(
             'Failed to send notification to topic. Status code: ${response.statusCode}');
-        print('Error: ${response.body}');
+        debugPrint('Error: ${response.body}');
       }
     } catch (e) {
-      print('Error sending notification to topic: $e');
+      debugPrint('Error sending notification to topic: $e');
     }
   }
 }
