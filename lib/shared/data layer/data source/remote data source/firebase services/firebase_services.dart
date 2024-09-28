@@ -3,6 +3,7 @@ import 'package:notify/core/network/error/exceptions.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/auth/presentation/controllers/login%20view%20model/login_view_modle.dart';
 import 'package:notify/features/auth/presentation/controllers/signup%20view%20model/signup_view_model.dart';
+import 'package:notify/shared/domin/entities/loaded_user.dart';
 
 class FirebaseServices {
   static Future<void> saveUserData(
@@ -15,6 +16,7 @@ class FirebaseServices {
       await FirebaseFirestore.instance.collection('users').doc(id).set({
         'fullName': fullName,
         'email': email,
+        "notificationToken": LoadedUserData.notificationToken
         // 'username': username,
       });
     } catch (e) {
@@ -48,21 +50,26 @@ class FirebaseServices {
   //   }
   // }
 
-  static Future<({String fullName, String username})> getUserData(
-      String uid) async {
+  static Future<({String fullName})> getUserData(String uid) async {
     try {
       final response =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
       // print(response.data()!['firstName']);
 
-      return (
-        fullName: "${response.data()!['fullName']}",
-        username: "${response.data()!['username']}"
-      );
+      return (fullName: "${response.data()!['fullName']}",);
     } catch (e) {
       throw FirebaseAuthFailure(LoginViewModle.errorInLoadingUserData);
     }
   }
-}
 
-var r = (firstName: 'firstName', last: 'lastName', username: 'username');
+  static Future<void> updateNotificationToken(String userUid) async {
+    try {
+      // Save User data using UID
+      await FirebaseFirestore.instance.collection('users').doc(userUid).update({
+        "notificationToken": LoadedUserData.notificationToken
+      });
+    } catch (e) {
+      throw const FirebaseErrorFailure("Error in Updating Notification Token");
+    }
+  }
+}

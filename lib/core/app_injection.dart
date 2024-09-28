@@ -5,6 +5,7 @@ import 'package:notify/core/injections/core_injection.dart';
 import 'package:notify/core/injections/diaplay_channel_injection.dart';
 import 'package:notify/core/injections/home_injection.dart';
 import 'package:notify/core/injections/image_util_injection.dart';
+import 'package:notify/core/injections/notification_services.dart';
 import 'package:notify/core/injections/search_injection.dart';
 
 final sl = GetIt.instance;
@@ -20,5 +21,6 @@ Future<void> initInjections() async {
   await homeScreenBlocInjections();
   await getChannelDataInjection();
   await getUserDataInjection();
+  await notificationServicesInjection();
   await authinjections();
 }

@@ -8,6 +8,7 @@ class LoadedUserData {
   static List<Channel> userownedChannels = [];
   static List<Channel> biggestChannels = [];
   static List<Channel> joindChannels = [];
+  static String? notificationToken;
 
   // Private constructor
   LoadedUserData._privateConstructor();

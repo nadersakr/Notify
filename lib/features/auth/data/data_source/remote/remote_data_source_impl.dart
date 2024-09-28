@@ -8,7 +8,7 @@ import 'package:notify/shared/domin/entities/user_model.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
 import 'package:notify/features/auth/presentation/controllers/signup%20view%20model/signup_view_model.dart';
-import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/firebase_services.dart';
+import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/firebase%20services/firebase_services.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl();
@@ -24,7 +24,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       var user = await FirebaseServices.getUserData(response.user!.uid);
-      
+      await FirebaseServices.updateNotificationToken(response.user!.uid);
+
       return UserModel(
         email: params.email,
         id: response.user!.uid,
@@ -62,10 +63,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       await FirebaseServices.saveUserData(
           // params.userName,
-          
+
           params.fullName,
           params.email,
           response.user!.uid);
+
+      await FirebaseServices.updateNotificationToken(response.user!.uid);
       return UserModel(
         email: params.email,
         id: response.user!.uid,
@@ -111,11 +114,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
 
       // Perform additional operations with the user data
-await FirebaseServices.saveUserData(
+      await FirebaseServices.saveUserData(
           // params.userName,
           user.displayName!,
           user.email!,
           user.uid);
+      await FirebaseServices.updateNotificationToken(user.uid);
+
       return UserModel(
         email: user.email!,
         id: user.uid,

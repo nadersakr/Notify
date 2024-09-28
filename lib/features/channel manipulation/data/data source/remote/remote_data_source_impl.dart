@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/delete_channel.dart';
-import 'package:notify/shared/data%20layer/data%20source/firebase_messaging.dart';
+import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/firebase%20services/notification%20services/firebase_messaging.dart';
 import 'package:notify/features/channel%20manipulation/data/data%20source/remote/remote_data_source.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/add_supervisor.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
@@ -203,28 +203,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
 
   @override
   Future<void> sendNotification(SendNotificationParams params) async {
-    try {
-      debugPrint('Sending notification to channel: ${params.channel.id}');
-      // Ensure notifications are set up
-      await FirebaseMessagingService().setupNotifications();
-      // Get the Firestore collection for notifications
-
-      debugPrint("Notification sending");
-      // Get the Firestore collection for channels
-      final channelCollection =
-          FirebaseFirestore.instance.collection('channels');
-
-      // Reference the specific channel document
-      final channelDoc = channelCollection.doc(params.channel.id);
-
-      // Update the document to include the new notification
-      await channelDoc.update({
-        'notifications': FieldValue.arrayUnion([params.notification]),
-      });
-      debugPrint("Notification sent successfully");
-    } catch (e) {
-      rethrow;
-    }
+    debugPrint("sending notifications");
   }
 
   @override
