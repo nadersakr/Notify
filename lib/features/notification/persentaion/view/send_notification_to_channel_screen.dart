@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:notify/features/notification/controller/send_notification_controller.dart';
+import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
 
 class SendNotificationScreen extends StatefulWidget {
-  final String channelId; // The selected channel's ID
+  final Channel channel; // The selected channel's ID
 
-  const SendNotificationScreen({super.key, required this.channelId});
+  const SendNotificationScreen({super.key, required this.channel});
 
   @override
   _SendNotificationScreenState createState() => _SendNotificationScreenState();
@@ -17,7 +18,7 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = SendNotificationController(channelId: widget.channelId);
+    _controller = SendNotificationController(channel: widget.channel);
   }
 
   @override

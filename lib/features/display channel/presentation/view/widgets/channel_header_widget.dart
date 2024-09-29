@@ -44,7 +44,7 @@ Widget buildChannelHeader(
                 navigatePushToScreen(
                     context,
                     SendNotificationScreen(
-                      channelId: channel.id,
+                      channel: channel,
                     ));
 
                 break;

@@ -98,6 +98,7 @@ Future<void> sendFCMTopicMessage({
   required String topic,
   required String title,
   required String body,
+  String? imageUrl,
   Map<String, dynamic>? data,
 }) async {
   final String serverKey = await getAccessToken(); // Your FCM server key
@@ -110,6 +111,7 @@ Future<void> sendFCMTopicMessage({
       'notification': {
         'title': title,
         'body': body,
+        if (imageUrl != null) 'image': imageUrl,
       },
       if (data != null) 'data': data,
     }
