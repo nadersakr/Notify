@@ -16,12 +16,6 @@ extension AppRouteExtension on AppRouteEnum {
         return "/search";
       case AppRouteEnum.channelScreen:
         return "/channel_screen";
-    
-      // case AppRouteEnum.weViewPage:
-      //   return "/web_view_page";
-
-      // case AppRouteEnum.photoViewPage:
-      //   return "/photo_view_page";
 
       default:
         return "/login";

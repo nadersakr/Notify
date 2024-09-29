@@ -6,9 +6,8 @@ import 'package:notify/features/home%20screen/data%20layer/repositories/home_rep
 import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
 import 'package:notify/features/home%20screen/domin/usecase/get_biggest_channel.dart';
 import 'package:notify/features/home%20screen/domin/usecase/get_user_data.dart';
-import 'package:notify/features/home%20screen/presentation/bloc/home_bloc.dart';
 
-homeScreenBlocInjections() async {
+homeScreenInjections() async {
   sl.registerFactory<HomeRemoteDataSource>(() => HomeRemoteDataSourceImpl());
 
   sl.registerSingletonAsync<HomeRepository>(() async {
@@ -19,7 +18,4 @@ homeScreenBlocInjections() async {
   sl.registerFactory<GetBiggestChannels>(
       () => GetBiggestChannels(sl<HomeRepository>()));
   sl.registerFactory<GetUserData>(() => GetUserData(sl<HomeRepository>()));
-  sl.registerFactory<HomeBloc>(() => HomeBloc(
-      getBiggestChannels: sl<GetBiggestChannels>(),
-      getUserData: sl<GetUserData>()));
 }

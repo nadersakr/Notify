@@ -12,6 +12,7 @@ import 'package:notify/features/channel%20manipulation/domin/usecases/leave_chan
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/channel%20manipulation/presentation/view/screens/add_supervisor_screen.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/popup_menu_items.dart';
+import 'package:notify/features/notification/persentaion/view/send_notification_to_channel_screen.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 
@@ -39,6 +40,14 @@ Widget buildChannelHeader(
                     : notMemberPopUpMenuItems,
           ).then((value) {
             switch (value) {
+              case "1": // send notification
+                navigatePushToScreen(
+                    context,
+                    SendNotificationScreen(
+                      channelId: channel.id,
+                    ));
+
+                break;
               case "6":
                 BlocProvider.of<ChannelBloc>(context).add(DeleteChannelEvent(
                   params: DeleteChannelParams(channel: channel),

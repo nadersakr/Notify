@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
+import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/delete_channel.dart';
 import 'package:notify/features/channel%20manipulation/data/data%20source/remote/remote_data_source.dart';
@@ -8,6 +9,8 @@ import 'package:notify/features/channel%20manipulation/domin/usecases/create_cha
 import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/leave_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/send_notification.dart';
+import 'package:notify/core/utils/services/firebase%20services/firebase_services.dart';
+import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 
 class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
@@ -137,6 +140,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
           .update({
         'joinedChannels': FieldValue.arrayUnion([params.channel.id]),
       });
+      await sl<NotificationService>().subscribeToTopic(params.channel.id);
     } on FirebaseErrorFailure catch (e) {
       throw FirebaseErrorFailure(e.errorMessage);
     } catch (e) {
@@ -155,6 +159,9 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
           DeleteChannelParams deleteChannelParams =
               DeleteChannelParams(channel: params.channel);
           deleteChannel(deleteChannelParams);
+          await sl<NotificationService>()
+              .unsubscribeFromTopic(params.channel.id);
+
           return;
         }
         await FirebaseFirestore.instance
@@ -171,6 +178,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
             .update({
           'ownedChannels': FieldValue.arrayRemove([params.channel.id]),
         });
+        await sl<NotificationService>().unsubscribeFromTopic(params.channel.id);
 
         return;
       }
@@ -193,6 +201,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
           .update({
         'joinedChannels': FieldValue.arrayRemove([params.channel.id]),
       });
+      await sl<NotificationService>().unsubscribeFromTopic(params.channel.id);
     } on FirebaseErrorFailure catch (e) {
       throw FirebaseErrorFailure(e.errorMessage);
     } catch (e) {

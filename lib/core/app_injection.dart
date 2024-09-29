@@ -18,9 +18,9 @@ Future<void> initInjections() async {
   await imageUtilInjections();
   await channelFeatureInjection();
   await displaychannelFeatureInjection();
-  await homeScreenBlocInjections();
+  await homeScreenInjections();
   await getChannelDataInjection();
   await getUserDataInjection();
-  await notificationServicesInjection();
   await authinjections();
+  await notificationServicesInjection();
 }
