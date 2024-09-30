@@ -8,12 +8,14 @@ class UserModel {
   final String imageUrl;
   final List<dynamic> joinedChannelsId;
   final List<dynamic> ownedChannels;
+  final List<dynamic> notifiactions;
   UserModel(
       {
       // required this.username,
       required this.fullName,
       this.joinedChannelsId = const [],
       this.ownedChannels = const [],
+      this.notifiactions = const [],
       this.imageUrl="",
       required this.id,
       required this.email});
@@ -26,6 +28,7 @@ class UserModel {
       imageUrl: json['imageUrl'],
       joinedChannelsId: json['channelsId'],
       // username: json['username'],
+      notifiactions: json['notifications'],
     );
   }
 
@@ -37,6 +40,8 @@ class UserModel {
       'email': email,
       'imageUrl': imageUrl,
       'channelsId': joinedChannelsId,
+      'ownedChannels': ownedChannels,
+      'notifications': notifiactions,
     };
   }
 
@@ -47,11 +52,11 @@ class UserModel {
         email = map['email'],
         ownedChannels = map['ownedChannels'] ?? [],
         imageUrl = map['imageUrl'],
+        notifiactions = map['notifications'] ?? [],
         joinedChannelsId = map['channelsId'];
 
   factory UserModel.fromFirebase(DocumentSnapshot doc, {required String id}) {
     final data = doc.data() as Map<String, dynamic>;
-    // print(data['ownedChannels']);
     return UserModel(
       id: id,
       fullName: data['fullName'] ?? '',
@@ -59,6 +64,7 @@ class UserModel {
       joinedChannelsId: data['joinedChannels'] ?? [],
       imageUrl: data['imageUrl'] ?? "",
       ownedChannels: data['ownedChannels'] ?? [],
+      notifiactions: data['notifications'] ?? [],
     );
   }
 }

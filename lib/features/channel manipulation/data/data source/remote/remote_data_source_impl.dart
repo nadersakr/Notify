@@ -223,8 +223,6 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
       // I need to save the notification in the notifications collection 
       await FirebaseFirestore.instance.collection("notifications").doc(params.notification.id).set({
         'message': params.notification.message,
-        'content': params.notification.content,
-        'imageUrl': params.notification.imageUrl,
         'timestamp': FieldValue.serverTimestamp(),
         'channelId': params.channel.id,
       });

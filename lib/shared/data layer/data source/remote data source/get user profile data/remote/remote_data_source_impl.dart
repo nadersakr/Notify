@@ -10,6 +10,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
         .collection('users')
         .doc(params.userId)
         .get();
+    
     return UserModel.fromFirebase(querySnapshot, id: params.userId);
   }
 }

@@ -3,10 +3,9 @@ import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/home%20screen/data%20layer/data%20source/remote/remote_data_source.dart';
 import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
-import 'package:notify/shared/domin/usecases/get_user_info.dart';
+import 'package:notify/features/home%20screen/domin/usecase/get_notification_data.dart';
+import 'package:notify/shared/domin/entities/notification_model.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;
@@ -34,13 +33,13 @@ class HomeRepositoryImpl implements HomeRepository {
     }
   }
 
+
+
   @override
-  Future<Either<Failure, UserModel>> getUserData(
-      GetUserInfoParams params) async {
+  Future<Either<Failure, NotificationModel>> getNotificationData(GetNotificationInfoParams params) async {
     if (await networkInfo.isConnected) {
       try {
-        UserModel response = await remoteDataSource.getUserData(params);
-        LoadedUserData().loadedUser = response;
+        NotificationModel response = await remoteDataSource.getNotificationData(params);
         return Right(response);
       } on FirebaseErrorFailure catch (e) {
         return Left(FirebaseErrorFailure(e.toString()));
