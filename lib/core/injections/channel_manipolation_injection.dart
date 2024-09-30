@@ -1,5 +1,6 @@
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/network/network_info.dart';
+import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 import 'package:notify/features/channel%20manipulation/data/data%20source/remote/remote_data_source.dart';
 import 'package:notify/features/channel%20manipulation/data/data%20source/remote/remote_data_source_impl.dart';
 import 'package:notify/features/channel%20manipulation/data/repositories/channel_repository_impl.dart';
@@ -14,7 +15,7 @@ import 'package:notify/features/channel%20manipulation/presentation/bloc/channel
 
 channelFeatureInjection() async {
   sl.registerFactory<ChannelRemoteDataSource>(
-      () => ChannelRemoteDataSourceImpl());
+      () => ChannelRemoteDataSourceImpl(notificationService: sl<NotificationService >()));
 
   sl.registerSingletonAsync<ChannelRepository>(() async {
     return ChannelRepositoryImpl(

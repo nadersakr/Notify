@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notify/core/app_injection.dart';
+import 'package:notify/core/helper/snackbar.dart';
+import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/notification/controller/send_notification_controller.dart';
+import 'package:notify/features/notification/persentaion/bloc/send_notification_bloc.dart';
 import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/presentaion/controller.dart';
+import 'package:notify/shared/presentaion/widget/custom_button.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
 
 class SendNotificationScreen extends StatefulWidget {
@@ -9,10 +16,10 @@ class SendNotificationScreen extends StatefulWidget {
   const SendNotificationScreen({super.key, required this.channel});
 
   @override
-  _SendNotificationScreenState createState() => _SendNotificationScreenState();
+  SendNotificationScreenState createState() => SendNotificationScreenState();
 }
 
-class _SendNotificationScreenState extends State<SendNotificationScreen> {
+class SendNotificationScreenState extends State<SendNotificationScreen> {
   late SendNotificationController _controller;
 
   @override
@@ -23,51 +30,69 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Send Notification'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _controller.formKey,
-          child: Column(
-            children: [
-              CustomTextFormField(
-                labelText: "Notification Title",
-                hintText: "Enter notification title",
-                textController: _controller.titleController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Title cannot be empty';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              CustomTextFormField(
-                labelText: "Notification Message",
-                hintText: "Enter your message here",
-                textController: _controller.messageController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Message cannot be empty';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => _controller.sendNotification(context),
-                child: Text('Send Notification'),
-              ),
-              if (_controller.isSending)
-                const Padding(
-                  padding: EdgeInsets.only(top: 16.0),
-                  child: CircularProgressIndicator(),
+    AppUIController appUIController = AppUIController();
+    return BlocProvider(
+      create: (context) => sl<SendNotificationBloc>(),
+      child: BlocListener<SendNotificationBloc, SendNotificationState>(
+        listener: (context, state) {
+          if (state is SendNotificationSuccess) {
+            ShowSnackBar.successSnackBar(
+                context, "Notification Sent Successfully");
+            _controller.messageController.clear();
+            Navigator.pop(context);
+          }
+          if (state is SendNotificationFailed) {
+            Navigator.pop(context);
+            ShowSnackBar.errorSnackBar(context, "Failed to send notification");
+          }
+        },
+        child: BlocBuilder<SendNotificationBloc, SendNotificationState>(
+          builder: (context, state) {
+            return SafeArea(
+              child: Scaffold(
+                body: Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                    width: appUIController.widgetsWidth,
+                    child: Form(
+                      key: _controller.formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: appUIController.smallPaddingSpace),
+                          Text(
+                            widget.channel.title,
+                            style: AppTextStyle.xLargeBlackBold,
+                          ),
+                          SizedBox(height: appUIController.smallPaddingSpace),
+                          CustomTextFormField(
+                              labelText: "Notification Message",
+                              hintText: "Enter your message here",
+                              textController: _controller.messageController,
+                              validator: (String? value) =>
+                                  _controller.messageValidator(value, context)),
+                          const Spacer(),
+                          ButtonWidget(
+                            text: "Send",
+                            onPressed: () =>
+                                _controller.sendNotification(context),
+                          ),
+                          SizedBox(
+                            height: appUIController.smallPaddingSpace,
+                          ),
+                          if (_controller.isSending)
+                            const Padding(
+                              padding: EdgeInsets.only(top: 16.0),
+                              child: CircularProgressIndicator(),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-            ],
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

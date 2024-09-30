@@ -9,10 +9,12 @@ import 'package:notify/features/channel%20manipulation/domin/usecases/create_cha
 import 'package:notify/features/channel%20manipulation/domin/usecases/join_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/leave_channel.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/send_notification.dart';
-import 'package:notify/core/utils/services/firebase%20services/firebase_services.dart';
 import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 
 class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
+  final NotificationService notificationService;
+  ChannelRemoteDataSourceImpl({required this.notificationService});
+
   @override
   Future<void> addSupervisorChannel(AddSupervisorParams params) async {
     try {
@@ -211,7 +213,13 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
 
   @override
   Future<void> sendNotification(SendNotificationParams params) async {
-    debugPrint("sending notifications");
+
+      notificationService.sendFCMTopicMessage(
+        topic: params.channel.id,
+        title: params.channel.title,
+        body: params.notification.message,
+        imageUrl: params.channel.imageUrl,
+      );
   }
 
   @override

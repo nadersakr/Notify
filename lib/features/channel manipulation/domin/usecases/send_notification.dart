@@ -7,7 +7,6 @@ import 'package:notify/shared/domin/entities/notification_model.dart';
 
 class SendNotification extends UseCase<void, SendNotificationParams> {
   final ChannelRepository repository;
-
   SendNotification(this.repository);
 
   @override

@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
 import 'package:googleapis_auth/auth_io.dart' as auth;
 import 'package:http/http.dart' as http;
 
 class FirebaseNotificationService implements NotificationService {
+  @override
   Future<String> getAccessToken() async {
     // Your client ID and client secret obtained from Google Cloud Console
     final serviceAccountJson = {
@@ -52,15 +52,13 @@ class FirebaseNotificationService implements NotificationService {
     return credentials.accessToken.data;
   }
 
-  Future<void> sendFCMMessage(
-    {
-      required String token,
-      required String title,
-      required String body,
-      String? imageUrl,
-
-    }
-  ) async {
+  @override
+  Future<void> sendFCMMessage({
+    required String token,
+    required String title,
+    required String body,
+    String? imageUrl,
+  }) async {
     final String serverKey = await getAccessToken(); // Your FCM server key
     const String fcmEndpoint =
         'https://fcm.googleapis.com/v1/projects/notify-afb86/messages:send';
@@ -68,10 +66,8 @@ class FirebaseNotificationService implements NotificationService {
     print("fcmkey : $currentFCMToken");
     final Map<String, dynamic> message = {
       'message': {
-        'token':token,        'notification': {
-          'body': body,
-          'title': title
-        },
+        'token': token,
+        'notification': {'body': body, 'title': title},
         'data': {
           'current_user_fcm_token':
               token, // Include the current user's FCM token in data payload
@@ -94,123 +90,28 @@ class FirebaseNotificationService implements NotificationService {
       print('Failed to send FCM message: ${response.statusCode}');
     }
   }
-Future<void> sendFCMTopicMessage({
-  required String topic,
-  required String title,
-  required String body,
-  String? imageUrl,
-  Map<String, dynamic>? data,
-}) async {
-  final String serverKey = await getAccessToken(); // Your FCM server key
-  const String fcmEndpoint =
-      'https://fcm.googleapis.com/v1/projects/notify-afb86/messages:send';
-
-  final Map<String, dynamic> message = {
-    'message': {
-      'topic': topic,
-      'notification': {
-        'title': title,
-        'body': body,
-        if (imageUrl != null) 'image': imageUrl,
-      },
-      if (data != null) 'data': data,
-    }
-  };
-
-  final http.Response response = await http.post(
-    Uri.parse(fcmEndpoint),
-    headers: <String, String>{
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $serverKey',
-    },
-    body: jsonEncode(message),
-  );
-
-  if (response.statusCode == 200) {
-    print('FCM topic message sent successfully');
-  } else {
-    print('Failed to send FCM topic message: ${response.statusCode}');
-    print('Response body: ${response.body}');
-  }
-}
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-  @override
-  Future<void> initialize() async {
-    // Request permission for notifications (iOS-specific)
-    NotificationSettings settings = await _firebaseMessaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      debugPrint('User granted permission for notifications');
-    } else {
-      debugPrint('User declined or has not accepted permission');
-    }
-
-    // Handle foreground messages
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      debugPrint(
-          'Received a foreground message: ${message.notification?.title}, ${message.notification?.body}');
-    });
-
-    // Handle background messages
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-    // Handle message when the app is opened from a notification
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      debugPrint(
-          'Notification clicked and app opened: ${message.notification?.title}, ${message.notification?.body}');
-    });
-
-    LoadedUserData.notificationToken = await getToken();
-    debugPrint("Token is ${LoadedUserData.notificationToken}");
-  }
-
-  static Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
-    debugPrint('Handling a background message: ${message.messageId}');
-  }
 
   @override
-  Future<String?> getToken() async {
-    return await _firebaseMessaging.getToken();
-  }
-
-  @override
-  Future<void> subscribeToTopic(String topic) async {
-    await _firebaseMessaging.subscribeToTopic(topic);
-    debugPrint('Subscribed to topic: $topic');
-  }
-
-  @override
-  Future<void> unsubscribeFromTopic(String topic) async {
-    await _firebaseMessaging.unsubscribeFromTopic(topic);
-    debugPrint('Unsubscribed from topic: $topic');
-  }
-
-  @override
-  Future<void> sendNotificationToToken({
-    required String token,
+  Future<void> sendFCMTopicMessage({
+    required String topic,
     required String title,
     required String body,
     String? imageUrl,
+    Map<String, dynamic>? data,
   }) async {
     final String serverKey = await getAccessToken(); // Your FCM server key
     const String fcmEndpoint =
         'https://fcm.googleapis.com/v1/projects/notify-afb86/messages:send';
-    final currentFCMToken = await FirebaseMessaging.instance.getToken();
-    print("fcmkey : $currentFCMToken");
+
     final Map<String, dynamic> message = {
       'message': {
-        'token':
-            currentFCMToken, // Token of the device you want to send the message to
-        'notification': {'body': body, 'title': title},
-        'data': {
-          'current_user_fcm_token':
-              currentFCMToken, // Include the current user's FCM token in data payload
+        'topic': topic,
+        'notification': {
+          'title': title,
+          'body': body,
+          if (imageUrl != null) 'image': imageUrl,
         },
+        if (data != null) 'data': data,
       }
     };
 
@@ -224,49 +125,27 @@ Future<void> sendFCMTopicMessage({
     );
 
     if (response.statusCode == 200) {
-      print('FCM message sent successfully');
+      print('FCM topic message sent successfully');
     } else {
-      print('Failed to send FCM message: ${response.statusCode}');
+      print('Failed to send FCM topic message: ${response.statusCode}');
+      print('Response body: ${response.body}');
     }
+  }
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  @override
+  @override
+  Future<void> subscribeToTopic(String topic) async {
+    await _firebaseMessaging.subscribeToTopic(topic);
+    debugPrint('Subscribed to topic: $topic');
   }
 
   @override
-  Future<void> sendNotificationToTopic({
-    required String topic,
-    required String title,
-    required String body,
-    String? imageUrl,
-  }) async {
-    final String serverKey = await getAccessToken(); // Your FCM server key
-    const String fcmEndpoint =
-        'https://fcm.googleapis.com/v1/projects/notify-afb86/messages:send';
-    final currentFCMToken = await FirebaseMessaging.instance.getToken();
-    print("fcmkey : $currentFCMToken");
-    final Map<String, dynamic> message = <String, dynamic>{
-      'to': '/topics/$topic',
-      'notification': <String, dynamic>{
-        'title': title,
-        'body': body,
-        'image': imageUrl,
-      },
-      'priority': 'high',
-    };
-
-    final http.Response response = await http.post(
-      Uri.parse(fcmEndpoint),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $serverKey',
-      },
-      body: jsonEncode(message),
-    );
-
-    if (response.statusCode == 200) {
-      print('FCM message sent successfully');
-    } else {
-      print('Failed to send FCM message: ${response.statusCode}');
-    }
+  Future<void> unsubscribeFromTopic(String topic) async {
+    await _firebaseMessaging.unsubscribeFromTopic(topic);
+    debugPrint('Unsubscribed from topic: $topic');
   }
+
 
 }
 // my mobile token 

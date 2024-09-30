@@ -1,9 +1,9 @@
 abstract class NotificationService {
   // Initialize the notification service (e.g., Firebase, push notification setup)
-  Future<void> initialize();
+  Future<void> getAccessToken();
 
   // Method to send a notification to a specific user/device using their token
-  Future<void> sendNotificationToToken({
+  Future<void> sendFCMMessage({
     required String token,
     required String title,
     required String body,
@@ -11,7 +11,7 @@ abstract class NotificationService {
   });
 
   // Method to send a notification to a topic (multiple users)
-  Future<void> sendNotificationToTopic({
+  Future<void> sendFCMTopicMessage({
     required String topic,
     required String title,
     required String body,
@@ -24,6 +24,4 @@ abstract class NotificationService {
   // Method to unsubscribe the current device/user from a specific topic
   Future<void> unsubscribeFromTopic(String topic);
 
-  // Method to get the FCM token of the current device/user
-  Future<String?> getToken();
 }

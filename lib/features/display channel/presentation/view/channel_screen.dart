@@ -29,7 +29,6 @@ class ChannelScreen extends StatelessWidget {
     bool isJoined = false;
     Channel channel = fakeChannel;
     final AppUIController appUIController = AppUIController();
-    bool loading = false;
 
     List<UserModel> members = fakeMembers;
     List<UserModel> supervisors = fakeMembers;
@@ -48,13 +47,12 @@ class ChannelScreen extends StatelessWidget {
       child: BlocConsumer<DisplayChannelBloc, DisplayChannelState>(
         listener: (context, state) {
           if (state is DisplayChannelFailed) {
-            loading = false;
+           
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errorMessage)),
             );
           }
           if (state is DisplayChannelLoaded) {
-            loading = false;
             channel = state.channel;
             isOwner = state.channel.supervisorsId
                 .contains(LoadedUserData().loadedUser!.id);
@@ -63,9 +61,7 @@ class ChannelScreen extends StatelessWidget {
             members = state.members;
             supervisors = state.supervisors;
           }
-          if (state is DisplayChannelLoading) {
-            loading = true;
-          }
+          
         },
         builder: (context, state) {
           return BlocListener<ChannelBloc, ChannelState>(
@@ -89,7 +85,7 @@ class ChannelScreen extends StatelessWidget {
                   child: SizedBox(
                     width: appUIController.widgetsWidth,
                     child: Skeletonizer(
-                      enabled: loading,
+                      enabled: state is DisplayChannelLoading,
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

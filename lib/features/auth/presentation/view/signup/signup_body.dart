@@ -116,22 +116,7 @@ class _SignupBodyState extends State<SignupBody> {
                   SizedBox(
                     height: controller.smallPaddingSpace,
                   ),
-                  // username textFormField
-                  // SizedBox(
-                  //   width: controller.widgetsWidth,
-                  //   child: CustomTextFormField(
-                  //     textController: controller.usernameController,
-                  //     validator: (String? value) =>
-                  //         controller.usernameValidator(value, context),
-                  //     hintText: controller.usernameString,
-                  //     labelText: controller.usernameLabel,
-                  //     suffixIcon: controller.usernameIcon,
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: controller.smallPaddingSpace,
-                  // ),
-                  // email textFormField
+
                   SizedBox(
                     width: controller.widgetsWidth,
                     child: CustomTextFormField(

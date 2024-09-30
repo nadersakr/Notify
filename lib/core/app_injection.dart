@@ -7,11 +7,13 @@ import 'package:notify/core/injections/home_injection.dart';
 import 'package:notify/core/injections/image_util_injection.dart';
 import 'package:notify/core/injections/notification_services.dart';
 import 'package:notify/core/injections/search_injection.dart';
+import 'package:notify/core/injections/send_notification_injection.dart';
 
 final sl = GetIt.instance;
 
 Future<void> initInjections() async {
   await initSharedPrefsInjections();
+  await notificationServicesInjection();
   await saveLocalDataInjection();
   await networkInjections();
   await searchBlocInjections();
@@ -22,5 +24,5 @@ Future<void> initInjections() async {
   await getChannelDataInjection();
   await getUserDataInjection();
   await authinjections();
-  await notificationServicesInjection();
+  await sendNotificationInjection();
 }

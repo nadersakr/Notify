@@ -7,14 +7,12 @@ import 'package:notify/core/style/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:notify/core/utils/constant/bloc_observer.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
-import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 import 'package:notify/shared/domin/entities/loaded_user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await initInjections();
-  await sl<NotificationService>().initialize();
   Bloc.observer=MyBlocObserver();
   runApp(const MyApp());
 }
