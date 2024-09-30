@@ -12,4 +12,14 @@ class NotificationModel {
     this.content,
     this.imageUrl,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'message': message,
+      'content': content,
+      'imageUrl': imageUrl,
+      'timestamp': timestamp,
+    };
+  }
 }
