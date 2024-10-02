@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notify/core/utils/constant/app_strings.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/presentaion/controller.dart';
 
 Widget buildMemberItem(UserModel member) {
   return Container(
@@ -8,13 +11,25 @@ Widget buildMemberItem(UserModel member) {
     padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
     child: Column(
       children: [
-        CircleAvatar(
-          radius: 30,
-          backgroundColor: Colors.grey[200],
-          backgroundImage: NetworkImage(member.imageUrl.isEmpty
-              ? AppStrings.personFixedImageUrl
-              : member.imageUrl),
-        ),
+        Container(
+                                width: 80.h,
+                                height: 80.h,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: AppUIController().borderWidth,
+                                      color: AppColors.primaryColor),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: ClipOval(
+                                  child: member.imageUrl.isNotEmpty
+                                      ? Image.network(member.imageUrl)
+                                      : const Icon(
+                                          Iconsax.user,
+                                          size: 50,
+                                          color: AppColors.primaryColor,
+                                        ),
+                                ),
+                              ),
         const SizedBox(height: 4),
         Text(
           member.fullName,

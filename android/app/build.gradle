@@ -45,12 +45,12 @@ android {
         multiDexEnabled true
     }
     signingConfigs{
-        debug{
-            keyAlias 'upload'
-            keyPassword '11111111'
-            storeFile file('upload-keystore.jks')
-            storePassword '11111111'
-        }
+        // debug{
+        //     keyAlias 'upload'
+        //     keyPassword '11111111'
+        //     storeFile file('upload-keystore.jks')
+        //     storePassword '11111111'
+        // }
     }
 
     buildTypes {
