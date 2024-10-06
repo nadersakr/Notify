@@ -40,7 +40,7 @@ mixin Icons {
 }
 
 mixin Sizes {
-  double imageSize = 160.h;
+  double imageSize = 120.w;
   double googleIconSize = 30.h;
   double smallpaddingSpace = 10.h;
   double largepaddingSpace = 90.h;

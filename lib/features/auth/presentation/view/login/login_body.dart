@@ -5,6 +5,7 @@ import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/core/style/app_text_style.dart';
+import 'package:notify/core/utils/lottle/lottle.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/controllers/login%20view%20model/login_view_modle.dart';
 import 'package:notify/features/auth/presentation/view/widgets/signin_with_google_widget.dart';
@@ -61,12 +62,7 @@ class _LoginBodyState extends State<LoginBody> {
             ShowSnackBar.successSnackBar(context, "Login Success");
           }
           if (state is AuthLoading) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Loading"),
-                backgroundColor: Colors.black,
-              ),
-            );
+           RunLottleFile().showNotiftyLottle(context,"Login in progress");
           }
         },
         builder: (context, state) {
