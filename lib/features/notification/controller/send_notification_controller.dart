@@ -7,8 +7,8 @@ import 'package:notify/core/utils/validators/longer_than_chars.dart';
 import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/send_notification.dart';
 import 'package:notify/features/notification/persentaion/bloc/send_notification_bloc.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/notification_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
 
 class SendNotificationController {
   final Channel channel;

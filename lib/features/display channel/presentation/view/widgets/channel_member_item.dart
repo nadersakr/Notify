@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/utils/constant/app_strings.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 
 Widget buildMemberItem(UserModel member) {
   return Container(

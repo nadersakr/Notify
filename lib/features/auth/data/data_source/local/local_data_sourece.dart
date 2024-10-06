@@ -1,4 +1,4 @@
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 
 abstract class AuthLocalDataSource {
   Future<void> cacheUser(UserModel user);

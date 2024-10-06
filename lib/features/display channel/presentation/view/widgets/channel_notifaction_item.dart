@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/notification_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
 
 Widget buildNotificationItem(
       NotificationModel notification, int index, Channel channel) {

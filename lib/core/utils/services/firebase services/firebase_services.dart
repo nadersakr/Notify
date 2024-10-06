@@ -3,7 +3,7 @@ import 'package:notify/core/network/error/exceptions.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/auth/presentation/controllers/login%20view%20model/login_view_modle.dart';
 import 'package:notify/features/auth/presentation/controllers/signup%20view%20model/signup_view_model.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
 
 class FirebaseServices {
   static Future<void> saveUserData(

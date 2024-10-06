@@ -4,7 +4,7 @@ import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/profile/data/data%20source/remote/remote_data_source.dart';
 import 'package:notify/shared/domin/repositories/profile_repository.dart';
 import 'package:notify/shared/domin/usecases/get_user_info.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileRemoteDataSource remoteDataSource;

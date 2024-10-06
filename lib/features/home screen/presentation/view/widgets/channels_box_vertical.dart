@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/presentaion/widget/channel_container.dart';
 import 'package:notify/shared/presentaion/widget/border_container.dart';
 

@@ -4,7 +4,7 @@ import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
 import 'package:notify/features/auth/data/data_source/remote/remote_data_source.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/features/auth/domin/repository/auth_repository.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';

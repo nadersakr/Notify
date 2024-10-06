@@ -10,12 +10,12 @@ import 'package:notify/features/display%20channel/presentation/bloc/display_chan
 import 'package:notify/features/display%20channel/presentation/view/widgets/channel_description_widget.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/channel_header_widget.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/channel_image_widget.dart';
-import 'package:notify/features/display%20channel/presentation/view/widgets/channel_notification_section.dart';
+import 'package:notify/features/display%20channel/presentation/view/widgets/notifications_section.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/channel_users_seaction.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/fake_channels_for_test.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
+import 'package:notify/shared/domin/models/fake_channels_for_test.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -105,6 +105,9 @@ class ChannelScreen extends StatelessWidget {
                             buildMembersSection(members, context, "Members",
                                 color: Color(
                                     int.parse('0xff${channel.hexColor}'))),
+                            SizedBox(
+                                height:
+                                    0.5 * appUIController.smallPaddingSpace),
                           ],
                         ),
                       ),

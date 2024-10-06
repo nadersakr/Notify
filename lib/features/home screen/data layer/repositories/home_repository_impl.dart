@@ -4,8 +4,8 @@ import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/home%20screen/data%20layer/data%20source/remote/remote_data_source.dart';
 import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
 import 'package:notify/features/home%20screen/domin/usecase/get_notification_data.dart';
-import 'package:notify/shared/domin/entities/notification_model.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;

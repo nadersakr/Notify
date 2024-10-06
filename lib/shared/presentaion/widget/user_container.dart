@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/style/app_text_style.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 
 class UserOverviewContainer extends StatelessWidget {

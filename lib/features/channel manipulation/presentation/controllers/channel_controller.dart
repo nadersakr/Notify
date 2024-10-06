@@ -13,9 +13,9 @@ import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/create_channel.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/shared/domin/usecases/compress_image_usecase.dart';
 import 'package:notify/shared/domin/usecases/upload_image_usecase.dart';
 

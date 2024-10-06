@@ -8,7 +8,7 @@ import 'package:notify/features/notification/persentaion/view/notification_scree
 import 'package:notify/features/profile/presentation/view/my%20profile/my_profile_screen.dart';
 import 'package:notify/features/search/presentation/view/search_screen.dart';
 import 'package:notify/features/nav%20menu/presentation/bloc/app_bloc.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
 import 'package:notify/shared/domin/usecases/get_user_info.dart';
 
 class NavMenu extends StatefulWidget {

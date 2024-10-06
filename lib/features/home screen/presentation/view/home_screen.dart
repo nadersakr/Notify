@@ -11,8 +11,8 @@ import 'package:notify/features/home%20screen/presentation/view/widgets/channels
 import 'package:notify/features/nav%20menu/presentation/bloc/app_bloc.dart';
 import 'package:notify/shared/presentaion/widget/head_line_upove_channels.dart';
 import 'package:notify/shared/presentaion/widget/your_channel_box.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeScreen extends StatelessWidget {

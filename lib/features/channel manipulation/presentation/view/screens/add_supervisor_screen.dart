@@ -5,8 +5,8 @@ import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/add_supervisor.dart';
 import 'package:notify/features/channel%20manipulation/presentation/bloc/channel_bloc.dart';
 import 'package:notify/features/search/presentation/view/search_screen.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 
 class AddSupervisorScreen extends StatelessWidget {
   final String channelId;

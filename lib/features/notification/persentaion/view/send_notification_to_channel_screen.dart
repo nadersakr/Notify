@@ -5,7 +5,7 @@ import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/notification/controller/send_notification_controller.dart';
 import 'package:notify/features/notification/persentaion/bloc/send_notification_bloc.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 import 'package:notify/shared/presentaion/widget/custom_button.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';

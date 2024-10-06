@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/display%20channel/domin/usecases/load_channel_data.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/shared/domin/usecases/get_user_info.dart';
 
 part 'display_channel_event.dart';

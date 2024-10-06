@@ -8,7 +8,7 @@ import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:notify/features/search/domin/usecases/search_for_channel.dart';
 import 'package:notify/features/search/domin/usecases/search_for_user.dart';
 import 'package:notify/features/search/presentation/bloc/search_bloc.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 abstract class SearchBaseController with SearchStrings, SearchIcons {
   final TextEditingController searchController = TextEditingController();

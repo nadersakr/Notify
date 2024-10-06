@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
 import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 
 class GetBiggestChannels extends UseCase<List<Channel>, NoParams> {
   final HomeRepository repository;

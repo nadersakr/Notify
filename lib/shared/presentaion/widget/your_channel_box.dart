@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 
 class ContainerHorizentalBoxWIthBorder extends StatelessWidget {
   const ContainerHorizentalBoxWIthBorder({

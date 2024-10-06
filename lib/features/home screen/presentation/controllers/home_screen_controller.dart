@@ -4,7 +4,7 @@ import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 
 class HomeScreenController extends AppUIController with Sizes, Strings {

@@ -9,10 +9,10 @@ import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/channels_box_vertical.dart';
 import 'package:notify/features/nav%20menu/presentation/bloc/app_bloc.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
 import 'package:notify/shared/presentaion/widget/head_line_upove_channels.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

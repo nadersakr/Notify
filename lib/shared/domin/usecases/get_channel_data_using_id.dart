@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/domin/repositories/get_channel_data_repository.dart';
 
 class GetChannelData extends UseCase<Channel, GetChannelInfoParams> {

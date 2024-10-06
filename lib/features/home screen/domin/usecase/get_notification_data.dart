@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
 import 'package:notify/features/home%20screen/domin/repositories/home_repository.dart';
-import 'package:notify/shared/domin/entities/notification_model.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
 class GetNotificationData extends UseCase<NotificationModel, GetNotificationInfoParams> {
   final HomeRepository repository;
 

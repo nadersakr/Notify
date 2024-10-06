@@ -1,7 +1,7 @@
 // apply singleTon pattern for this class to be used in all the app
-import 'package:notify/shared/domin/entities/channel_model.dart';
-import 'package:notify/shared/domin/entities/notification_model.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 
 class LoadedUserData {
   UserModel? loadedUser;

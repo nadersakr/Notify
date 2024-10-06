@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/shared/data%20layer/data%20source/remote%20data%20source/get%20channel%20data/remote_data_source.dart';
-import 'package:notify/shared/domin/entities/channel_model.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/domin/usecases/get_channel_data_using_id.dart';
 
 class GetChannelDataRemoteDataSourceImpl

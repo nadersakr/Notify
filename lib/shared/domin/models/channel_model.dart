@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:notify/shared/domin/entities/notification_model.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
 
 class Channel {
   final String id;

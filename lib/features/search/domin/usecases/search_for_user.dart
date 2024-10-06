@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/utils/usecases/usecase.dart';
 import 'package:notify/features/search/domin/repositories/search_repository.dart';
-import 'package:notify/shared/domin/entities/user_model.dart';
+import 'package:notify/shared/domin/models/user_model.dart';
 
 class SearchForUser extends UseCase<List<UserModel>, SearchForUserParams> {
   final SearchRepository repository;

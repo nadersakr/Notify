@@ -5,7 +5,7 @@ import 'package:notify/features/auth/presentation/view/signup/signup_page.dart';
 import 'package:notify/features/display%20channel/presentation/view/channel_screen.dart';
 import 'package:notify/features/home%20screen/presentation/view/home_screen.dart';
 import 'package:notify/features/nav%20menu/presentation/view/nav_menu.dart';
-import 'package:notify/shared/domin/entities/loaded_user.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
 
 // Define the router
 final GoRouter router = GoRouter(
