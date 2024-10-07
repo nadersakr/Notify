@@ -12,7 +12,8 @@ class FirebaseServices {
       String? imageUrl,
       required String fullName,
       required String email,
-      required String id}) async {
+      required String id,
+    }) async {
     try {
       // Save User data using UID
       await FirebaseFirestore.instance.collection('users').doc(id).set({
