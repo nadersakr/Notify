@@ -28,7 +28,7 @@ LoadedUserData.notifications.clear();
         GetUserInfo getUserInfo = sl<GetUserInfo>();
         final userDataResult = await getUserInfo.call(event.usereInfoParams);
         userDataResult.fold((l) {
-          emit(AppFailed());
+          emit(AppFailed(errorMessage: l.errorMessage));
           return;
         }, (userData) {
           user = userData;
@@ -39,7 +39,7 @@ LoadedUserData.notifications.clear();
         GetBiggestChannels getBiggestChannels = sl<GetBiggestChannels>();
         final biggestChannelsResult = await getBiggestChannels.call(NoParams());
         biggestChannelsResult.fold((l) {
-          emit(AppFailed());
+          emit(AppFailed(errorMessage: l.errorMessage));
           return;
         }, (biggestChannels) {
           LoadedUserData.biggestChannels = biggestChannels;
@@ -49,7 +49,7 @@ LoadedUserData.notifications.clear();
           final channelResult = await getChannelData
               .call(GetChannelInfoParams(channelId: channelId));
           channelResult.fold((l) {
-            emit(AppFailed());
+          emit(AppFailed(errorMessage: l.errorMessage));
             return;
           }, (channelData) {
             LoadedUserData.joindChannels.add(channelData);
@@ -61,7 +61,7 @@ LoadedUserData.notifications.clear();
           final channelResult = await getChannelData
               .call(GetChannelInfoParams(channelId: channelId));
           channelResult.fold((l) {
-            emit(AppFailed());
+          emit(AppFailed(errorMessage: l.errorMessage));
             return;
           }, (channelData) {
             LoadedUserData.userownedChannels.add(channelData);
@@ -74,7 +74,7 @@ LoadedUserData.notifications.clear();
           final notificationResult = await getNotificationData
               .call(GetNotificationInfoParams(notificationId: notificationId));
           notificationResult.fold((l) {
-            emit(AppFailed());
+          emit(AppFailed(errorMessage: l.errorMessage));
             return;
           }, (notification) {
             LoadedUserData.notifications.add(notification);
@@ -83,7 +83,7 @@ LoadedUserData.notifications.clear();
 
         emit(AppSuccess());
       } catch (e) {
-        emit(AppFailed());
+          emit(AppFailed(errorMessage: e.toString()));
       }
     });
   }

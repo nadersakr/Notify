@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<AppBloc, AppState>(
       listener: (context, state) {
         if (state is AppFailed) {
-          ShowSnackBar.errorSnackBar(context, "Failed to load data");
+          ShowSnackBar.errorSnackBar(context, "Failed to load data ${state.errorMessage}");
         }
       },
       builder: (context, state) {
@@ -81,8 +81,9 @@ class HomeScreen extends StatelessWidget {
                                     style: AppTextStyle.mediumBlack)),
                           ),
                           Skeletonizer(
-                            enabled: state is AppLoading,
+                            enabled: state is AppLoading||state is AppFailed,
                             child: ContainerHorizentalBoxWIthBorder(
+                              
                                 height: controller.yourChannelContainerHeight,
                                 channelList: LoadedUserData.userownedChannels,
                                 letterSpace: controller.letterSpace),
@@ -102,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           Skeletonizer(
-                            enabled: state is AppLoading,
+                            enabled: state is AppLoading||state is AppFailed,
                             child: ContainerChannelVertical(
                               maximumNumberOfChannels: 9,
                                 channelList: LoadedUserData.biggestChannels,

@@ -66,8 +66,7 @@ class FirebaseServices {
         joinedChannels: (response.data()!['joinedChannels']??[]) as List<dynamic>,
       );
     } catch (e) {
-      print("=====================================");
-      print(e);
+
       throw FirebaseAuthFailure(LoginViewModle.errorInLoadingUserData);
     }
   }
