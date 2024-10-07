@@ -1,4 +1,6 @@
 abstract class NotificationService {
+
+  Future<void> initialize();
   // Initialize the notification service (e.g., Firebase, push notification setup)
   Future<void> getAccessToken();
 

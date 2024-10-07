@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/features/channel%20manipulation/domin/usecases/delete_channel.dart';
@@ -212,38 +213,44 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
 
   @override
   Future<void> sendNotification(SendNotificationParams params) async {
-    notificationService.sendFCMTopicMessage(
-      topic: params.channel.id,
-      title: params.channel.title,
-      body: params.notification.message,
-      imageUrl: params.channel.imageUrl,
-    );
+    try {
+      notificationService.sendFCMTopicMessage(
+        topic: params.channel.id,
+        title: params.channel.title,
+        body: params.notification.message,
+        imageUrl: params.channel.imageUrl,
+      );
 
-    // I need to save the notification in the notifications collection
-    await FirebaseFirestore.instance
-        .collection("notifications")
-        .doc(params.notification.id)
-        .set({
-      'message': params.notification.message,
-      'timestamp': FieldValue.serverTimestamp(),
-      'channelId': params.channel.id,
-      'hexColor': params.channel.hexColor,
-      'channelTitle': params.channel.title,
-    });
-    // also and the notification to the channel notifications list
-    await FirebaseFirestore.instance
-        .collection('channels')
-        .doc(params.channel.id)
-        .update({
-      'notifications': FieldValue.arrayUnion([params.notification.id]),
-    });
-
-    // also I need to save the notification in the channel's users notifications list
-    final List<String> users = params.channel.membersId;
-    for (final user in users) {
-      await FirebaseFirestore.instance.collection('users').doc(user).update({
+      // I need to save the notification in the notifications collection
+      await FirebaseFirestore.instance
+          .collection("notifications")
+          .doc(params.notification.id)
+          .set({
+        'message': params.notification.message,
+        'timestamp': FieldValue.serverTimestamp(),
+        'channelId': params.channel.id,
+        'hexColor': params.channel.hexColor,
+        'channelTitle': params.channel.title,
+      });
+      // also and the notification to the channel notifications list
+      await FirebaseFirestore.instance
+          .collection('channels')
+          .doc(params.channel.id)
+          .update({
         'notifications': FieldValue.arrayUnion([params.notification.id]),
       });
+
+      // also I need to save the notification in the channel's users notifications list
+      final List<String> users = params.channel.membersId;
+      for (final user in users) {
+        await FirebaseFirestore.instance.collection('users').doc(user).update({
+          'notifications': FieldValue.arrayUnion([params.notification.id]),
+        });
+      }
+    } on FirebaseException catch (e) {
+      throw FirebaseErrorFailure(e.message.toString());
+    } catch (e) {
+      throw UnknowFailure("Unknown Failure ${e.toString()}");
     }
   }
 

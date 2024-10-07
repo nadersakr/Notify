@@ -51,6 +51,7 @@ class _LoginBodyState extends State<LoginBody> {
                 backgroundColor: Colors.red,
               ),
             );
+            navigateTo(context, AppRouteEnum.loginPage.name);
           }
           if (state is AuthSuccess) {
             // Navigator.pushReplacementNamed(
@@ -58,8 +59,8 @@ class _LoginBodyState extends State<LoginBody> {
             //   AppRouteEnum.navMenu.name,
             //   // arguments: state.user,
             // );
-            navigateTo(context, AppRouteEnum.navMenu.name);
             ShowSnackBar.successSnackBar(context, "Login Successed");
+            navigateTo(context, AppRouteEnum.navMenu.name);
           }
           if (state is AuthLoading) {
            RunLottleFile().showNotiftyLottle(context,"Loging in");

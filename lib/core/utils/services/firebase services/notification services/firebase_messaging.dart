@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 import 'package:googleapis_auth/auth_io.dart' as auth;
 import 'package:http/http.dart' as http;
+import 'package:notify/shared/domin/models/loaded_user.dart';
 
 class FirebaseNotificationService implements NotificationService {
   @override
@@ -145,8 +146,55 @@ class FirebaseNotificationService implements NotificationService {
     await _firebaseMessaging.unsubscribeFromTopic(topic);
     debugPrint('Unsubscribed from topic: $topic');
   }
+  
+  @override
+ Future<void> initialize() async {
+  // Request notification permissions
+  NotificationSettings settings = await _firebaseMessaging.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
 
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    debugPrint('User granted permission');
 
+    // Listen for foreground messages
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      debugPrint('Received a message while in the foreground!');
+      if (message.notification != null) {
+        debugPrint('Message also contained a notification: ${message.notification}');
+      }
+    });
+
+    // Listen for messages opened from a terminated state
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      debugPrint('A new onMessageOpenedApp event was published!');
+      if (message.notification != null) {
+        debugPrint('Message also contained a notification: ${message.notification}');
+      }
+    });
+
+    // Retrieve and store the FCM token
+    String? token = await FirebaseMessaging.instance.getToken();
+    if (token != null) {
+      LoadedUserData.notificationToken = token;
+      debugPrint('User FCM token set: $token');
+    } else {
+      debugPrint('Failed to get FCM token');
+    }
+  } else {
+    debugPrint('User declined or has not accepted permission');
+  }
 }
+
+
+  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    debugPrint('Handling a background message: ${message.messageId}');
+  }
+  }
+
+
+
 // my mobile token 
 // eJzGSfsJT92a-Y35eQKBZ2:APA91bG4SyYbbIOt8S7MkORKo6BrtthmrTLRvMyzOVHbBTTCvQc1GOBHSKDipXDFrM_F2xQ5lUecODkY0lDIoY6gsVzKd1rtkixMCtUOYOKHkxvlk8jK9swEg8zT1Tb-gyWo3Vfp0Zcb
