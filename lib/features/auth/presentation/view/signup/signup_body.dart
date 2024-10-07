@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/core/style/app_text_style.dart';
+import 'package:notify/core/utils/lottle/lottle.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/controllers/signup%20view%20model/signup_view_model.dart';
 import 'package:notify/features/auth/presentation/view/widgets/signin_with_google_widget.dart';
@@ -51,23 +51,16 @@ class _SignupBodyState extends State<SignupBody> {
       create: (_) => sl<AuthBloc>(),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthFailure) {
-            ShowSnackBar.errorSnackBar(context, state.message);
+          if (state is AuthLoading) {
+            RunLottleFile().showNotiftyLottle(context, "Signing Up");
           }
           if (state is AuthSuccess) {
             navigateTo(context, AppRouteEnum.navMenu.name);
             ShowSnackBar.successSnackBar(context, "Login Success");
           }
           if (state is AuthFailure) {
-            Navigator.pushReplacementNamed(
-              context,
-              AppRouteEnum.loginPage.name,
-            );
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Loading"),
-              ),
-            );
+            ShowSnackBar.errorSnackBar(context, state.message);
+            navigateTo(context, AppRouteEnum.loginPage.name);
           }
         },
         builder: (context, state) {

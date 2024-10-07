@@ -60,43 +60,12 @@ class SignupViewModle extends AuthViewModel
   late TextEditingController confirmPasswordController;
   Future<void> signUpWithEmail(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      //  for testing
-      // print("email : ${emailController.text.toLowerCase().trim()}");
-      // print("password : ${passwordController.text}");
-      // print("first name : ${firstNameController.text}");
-      // print("last name : ${lastNameController.text}");
-      // print("username : ${usernameController.text}");
-      // print("confirm password : ${confirmPasswordController.text}");
-      // SharedPreferences sharedPreferncesServices =
-      //     await SharedPreferences.getInstance();
-
-      // SharedPreferencesServices sharedPreferencesServices =
-      //     SharedPreferencesServices(
-      //         sharedPreferences: sharedPreferncesServices);
-      // AuthLocalDataSource authLocalDataSourceImpl = AuthLocalDataSourceImp(
-      //     saveDataLocal: sharedPreferencesServices);
-      // AuthRemoteDataSource authRemoteDataSourceImpl =
-      //     AuthRemoteDataSourceImpl();
-      // NetworkInfo networkInfo = NetworkInfoImpl();
-      // AuthRepository authRepositoryImpl = AuthRepositoryImpl(
-      //     localDataSource: authLocalDataSourceImpl,
-      //     remoteDataSource: authRemoteDataSourceImpl,
-      //     networkInfo: networkInfo);
-     
-
       final params = SignUpParams(
           fullName: fullNameController.text,
-          // userName: usernameController.text,
           email: emailController.text.toLowerCase().trim(),
           password: passwordController.text,
           imageUrl: selectedImage);
       BlocProvider.of<AuthBloc>(context).add(AuthSignUpEvent(params: params));
-      // final result = await Signup(authRepositoryImpl).call(params);
-      // result.fold((l) {
-      //   print(l);
-      // }, (r) {
-      //   print(r);
-      // });
     }
   }
 }
@@ -109,7 +78,6 @@ mixin Icons {
 mixin Sizes {
   double get imageSize => 100.h;
 }
-
 mixin Strings {
   String signupString = "Signup";
   String fullNameString = "Enter your full name";

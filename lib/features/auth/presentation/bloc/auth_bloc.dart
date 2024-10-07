@@ -44,19 +44,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignUpEvent>((event, emit) async {
       emit(AuthLoading());
       if (event.params.imageUrl != null) {
-        compressImage
+        await compressImage
             .call(CompressImageParams(image: File(event.params.imageUrl!)))
-            .then((value) {
-          value.fold((l) {
+            .then((value) async {
+          await value.fold((l) {
             emit(AuthFailure(l.errorMessage));
-          }, (r) {
-            uploadImage.call(UploadImageParams(image: r)).then((value) {
+          }, (r) async {
+            await uploadImage.call(UploadImageParams(image: r)).then((value) {
               value.fold((l) {
                 emit(AuthFailure(l.errorMessage));
               }, (r) {
                 event.params.imageUrl = r;
-                print(r);
-                print("==============================");
               });
             });
           });

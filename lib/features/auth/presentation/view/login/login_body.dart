@@ -59,10 +59,10 @@ class _LoginBodyState extends State<LoginBody> {
             //   // arguments: state.user,
             // );
             navigateTo(context, AppRouteEnum.navMenu.name);
-            ShowSnackBar.successSnackBar(context, "Login Success");
+            ShowSnackBar.successSnackBar(context, "Login Successed");
           }
           if (state is AuthLoading) {
-           RunLottleFile().showNotiftyLottle(context,"Login in progress");
+           RunLottleFile().showNotiftyLottle(context,"Loging in");
           }
         },
         builder: (context, state) {
