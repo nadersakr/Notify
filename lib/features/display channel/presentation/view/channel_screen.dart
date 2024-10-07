@@ -85,7 +85,7 @@ class ChannelScreen extends StatelessWidget {
                   child: SizedBox(
                     width: appUIController.widgetsWidth,
                     child: Skeletonizer(
-                      enabled: state is DisplayChannelLoading,
+                      enabled: state is DisplayChannelLoading || state is DisplayChannelFailed,
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

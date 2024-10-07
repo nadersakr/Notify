@@ -91,12 +91,12 @@ class NoificationScreen extends StatelessWidget {
                               : Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    if (state is AppSuccess)
+                                    if (state is! AppLoading)
                                       Lottie.asset(
-                                        'assets/lottles/no.json', // Your Lottie file path
+                                        'assets/lotties/no_notifications.json', 
                                         height:
-                                            200, // Optional: Width for the widget
-                                        fit: BoxFit.fill, // Optional: fit style
+                                            200, 
+                                        fit: BoxFit.fill, 
                                       ),
                                     Text(
                                       "You didn't receive any notification",

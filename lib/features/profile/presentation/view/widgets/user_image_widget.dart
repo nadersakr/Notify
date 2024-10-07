@@ -31,6 +31,7 @@ class ImageCircle extends StatelessWidget {
       height: size ?? 80.h,
       decoration: BoxDecoration(
         border: Border.all(
+            
             width: appUIController.borderWidth, color: AppColors.primaryColor),
         shape: BoxShape.circle,
       ),

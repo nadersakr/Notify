@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/routers/naigator_function.dart';
 import 'package:notify/core/utils/validators/base_validator.dart';
@@ -12,6 +15,7 @@ import 'package:notify/core/utils/validators/required_validator.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/controllers/auth_view_model.dart';
+import 'package:notify/shared/domin/usecases/compress_image_usecase.dart';
 
 class SignupViewModle extends AuthViewModel
     with Icons, Strings, Sizes, Validators {
@@ -56,8 +60,7 @@ class SignupViewModle extends AuthViewModel
   late TextEditingController confirmPasswordController;
   Future<void> signUpWithEmail(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-     
-    //  for testing
+      //  for testing
       // print("email : ${emailController.text.toLowerCase().trim()}");
       // print("password : ${passwordController.text}");
       // print("first name : ${firstNameController.text}");
@@ -79,14 +82,14 @@ class SignupViewModle extends AuthViewModel
       //     localDataSource: authLocalDataSourceImpl,
       //     remoteDataSource: authRemoteDataSourceImpl,
       //     networkInfo: networkInfo);
+     
 
       final params = SignUpParams(
-        fullName: fullNameController.text,
-        // userName: usernameController.text,
-        email: emailController.text.toLowerCase().trim(),
-        password: passwordController.text,
-        imageUrl: selectedImage
-      );
+          fullName: fullNameController.text,
+          // userName: usernameController.text,
+          email: emailController.text.toLowerCase().trim(),
+          password: passwordController.text,
+          imageUrl: selectedImage);
       BlocProvider.of<AuthBloc>(context).add(AuthSignUpEvent(params: params));
       // final result = await Signup(authRepositoryImpl).call(params);
       // result.fold((l) {
@@ -104,7 +107,7 @@ mixin Icons {
   IconData lastNameIcon = Iconsax.user;
 }
 mixin Sizes {
- double get imageSize => 100.h;
+  double get imageSize => 100.h;
 }
 
 mixin Strings {

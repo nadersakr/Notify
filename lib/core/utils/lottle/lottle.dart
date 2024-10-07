@@ -17,7 +17,7 @@ class RunLottleFile {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Lottie.asset(
-                    'assets/lottles/notify.json', // Your Lottie file path
+                    'assets/lotties/notify.json', // Your Lottie file path
                     width: 200, // Optional: set width
                     height: 200, // Optional: set height
                     fit: BoxFit.fill, // Optional: fit style

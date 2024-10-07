@@ -12,6 +12,8 @@ import 'package:notify/features/auth/domin/usecases/login.dart';
 import 'package:notify/features/auth/domin/usecases/signin_with_google.dart';
 import 'package:notify/features/auth/domin/usecases/signup.dart';
 import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:notify/shared/domin/usecases/compress_image_usecase.dart';
+import 'package:notify/shared/domin/usecases/upload_image_usecase.dart';
 
 authinjections() async {
 // for the local data source
@@ -42,6 +44,8 @@ authinjections() async {
   sl.registerFactory<LogOut>(() => LogOut(sl<AuthRepository>()));
 // for the bloc
   sl.registerFactory<AuthBloc>(() => AuthBloc(
+        compressImage: sl<CompressImage>(),
+        uploadImage: sl<UploadImage>(),
         login: sl<Login>(),
         signup: sl<Signup>(),
         signinWithGooogle: sl<SigninWithGoogle>(),

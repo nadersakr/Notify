@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notify/core/utils/constant/app_strings.dart';
+import 'package:notify/features/profile/presentation/view/widgets/user_image_widget.dart';
 import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 
@@ -21,15 +20,9 @@ Widget buildMemberItem(UserModel member) {
                                       color: AppColors.primaryColor),
                                   shape: BoxShape.circle,
                                 ),
-                                child: ClipOval(
-                                  child: member.imageUrl.isNotEmpty
-                                      ? Image.network(member.imageUrl)
-                                      : const Icon(
-                                          Iconsax.user,
-                                          size: 50,
-                                          color: AppColors.primaryColor,
-                                        ),
-                                ),
+                                child: ImageCircle(
+                                  imagePath: member.imageUrl,
+                                )
                               ),
         const SizedBox(height: 4),
         Text(

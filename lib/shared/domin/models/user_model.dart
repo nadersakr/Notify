@@ -5,7 +5,7 @@ class UserModel {
   final String fullName;
   // final String username;
   final String email;
-  final String imageUrl;
+  final String? imageUrl;
   final List<dynamic> joinedChannelsId;
   final List<dynamic> ownedChannels;
   final List<dynamic> notifiactions;
@@ -16,7 +16,7 @@ class UserModel {
       this.joinedChannelsId = const [],
       this.ownedChannels = const [],
       this.notifiactions = const [],
-      this.imageUrl="",
+      this.imageUrl,
       required this.id,
       required this.email});
 
@@ -62,7 +62,7 @@ class UserModel {
       fullName: data['fullName'] ?? '',
       email: data['email'] ?? '',
       joinedChannelsId: data['joinedChannels'] ?? [],
-      imageUrl: data['imageUrl'] ?? "",
+      imageUrl: data['imageUrl'],
       ownedChannels: data['ownedChannels'] ?? [],
       notifiactions: data['notifications'] ?? [],
     );

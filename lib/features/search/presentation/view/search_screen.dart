@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/routers/naigator_function.dart';
@@ -87,8 +88,13 @@ class SearchScreenState extends State<SearchScreen> {
                         ),
                         const SizedBox(height: 16),
                         if (_controller.isLoading)
-                          const Expanded(
-                              child: Center(child: CircularProgressIndicator()))
+                          Expanded(
+                              child: Center(child: Lottie.asset(
+                                        'assets/lotties/searching.json', 
+                                        height:
+                                            200, 
+                                        fit: BoxFit.fill, 
+                                      )))
                         else
                           Expanded(
                             child: ListView.builder(
