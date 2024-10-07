@@ -53,7 +53,7 @@ class FirebaseServices {
   //   }
   // }
 
-  static Future<({String fullName, List<String> joinedChannels})> getUserData(
+  static Future<({String fullName, List<dynamic> joinedChannels})> getUserData(
       String uid) async {
     try {
       final response =
@@ -62,9 +62,11 @@ class FirebaseServices {
 
       return (
         fullName: "${response.data()!['fullName']}",
-        joinedChannels: response.data()!['joinedChannels'] as List<String>,
+        joinedChannels: (response.data()!['joinedChannels']??[]) as List<dynamic>,
       );
     } catch (e) {
+      print("=====================================");
+      print(e);
       throw FirebaseAuthFailure(LoginViewModle.errorInLoadingUserData);
     }
   }

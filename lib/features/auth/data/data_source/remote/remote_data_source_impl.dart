@@ -25,12 +25,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw FirebaseAuthFailure(SignupViewModle.userNotFound);
       }
 
-      ({String fullName, List<String> joinedChannels}) user =
+      ({String fullName, List<dynamic> joinedChannels}) user =
           await FirebaseServices.getUserData(response.user!.uid);
       await FirebaseServices.updateNotificationToken(response.user!.uid);
       // subsvribe to all the channels for the user
       for (var channelId in user.joinedChannels) {
-        await sl<NotificationService>().subscribeToTopic(channelId);
+        await sl<NotificationService>().subscribeToTopic(channelId as String);
       }
       return UserModel(
         email: params.email,
