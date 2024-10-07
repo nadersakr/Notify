@@ -9,12 +9,13 @@ import 'package:notify/core/utils/constant/bloc_observer.dart';
 import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
 import 'package:notify/shared/domin/models/loaded_user.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await initInjections();
   await sl<NotificationService>().initialize();
+  await dotenv.load(fileName: ".env");
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }

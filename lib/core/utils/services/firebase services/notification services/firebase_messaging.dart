@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 import 'package:googleapis_auth/auth_io.dart' as auth;
 import 'package:http/http.dart' as http;
@@ -11,22 +12,17 @@ class FirebaseNotificationService implements NotificationService {
   Future<String> getAccessToken() async {
     // Your client ID and client secret obtained from Google Cloud Console
     final serviceAccountJson = {
-      "type": "service_account",
-      "project_id": "notify-afb86",
-      "private_key_id": "8c5bcd8808910496c938ec1901fbfd947733953a",
-      "private_key":
-          "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCWBHxNB3iwjvV4\nO9DLK7FFBLaFfeSqVKiBmdip6IctMZz2mB27Jb0W0KgdD0aMSwbs5SBrvySdVDbt\npyDHAo+6UhncHiBWxg3ozZhcjTiwAsIqEQI4jOx9C8Okd2k9/US2J+Y7520R/EBx\nfZ/iBMnRw9H5b867fsH/JesKLrSbd2UsuY7T/4rb83kOkG217ewLLsWd98JPdoid\nhH1+adbty+1nMiOV1xl/Ge4M9erlEvcokDyFQeYhs5fb69aVMPNwcQ94MRtDGu4d\nhPIAX1r49EwVTiVhD+csA28lyl8Y5WGEpCnC+hVcj4Y/JFWgkkG3UV50LmMbMCgS\n8deGWKSDAgMBAAECggEACt59VD/P1NiVKWZwD/n07vK5KxfX4Vo4sT2NaKLbzgCN\nUxwdv1Yr8PZVaXGWlqPGKmDGRhHQ9c/8Gm2xXsN6C8sjnrXVRjEB7fwDZ37ZFhhe\nqzL7R0/SjJOb7Ua0XdTqGkAiASh/cXFACNj/JGspy8rVY+F5bk7WgGvlySGUKiIf\nS9PDo/qhIaSWoUC7saiJVr3SaQu6WlCU37djwibB96BLCM0HWfvnT5KePjptORUX\nO5fNiZQqtt45ep+sdksmFtJtJdAkPUB38nCsVEV1iF6rX6PkCUOltLysW7r1LAZD\n5VIJzXe64V0R/wVy5LiUrgO2LINZrK70n/miH1djiQKBgQDLq5wQ2SyOQ2sSWdbX\nrh0ecg8IDbjJ1hDyvsiXzaObiku0JbDbUi20AWJCAeW0jL611eqBYyJrALn6SyB9\n9D8/3+OZ9JZ9VbBRUuuLNhaZ+YXV+//4+SgkguHhz9OiVvTP92yqfunzrIr5ktjf\nbNdyjaDM1e/0y0ctdh1S3lv62QKBgQC8j95DcsjViV8B6VSzGJYuuxjq5WgRwI+9\nzeYJrQmIKGGBbO9L4vrnahX3gnPDBFzXxVTWNFtBfinSqFSRp8OA4FKsPXZfgY+e\nfp9a9CIFl06k8bk+G7hkpA2wvxAetEPeuvdlwkIBP3KrzE0VcFSaty1BpWhh0CSa\nHvsaxpqouwKBgEi4dXjukiIZoFllCnjoCi2cvBE8FQa8EEEcLbNGEWyv7GfeLU+h\n//+Nnu/CjanxtwZl4t1f8CIUmFLuECPo2cyMvE90LWeC+PmQidmi7l774PWOjM7w\n54xhzxU5h28nbTH0PjCCMDZ5HQYPkK/1xNd6CjgZCxx0mG17Bu1Xx6/BAoGAM/EZ\nk9DZu+DEeB1TRKaAME0/tu0Mtt8peWpvdLjiyEv/WAyu+mODJB4YAP9BbjYUcSed\nkAgKH0dms+3Epf7lnumsPGAN7I8fBdTxhrd7a7jbZBpmIdK2/5olX0uyYBLeI0uz\nfKd/USKuLt7vWPmBhMDyyYOL9m3Et2PTXfPZhKMCgYBfjGxZTlWeS/iPrP2o20zs\nDfgEOgJdfAj1DCsgZGe4LMBIl2WzQhI1isZgYKbbuaOJZBRvgZQ/48jmk5FjrhzO\nU/XZzlKvyFg3QuMSIEji+u0970TKBadjXnJu4p5Rb9WoGqWv/kI0T+Tw1TiFfLld\nChh2/1ke0xQFAtxwDErqYA==\n-----END PRIVATE KEY-----\n",
-      "client_email":
-          "firebase-adminsdk-5x9th@notify-afb86.iam.gserviceaccount.com",
-      "client_id": "115576278452177368843",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "token_uri": "https://oauth2.googleapis.com/token",
-      "auth_provider_x509_cert_url":
-          "https://www.googleapis.com/oauth2/v1/certs",
-      "client_x509_cert_url":
-          "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-5x9th%40notify-afb86.iam.gserviceaccount.com",
-      "universe_domain": "googleapis.com"
-    };
+  "type": dotenv.env['TYPE'],
+  "project_id": dotenv.env['PROJECT_ID'],
+  "private_key_id": dotenv.env['PRIVATE_KEY_ID'],
+  "private_key": dotenv.env['PRIVATE_KEY']?.replaceAll(r'\n', '\n'),
+  "client_email": dotenv.env['CLIENT_EMAIL'],
+  "client_id": dotenv.env['CLIENT_ID'],
+  "auth_uri": dotenv.env['AUTH_URI'],
+  "token_uri": dotenv.env['TOKEN_URI'],
+  "auth_provider_x509_cert_url": dotenv.env['AUTH_PROVIDER_CERT_URL'],
+  "client_x509_cert_url": dotenv.env['CLIENT_CERT_URL'],
+};
 
     List<String> scopes = [
       "https://www.googleapis.com/auth/userinfo.email",
@@ -38,14 +34,12 @@ class FirebaseNotificationService implements NotificationService {
       auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
       scopes,
     );
-
     // Obtain the access token
     auth.AccessCredentials credentials =
         await auth.obtainAccessCredentialsViaServiceAccount(
             auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
             scopes,
             client);
-
     // Close the HTTP client
     client.close();
 
@@ -100,7 +94,9 @@ class FirebaseNotificationService implements NotificationService {
     String? imageUrl,
     Map<String, dynamic>? data,
   }) async {
+    print("====-----------------1");
     final String serverKey = await getAccessToken(); // Your FCM server key
+    print("====-----------------2");
     const String fcmEndpoint =
         'https://fcm.googleapis.com/v1/projects/notify-afb86/messages:send';
 
@@ -146,7 +142,7 @@ class FirebaseNotificationService implements NotificationService {
     await _firebaseMessaging.unsubscribeFromTopic(topic);
     debugPrint('Unsubscribed from topic: $topic');
   }
-  
+
   @override
  Future<void> initialize() async {
   // Request notification permissions
@@ -188,13 +184,10 @@ class FirebaseNotificationService implements NotificationService {
   }
 }
 
-
   Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     debugPrint('Handling a background message: ${message.messageId}');
   }
-  }
+}
+  
 
 
-
-// my mobile token 
-// eJzGSfsJT92a-Y35eQKBZ2:APA91bG4SyYbbIOt8S7MkORKo6BrtthmrTLRvMyzOVHbBTTCvQc1GOBHSKDipXDFrM_F2xQ5lUecODkY0lDIoY6gsVzKd1rtkixMCtUOYOKHkxvlk8jK9swEg8zT1Tb-gyWo3Vfp0Zcb

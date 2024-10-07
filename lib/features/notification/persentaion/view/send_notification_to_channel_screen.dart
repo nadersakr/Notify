@@ -43,7 +43,8 @@ class SendNotificationScreenState extends State<SendNotificationScreen> {
           }
           if (state is SendNotificationFailed) {
             Navigator.pop(context);
-            ShowSnackBar.errorSnackBar(context, "Failed to send notification");
+            ShowSnackBar.errorSnackBar(context, state.errorMessage);
+            print(state.errorMessage);
           }
         },
         child: BlocBuilder<SendNotificationBloc, SendNotificationState>(

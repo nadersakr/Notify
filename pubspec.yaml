@@ -73,6 +73,7 @@ dependencies:
   go_router: 
   googleapis: ^13.2.0
   googleapis_auth: ^1.6.0
+  flutter_dotenv: ^5.1.0
   
   
 dev_dependencies:
@@ -98,6 +99,7 @@ flutter:
     - assets/notify.png
     - assets/google_icon.png
     - assets/lotties/
+    - .env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

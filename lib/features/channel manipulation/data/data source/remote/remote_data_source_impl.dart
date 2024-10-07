@@ -214,7 +214,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
   @override
   Future<void> sendNotification(SendNotificationParams params) async {
     try {
-      notificationService.sendFCMTopicMessage(
+      await notificationService.sendFCMTopicMessage(
         topic: params.channel.id,
         title: params.channel.title,
         body: params.notification.message,
@@ -248,7 +248,7 @@ class ChannelRemoteDataSourceImpl extends ChannelRemoteDataSource {
         });
       }
     } on FirebaseException catch (e) {
-      throw FirebaseErrorFailure(e.message.toString());
+      throw FirebaseErrorFailure("Firebase Error: ${e.message.toString()}");
     } catch (e) {
       throw UnknowFailure("Unknown Failure ${e.toString()}");
     }
