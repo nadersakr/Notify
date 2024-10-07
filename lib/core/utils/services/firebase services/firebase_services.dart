@@ -10,11 +10,9 @@ class FirebaseServices {
       {
       // String username,
       String? imageUrl,
-     required String fullName,
-    required  String email,
-     required String id
-      
-      }) async {
+      required String fullName,
+      required String email,
+      required String id}) async {
     try {
       // Save User data using UID
       await FirebaseFirestore.instance.collection('users').doc(id).set({
@@ -55,13 +53,17 @@ class FirebaseServices {
   //   }
   // }
 
-  static Future<({String fullName})> getUserData(String uid) async {
+  static Future<({String fullName, List<String> joinedChannels})> getUserData(
+      String uid) async {
     try {
       final response =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
       // print(response.data()!['firstName']);
 
-      return (fullName: "${response.data()!['fullName']}",);
+      return (
+        fullName: "${response.data()!['fullName']}",
+        joinedChannels: response.data()!['joinedChannels'] as List<String>,
+      );
     } catch (e) {
       throw FirebaseAuthFailure(LoginViewModle.errorInLoadingUserData);
     }

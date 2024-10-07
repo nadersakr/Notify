@@ -5,7 +5,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
 import 'package:notify/core/routers/naigator_function.dart';
-import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/channels_box_vertical.dart';
 import 'package:notify/features/nav%20menu/presentation/bloc/app_bloc.dart';

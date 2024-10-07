@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/network/error/exceptions.dart';
 import 'package:notify/core/network/error/failures.dart';
+import 'package:notify/core/utils/services/firebase%20services/notification%20services/notification_base_class.dart';
 import 'package:notify/features/auth/data/data_source/remote/remote_data_source.dart';
 import 'package:notify/features/auth/presentation/controllers/login%20view%20model/login_view_modle.dart';
 import 'package:notify/shared/domin/models/user_model.dart';
@@ -23,14 +25,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw FirebaseAuthFailure(SignupViewModle.userNotFound);
       }
 
-      var user = await FirebaseServices.getUserData(response.user!.uid);
+      ({String fullName, List<String> joinedChannels}) user =
+          await FirebaseServices.getUserData(response.user!.uid);
       await FirebaseServices.updateNotificationToken(response.user!.uid);
-
+      // subsvribe to all the channels for the user
+      for (var channelId in user.joinedChannels) {
+        await sl<NotificationService>().subscribeToTopic(channelId);
+      }
       return UserModel(
         email: params.email,
         id: response.user!.uid,
         fullName: user.fullName,
-        joinedChannelsId: [],
+        joinedChannelsId: user.joinedChannels,
         // username: user.username,
       );
     } on FirebaseAuthException catch (e) {
