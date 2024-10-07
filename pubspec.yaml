@@ -97,7 +97,7 @@ flutter:
   assets:
     - assets/notify.png
     - assets/google_icon.png
-    - assets/lottles/notify.json
+    - assets/lottles/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -9,6 +9,7 @@ import 'package:notify/core/style/app_colors.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/channels_box_vertical.dart';
 import 'package:notify/features/nav%20menu/presentation/bloc/app_bloc.dart';
+import 'package:notify/features/profile/presentation/view/widgets/user_image_widget.dart';
 import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/domin/models/loaded_user.dart';
 import 'package:notify/shared/presentaion/widget/head_line_upove_channels.dart';
@@ -50,25 +51,7 @@ class MyProfileScreen extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              Container(
-                                width: 80.h,
-                                height: 80.h,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: appUIController.borderWidth,
-                                      color: AppColors.primaryColor),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: ClipOval(
-                                  child: user.imageUrl.isNotEmpty
-                                      ? Image.network(user.imageUrl)
-                                      : const Icon(
-                                          Iconsax.user,
-                                          size: 50,
-                                          color: AppColors.primaryColor,
-                                        ),
-                                ),
-                              ),
+                              ImageCircle( imagePath: user.imageUrl),
                               SizedBox(
                                   height:
                                       0.5 * appUIController.smallPaddingSpace),
@@ -112,3 +95,5 @@ class MyProfileScreen extends StatelessWidget {
     );
   }
 }
+
+

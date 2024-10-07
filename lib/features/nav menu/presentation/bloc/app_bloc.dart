@@ -23,7 +23,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         LoadedUserData.biggestChannels.clear();
         LoadedUserData.joindChannels.clear();
         LoadedUserData.userownedChannels.clear();
-
+LoadedUserData.notifications.clear();
         // Load user profile data
         GetUserInfo getUserInfo = sl<GetUserInfo>();
         final userDataResult = await getUserInfo.call(event.usereInfoParams);

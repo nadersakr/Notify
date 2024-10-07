@@ -56,7 +56,7 @@ class ChannelController {
       BaseValidator.validateValue(
         context,
         (value ?? "").trim(),
-        [RequiredValidator(), LognerThanChars(2), LessThanChars(20)],
+        [RequiredValidator(), LognerThanChars(2), LessThanChars(30)],
         true,
       );
 
@@ -120,6 +120,4 @@ class ChannelController {
       });
     }
   }
-
-
 }

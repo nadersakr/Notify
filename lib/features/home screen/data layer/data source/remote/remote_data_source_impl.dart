@@ -11,7 +11,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     final querySnapshot = await FirebaseFirestore.instance
         .collection('channels')
         .orderBy('membersCount', descending: true)
-        .limit(4)
+        .limit(9)
         .get();
     return querySnapshot.docs.map((doc) => Channel.fromFirebase(doc)).toList();
   }

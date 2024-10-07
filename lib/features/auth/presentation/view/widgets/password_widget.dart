@@ -26,9 +26,9 @@ class _PasswordWidgetState extends State<PasswordWidget> {
       // key: widget.key,
       textController: widget.textController,
       validator: widget.validator,
-      // obscureText: widget.isConfirmPassword
-      //     ? widget.controller.isConfirmedPasswordVisible
-      //     : widget.controller.isPasswordVisible,
+      obscureText: widget.isConfirmPassword
+          ? widget.controller.isConfirmedPasswordVisible
+          : widget.controller.isPasswordVisible,
       onIconPressed: () {
         setState(() {
           widget.controller.showPassword(widget.isConfirmPassword);

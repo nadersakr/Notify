@@ -7,15 +7,20 @@ import 'package:notify/shared/domin/models/loaded_user.dart';
 
 class FirebaseServices {
   static Future<void> saveUserData(
+      {
       // String username,
-      String fullName,
-      String email,
-      String id) async {
+      String? imageUrl,
+     required String fullName,
+    required  String email,
+     required String id
+      
+      }) async {
     try {
       // Save User data using UID
       await FirebaseFirestore.instance.collection('users').doc(id).set({
         'fullName': fullName,
         'email': email,
+        'imageUrl': imageUrl,
         "notificationToken": LoadedUserData.notificationToken
         // 'username': username,
       });
@@ -65,9 +70,10 @@ class FirebaseServices {
   static Future<void> updateNotificationToken(String userUid) async {
     try {
       // Save User data using UID
-      await FirebaseFirestore.instance.collection('users').doc(userUid).update({
-        "notificationToken": LoadedUserData.notificationToken
-      });
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userUid)
+          .update({"notificationToken": LoadedUserData.notificationToken});
     } catch (e) {
       throw const FirebaseErrorFailure("Error in Updating Notification Token");
     }

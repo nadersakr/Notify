@@ -63,10 +63,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       await FirebaseServices.saveUserData(
           // params.userName,
-
-          params.fullName,
-          params.email,
-          response.user!.uid);
+          imageUrl: params.imageUrl,
+          fullName: params.fullName,
+          email: params.email,
+          id: response.user!.uid);
 
       await FirebaseServices.updateNotificationToken(response.user!.uid);
       return UserModel(
@@ -116,9 +116,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       // Perform additional operations with the user data
       await FirebaseServices.saveUserData(
           // params.userName,
-          user.displayName!,
-          user.email!,
-          user.uid);
+          imageUrl: user.photoURL,
+          fullName: user.displayName!,
+          email: user.email!,
+          id: user.uid);
       await FirebaseServices.updateNotificationToken(user.uid);
 
       return UserModel(

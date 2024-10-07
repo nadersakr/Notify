@@ -4,6 +4,7 @@ import 'package:notify/core/network/error/failures.dart';
 import 'package:notify/core/network/network_info.dart';
 import 'package:notify/features/auth/data/data_source/local/local_data_sourece.dart';
 import 'package:notify/features/auth/data/data_source/remote/remote_data_source.dart';
+import 'package:notify/shared/domin/models/loaded_user.dart';
 import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/features/auth/domin/repository/auth_repository.dart';
 import 'package:notify/features/auth/domin/usecases/login.dart';
@@ -82,6 +83,11 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await FirebaseAuth.instance.signOut();
       localDataSource.clearUser();
+      LoadedUserData.biggestChannels.clear();
+      LoadedUserData.joindChannels.clear();
+      LoadedUserData.userownedChannels.clear();
+      LoadedUserData.notifications.clear();
+      LoadedUserData().loadedUser = null;
       return const Right(null);
     } on CacheFailure catch (e) {
       return Left(CacheFailure(e.errorMessage));

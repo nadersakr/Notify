@@ -24,9 +24,12 @@ class SignUpParams {
  final  String email;
  final String password;
  final String fullName;
+ final String? imageUrl;
 
   // final String userName;
   const SignUpParams({required this.fullName
   // ,required this.userName
-  , required this.email,required this.password});
+  , required this.email
+  , this.imageUrl,
+  required this.password});
 }

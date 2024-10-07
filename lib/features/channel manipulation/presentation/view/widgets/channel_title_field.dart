@@ -9,7 +9,7 @@ class ChannelTitleField extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = ChannelController();
     return CustomTextFormField(
-      maxLenght: 19,
+      maxLenght: 29,
       labelText: "Title",
       textController: ChannelController.titleController,
       validator: (String? value) => controller.titleValidator(value, context),

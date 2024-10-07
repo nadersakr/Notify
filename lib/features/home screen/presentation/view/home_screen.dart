@@ -104,6 +104,7 @@ class HomeScreen extends StatelessWidget {
                           Skeletonizer(
                             enabled: state is AppLoading,
                             child: ContainerChannelVertical(
+                              maximumNumberOfChannels: 9,
                                 channelList: LoadedUserData.biggestChannels,
                                 height: controller.yourChannelContainerHeight,
                                 letterSpace: controller.letterSpace,

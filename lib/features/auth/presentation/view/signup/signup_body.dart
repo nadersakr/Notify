@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:notify/core/app_injection.dart';
 import 'package:notify/core/helper/snackbar.dart';
 import 'package:notify/core/routers/app_routers_enum.dart';
@@ -9,6 +11,7 @@ import 'package:notify/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:notify/features/auth/presentation/controllers/signup%20view%20model/signup_view_model.dart';
 import 'package:notify/features/auth/presentation/view/widgets/signin_with_google_widget.dart';
 import 'package:notify/features/auth/presentation/view/widgets/string_line_for_navigator_auth.dart';
+import 'package:notify/features/profile/presentation/view/widgets/user_image_widget.dart';
 import 'package:notify/shared/presentaion/widget/custom_button.dart';
 import 'package:notify/shared/presentaion/widget/custom_text_form_field.dart';
 import 'package:notify/features/auth/presentation/view/widgets/password_widget.dart';
@@ -52,18 +55,14 @@ class _SignupBodyState extends State<SignupBody> {
             ShowSnackBar.errorSnackBar(context, state.message);
           }
           if (state is AuthSuccess) {
-            // Navigator.pushReplacementNamed(
-            //   context,
-            //   AppRouteEnum.navMenu.name,
-            // );
             navigateTo(context, AppRouteEnum.navMenu.name);
             ShowSnackBar.successSnackBar(context, "Login Success");
           }
           if (state is AuthFailure) {
-            // Navigator.pushReplacementNamed(
-            //   context,
-            //   AppRouteEnum.homePage.name,
-            // );
+            Navigator.pushReplacementNamed(
+              context,
+              AppRouteEnum.loginPage.name,
+            );
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text("Loading"),
@@ -93,6 +92,39 @@ class _SignupBodyState extends State<SignupBody> {
                 controller.headLine,
                 style: AppTextStyle.largeBlack,
                 textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(
+              height: controller.smallPaddingSpace,
+            ),
+            GestureDetector(
+              onTap: () async {
+                await controller.pickImage(context);
+                setState(() {});
+              },
+              child: ImageCircle(
+                imagePath: controller.selectedImage,
+                size: controller.imageSize,
+              ),
+            ),
+            SizedBox(
+              height: controller.smallPaddingSpace,
+            ),
+            SizedBox(
+              width: controller.widgetsWidth,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    controller.pickImageString,
+                    style: AppTextStyle.largeBlack,
+                    textAlign: TextAlign.center,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Icon(Iconsax.camera, color: Colors.black),
+                  ),
+                ],
               ),
             ),
             SizedBox(
