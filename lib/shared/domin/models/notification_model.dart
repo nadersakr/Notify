@@ -38,6 +38,9 @@ class NotificationModel {
       channelId: data['channelId'] ?? "",
       hexColor: data['hexColor'] ?? "",
       channelTitle: data['channelTitle'] ?? "Channel Title",
+      timestamp: data['timestamp'] != null
+          ? (data['timestamp'] as Timestamp).toDate()
+          : DateTime.now(),
     );
   }
 }

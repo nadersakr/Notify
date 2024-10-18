@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:notify/shared/domin/models/notification_model.dart';
 
 class Channel {
   final String id;
@@ -12,7 +11,7 @@ class Channel {
   final String hexColor;
   final int membersCount;
   final bool? isPrivate;
-  final List<NotificationModel> notifications;
+  final List<dynamic> notifications;
 
   const Channel(
       {required this.id,
@@ -29,6 +28,7 @@ class Channel {
 
   factory Channel.fromFirebase(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
+   
     return Channel(
       id: data['id'] != null ? "${data['id']}" : '',
       creatorId: data['ownerId'] ?? '',
@@ -40,7 +40,7 @@ class Channel {
       membersCount: data['membersCount'] ?? 0,
       supervisorsId: List<String>.from(data['supervisorsId'] ?? []),
       membersId: List<String>.from(data['membersId'] ?? []),
-      notifications: [], // You might want to fetch or pass notifications differently
+      notifications: data['notifications']??[], // You might want to fetch or pass notifications differently
     );
   }
 }

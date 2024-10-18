@@ -73,7 +73,7 @@ final List<Channel> channelList = [
     hexColor: '00CED1',
   ),
 ];
-Channel fakeChannel = Channel(
+Channel fakeChannel = const Channel(
   //fake channel to load while waiting for the real data
   membersCount: 5,
   membersId: ['u1', 'u2', 'u3'],
@@ -86,32 +86,7 @@ Channel fakeChannel = Channel(
   imageUrl:
       'https://firebasestorage.googleapis.com/v0/b/notify-afb86.appspot.com/o/uploads%2Fcompressed_1726716621961.jpg?alt=media&token=04dd8042-369f-4719-8598-fccbde8d466a',
   hexColor: 'FFFFBB01',
-  notifications: [
-    NotificationModel(
-        id: 'n1',
-        message: 'New tutorial on state management available!',
-        timestamp: DateTime.now().subtract(const Duration(minutes: 10))),
-    NotificationModel(
-        id: 'n2',
-        message: 'Join our upcoming Flutter meetup!',
-        timestamp: DateTime.now().subtract(const Duration(hours: 1))),
-    NotificationModel(
-        id: 'n3',
-        message: 'Weekly coding challenge starts now!',
-        timestamp: DateTime.now().subtract(const Duration(days: 1))),
-    NotificationModel(
-        id: 'n1',
-        message: 'New tutorial on state management available!',
-        timestamp: DateTime.now().subtract(const Duration(minutes: 10))),
-    NotificationModel(
-        id: 'n2',
-        message: 'Join our upcoming Flutter meetup!',
-        timestamp: DateTime.now().subtract(const Duration(hours: 1))),
-    NotificationModel(
-        id: 'n3',
-        message: 'Weekly coding challenge starts now!',
-        timestamp: DateTime.now().subtract(const Duration(days: 1))),
-  ],
+  notifications: [""],
 );
 
 List<UserModel> fakeMembers = [
@@ -119,22 +94,58 @@ List<UserModel> fakeMembers = [
       id: 'u1',
       fullName: 'Alice Johnson',
       email: 'alice@example.com',
-      imageUrl: 'https://via.placeholder.com/150'),
+      imageUrl:
+          'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg'),
   UserModel(
       id: 'u2',
       fullName: 'Bob Smith',
       email: 'bob@example.com',
-      imageUrl: 'https://via.placeholder.com/150'),
+      imageUrl:
+          'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg'),
   UserModel(
       id: 'u1',
       fullName: 'Alice Johnson',
       email: 'alice@example.com',
-      imageUrl: 'https://via.placeholder.com/150'),
+      imageUrl:
+          'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg'),
   UserModel(
       id: 'u2',
       fullName: 'Bob Smith',
       email: 'bob@example.com',
-      imageUrl: 'https://via.placeholder.com/150'),
+      imageUrl:
+          'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg'),
+];
+List<NotificationModel> fakeNotifications = [
+  NotificationModel(
+    id: '1',
+    channelId: '2',
+    message: 'New post: "Getting Started with Flutter"',
+    timestamp: DateTime.now(),
+  ),
+  NotificationModel(
+    id: '2',
+    channelId: '2',
+    message: 'New post: "State Management in Flutter"',
+    timestamp: DateTime.now(),
+  ),
+  NotificationModel(
+    id: '3',
+    channelId: '2',
+    message: 'New post: "Flutter Widgets"',
+    timestamp: DateTime.now(),
+  ),
+  NotificationModel(
+    id: '4',
+    channelId: '2',
+    message: 'New post: "Flutter Animations"',
+    timestamp: DateTime.now(),
+  ),
+  NotificationModel(
+    id: '5',
+    channelId: '2',
+    message: 'New post: "Flutter Packages"',
+    timestamp: DateTime.now(),
+  ),
 ];
 // List<String> titles = [
 //   "Sports",

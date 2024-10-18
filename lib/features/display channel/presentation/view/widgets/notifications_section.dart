@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:notify/core/style/app_text_style.dart';
 import 'package:notify/features/display%20channel/presentation/view/widgets/channel_notifaction_item.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
 import 'package:notify/shared/presentaion/widget/head_line_upove_channels.dart';
 import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 import 'package:notify/shared/presentaion/widget/border_container.dart';
 
-Widget buildNotificationsSection(Channel channel) {
+Widget buildNotificationsSection(List<NotificationModel> notifications, Channel channel) {
     return Column(
       children: [
         TextLineUpoveChannels(
           headLineText: "Notifications",
-          actionWidget: channel.notifications.length > 3
+          actionWidget: notifications.length > 3
               ? TextButton(
                   onPressed: () {},
                   child: Text("View All", style: AppTextStyle.mediumBlack),
@@ -23,14 +24,14 @@ Widget buildNotificationsSection(Channel channel) {
           child: Container(
             margin: const EdgeInsets.all(5),
             padding: const EdgeInsets.all(10),
-            child:channel.notifications.isNotEmpty? Column(
+            child:notifications.isNotEmpty? Column(
               children: List.generate(
-                channel.notifications.length > 3
+                notifications.length > 3
                     ? 3
-                    : channel.notifications.length,
+                    : notifications.length,
                 (index) {
-                  final notification = channel.notifications[index];
-                  return buildNotificationItem(notification, index, channel);
+                  
+                  return buildNotificationItem(notifications[index], index, channel);
                 },
               ),
             ):Center(child: Text("No Notifications",style: AppTextStyle.mediumBlack,))

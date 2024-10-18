@@ -15,6 +15,7 @@ import 'package:notify/features/display%20channel/presentation/view/widgets/chan
 import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/domin/models/fake_channels_for_test.dart';
 import 'package:notify/shared/domin/models/loaded_user.dart';
+import 'package:notify/shared/domin/models/notification_model.dart';
 import 'package:notify/shared/domin/models/user_model.dart';
 import 'package:notify/shared/presentaion/controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -32,6 +33,7 @@ class ChannelScreen extends StatelessWidget {
 
     List<UserModel> members = fakeMembers;
     List<UserModel> supervisors = fakeMembers;
+    List<NotificationModel> notifications = fakeNotifications;
 
     return MultiBlocProvider(
       providers: [
@@ -47,7 +49,6 @@ class ChannelScreen extends StatelessWidget {
       child: BlocConsumer<DisplayChannelBloc, DisplayChannelState>(
         listener: (context, state) {
           if (state is DisplayChannelFailed) {
-           
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errorMessage)),
             );
@@ -60,8 +61,8 @@ class ChannelScreen extends StatelessWidget {
                 .contains(LoadedUserData().loadedUser!.id);
             members = state.members;
             supervisors = state.supervisors;
+            notifications = state.notifications;
           }
-          
         },
         builder: (context, state) {
           return BlocListener<ChannelBloc, ChannelState>(
@@ -85,7 +86,8 @@ class ChannelScreen extends StatelessWidget {
                   child: SizedBox(
                     width: appUIController.widgetsWidth,
                     child: Skeletonizer(
-                      enabled: state is DisplayChannelLoading || state is DisplayChannelFailed,
+                      enabled: state is DisplayChannelLoading ||
+                          state is DisplayChannelFailed,
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +103,7 @@ class ChannelScreen extends StatelessWidget {
                                 supervisors, context, "Supervisors",
                                 color: Color(
                                     int.parse('0xff${channel.hexColor}'))),
-                            buildNotificationsSection(channel),
+                            buildNotificationsSection(notifications, channel),
                             buildMembersSection(members, context, "Members",
                                 color: Color(
                                     int.parse('0xff${channel.hexColor}'))),
