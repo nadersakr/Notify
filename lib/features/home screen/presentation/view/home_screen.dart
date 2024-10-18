@@ -9,6 +9,7 @@ import 'package:notify/core/utils/constant/app_strings.dart';
 import 'package:notify/features/home%20screen/presentation/controllers/home_screen_controller.dart';
 import 'package:notify/features/home%20screen/presentation/view/widgets/channels_box_vertical.dart';
 import 'package:notify/features/nav%20menu/presentation/bloc/app_bloc.dart';
+import 'package:notify/shared/domin/models/channel_model.dart';
 import 'package:notify/shared/presentaion/widget/head_line_upove_channels.dart';
 import 'package:notify/shared/presentaion/widget/your_channel_box.dart';
 import 'package:notify/shared/domin/models/loaded_user.dart';
@@ -26,7 +27,8 @@ class HomeScreen extends StatelessWidget {
     return BlocConsumer<AppBloc, AppState>(
       listener: (context, state) {
         if (state is AppFailed) {
-          ShowSnackBar.errorSnackBar(context, "Failed to load data ${state.errorMessage}");
+          ShowSnackBar.errorSnackBar(
+              context, "Failed to load data ${state.errorMessage}");
         }
       },
       builder: (context, state) {
@@ -81,12 +83,16 @@ class HomeScreen extends StatelessWidget {
                                     style: AppTextStyle.mediumBlack)),
                           ),
                           Skeletonizer(
-                            enabled: state is AppLoading||state is AppFailed,
+                            enabled: state is AppLoading || state is AppFailed,
                             child: ContainerHorizentalBoxWIthBorder(
-                              
-                                height: controller.yourChannelContainerHeight,
-                                channelList: LoadedUserData.userownedChannels,
-                                letterSpace: controller.letterSpace),
+                              height: controller.yourChannelContainerHeight,
+                              channelList: LoadedUserData.userownedChannels,
+                              letterSpace: controller.letterSpace,
+                              onTap: (Channel channel) {
+                                controller.navigateToChannelScreen(
+                                    context, channel);
+                              },
+                            ),
                           ),
                           SizedBox(
                             height: controller.smallPaddingSpace,
@@ -103,9 +109,9 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           Skeletonizer(
-                            enabled: state is AppLoading||state is AppFailed,
+                            enabled: state is AppLoading || state is AppFailed,
                             child: ContainerChannelVertical(
-                              maximumNumberOfChannels: 9,
+                                maximumNumberOfChannels: 9,
                                 channelList: LoadedUserData.biggestChannels,
                                 height: controller.yourChannelContainerHeight,
                                 letterSpace: controller.letterSpace,

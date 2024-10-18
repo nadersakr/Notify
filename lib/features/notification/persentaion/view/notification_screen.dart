@@ -93,7 +93,7 @@ class NoificationScreen extends StatelessWidget {
                                   children: [
                                     if (state is! AppLoading)
                                       Lottie.asset(
-                                        'assets/lotties/no_notifications.json', 
+                                        'assets/lotties/no.json', 
                                         height:
                                             200, 
                                         fit: BoxFit.fill, 

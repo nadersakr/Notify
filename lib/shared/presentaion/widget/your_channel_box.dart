@@ -10,10 +10,12 @@ class ContainerHorizentalBoxWIthBorder extends StatelessWidget {
     required this.height,
     required this.letterSpace,
     required this.channelList,
+    required this.onTap,
   });
   final double height;
   final double letterSpace;
   final List<Channel> channelList;
+  final void Function(Channel channel) onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -35,26 +37,20 @@ class ContainerHorizentalBoxWIthBorder extends StatelessWidget {
 
                 final Color color = Color(int.parse('0xFF${channel.hexColor}'));
 
-                return Container(
-                  width: 100.w,
-                  margin: const EdgeInsets.all(5),
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: color,
-                    ),
-                    // color: color.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Stack(children: [
-                    // blur
-                    Positioned.fill(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(),
+                return GestureDetector(
+                  onTap: ()=> onTap(channel),
+                  child: Container(
+                    width: 100.w,
+                    margin: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: color,
                       ),
+                      // color: color.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    Center(
+                    child: Center(
                       child: Text(
                         channel.title,
                         textAlign: TextAlign.center,
@@ -63,7 +59,7 @@ class ContainerHorizentalBoxWIthBorder extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ]),
+                  ),
                 );
               },
             )
