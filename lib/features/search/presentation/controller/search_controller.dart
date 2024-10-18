@@ -25,7 +25,7 @@ abstract class SearchBaseController with SearchStrings, SearchIcons {
   }
 
   Future<void> saveSearchHistory(String searchTerm) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = sl<SharedPreferences>();
     if (!searchHistory.contains(searchTerm)) {
       searchHistory.insert(0, searchTerm);
       if (searchHistory.length > 4) {

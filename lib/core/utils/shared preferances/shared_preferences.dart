@@ -4,6 +4,7 @@ abstract class SaveDataLocal {
   Future<void> saveData(String key, String value);
   String? getData(String key);
   Future<void> removeData(String key);
+  
 }
 
 class SharedPreferencesServices implements SaveDataLocal {
